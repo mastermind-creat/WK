@@ -1,73 +1,102 @@
-# React + TypeScript + Vite
+# Wambia Kennedy | Elite Engineering Portfolio
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+![Portfolio Banner](/public/images/logo/logo.png)
 
-Currently, two official plugins are available:
+> **"Deconstructing complexity through high-level technical documentation, strategic insights, and engineering logs."**
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+A premium, high-performance personal portfolio and blog platform built with modern web technologies. This project showcases advanced UI/UX design, interactive elements, and a sophisticated engineering aesthetic.
 
-## React Compiler
+---
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## 🚀 Key Features
 
-## Expanding the ESLint configuration
+### 🎨 **Premium Aesthetics**
+-   **Glassmorphism & Neomorphism**: A modern visual style using translucent backgrounds and subtle shadows.
+-   **Dynamic Animations**: Powered by **Framer Motion** for smooth page transitions and micro-interactions.
+-   **Responsive Design**: Fully adaptive layouts that look stunning on mobile, tablet, and desktop.
+-   **Custom Theme System**: Integrated Dark/Light/System theme toggles.
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+### 🧠 **AI-Powered Chatbot**
+-   **Intelligent Assistant**: An integrated AI chatbot (Gemini/OpenAI) trained on Wambia Kennedy's professional profile.
+-   **Voice Interface**: Text-to-speech capabilities for a futuristic interaction.
+-   **Contextual Awareness**: Can answer detailed questions about skills, projects, and services.
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+### 📝 **Technical Blog (The Intel)**
+-   **Article Management**: A dedicated section for technical logs and tutorials.
+-   **Interactive Reading**: Premium modal overlays for an immersive reading experience.
+-   **Filtering & Search**: Real-time search and category filtering for content.
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+### 🖼️ **Interactive Gallery**
+-   **Masonry Layout**: A beautiful, auto-organizing grid for visual work.
+-   **Lightbox View**: Full-screen image viewing with zoom and pan capabilities.
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+---
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## 🛠️ Technology Stack
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+-   **Frontend Framework**: [React 18](https://react.dev/)
+-   **Language**: [TypeScript](https://www.typescriptlang.org/)
+-   **Build Tool**: [Vite](https://vitejs.dev/)
+-   **Styling**: [Tailwind CSS](https://tailwindcss.com/)
+-   **Animations**: [Framer Motion](https://www.framer.com/motion/)
+-   **Icons**: [Lucide React](https://lucide.dev/)
+-   **Routing**: [React Router v6](https://reactrouter.com/)
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+---
+
+## ⚡ Getting Started
+
+### Prerequisites
+
+-   Node.js (v18 or higher)
+-   npm or yarn
+
+### Installation
+
+1.  **Clone the repository**
+    ```bash
+    git clone https://github.com/mastermind-creat/WK.git
+    cd WK
+    ```
+
+2.  **Install dependencies**
+    ```bash
+    npm install
+    ```
+
+3.  **Configure Environment Variables**
+    Create a `.env` file in the root directory and add your API keys:
+    ```env
+    VITE_GEMINI_API_KEY=your_gemini_api_key_here
+    VITE_OPENAI_API_KEY=your_openai_api_key_here
+    ```
+
+4.  **Run the development server**
+    ```bash
+    npm run dev
+    ```
+
+---
+
+## 🚀 Deployment
+
+This project is optimized for deployment on **Vercel**.
+
+1.  Connect your GitHub repository to Vercel.
+2.  Add the environment variables (`VITE_GEMINI_API_KEY`) in the Vercel project settings.
+3.  Deploy!
+
+---
+
+## 📬 Contact
+
+**Wambia Kennedy**  
+*Web Developer | Graphic Designer | Tech Enthusiast*
+
+-   📧 Email: [kennyleyy0@gmail.com](mailto:kennyleyy0@gmail.com)
+-   📱 Phone: +254 743 394 373
+-   📍 Location: Kisumu, Kenya
+
+---
+
+© 2025 Wambia Kennedy. All Rights Reserved.
