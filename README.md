@@ -67,7 +67,7 @@ A premium, high-performance personal portfolio and blog platform built with mode
 3.  **Configure Environment Variables**
     Create a `.env` file in the root directory and add your API keys:
     ```env
-    VITE_GEMINI_API_KEY=your_gemini_api_key_here
+    GEMINI_API_KEY=your_gemini_api_key_here
     VITE_OPENAI_API_KEY=your_openai_api_key_here
     ```
 
@@ -83,7 +83,7 @@ A premium, high-performance personal portfolio and blog platform built with mode
 This project is optimized for deployment on **Vercel**.
 
 1.  Connect your GitHub repository to Vercel.
-2.  Add the environment variables (`VITE_GEMINI_API_KEY`) in the Vercel project settings.
+2.  Add the environment variables (`GEMINI_API_KEY`) in the Vercel project settings.
 3.  Deploy!
 
 ---

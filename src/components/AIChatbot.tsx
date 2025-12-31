@@ -241,7 +241,7 @@ If the user says they want to "hire", "contact", "start a project", or "needs he
     };
 
     const callGemini = async (userMessage: string): Promise<string> => {
-        const apiKey = import.meta.env.VITE_GEMINI_API_KEY;
+        const apiKey = import.meta.env.GEMINI_API_KEY || import.meta.env.VITE_GEMINI_API_KEY;
 
         if (!apiKey) {
             return "Gemini API key not configured. Please add VITE_GEMINI_API_KEY to your .env file.";
