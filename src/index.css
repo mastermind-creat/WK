@@ -1,0 +1,389 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ============================================
+   PREMIUM DESIGN SYSTEM
+   ============================================ */
+
+:root {
+  /* Color System - Light Mode */
+  --bg-main: #ffffff;
+  --bg-surface: #fafafa;
+  --bg-elevated: #f5f5f5;
+  --glass-main: rgba(255, 255, 255, 0.85);
+
+  --text-main: #0a0a0a;
+  --text-muted: #525252;
+  --text-subtle: #a3a3a3;
+
+  --border-main: #e5e5e5;
+  --border-subtle: #f5f5f5;
+
+  --primary-main: #e11d48;
+  --primary-glow: rgba(225, 29, 72, 0.15);
+
+  /* Depth System */
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+  --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+  --shadow-2xl: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+
+  /* Blur System */
+  --blur-sm: 8px;
+  --blur-md: 16px;
+  --blur-lg: 24px;
+  --blur-xl: 40px;
+}
+
+.dark {
+  /* Color System - Dark Mode */
+  --bg-main: #0a0a0a;
+  --bg-surface: #141414;
+  --bg-elevated: #1a1a1a;
+  --glass-main: rgba(10, 10, 10, 0.85);
+
+  --text-main: #fafafa;
+  --text-muted: #a3a3a3;
+  --text-subtle: #525252;
+
+  --border-main: #262626;
+  --border-subtle: #1a1a1a;
+
+  --primary-main: #e11d48;
+  --primary-glow: rgba(225, 29, 72, 0.2);
+
+  /* Enhanced shadows for dark mode */
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.4);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.5);
+  --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.6);
+  --shadow-2xl: 0 25px 50px -12px rgba(0, 0, 0, 0.7);
+}
+
+/* ============================================
+   TYPOGRAPHY SYSTEM
+   ============================================ */
+
+@layer base {
+  html {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-feature-settings: 'cv11', 'ss01';
+    font-optical-sizing: auto;
+  }
+
+  body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-size: 1rem;
+    line-height: 1.625;
+    color: var(--text-main);
+    background-color: var(--bg-main);
+  }
+
+  /* Hierarchical Typography Scale */
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: 'Outfit', sans-serif;
+    font-weight: 900;
+    letter-spacing: -0.025em;
+    line-height: 1.1;
+  }
+
+  h1 {
+    font-size: 3rem;
+    letter-spacing: -0.02em;
+  }
+
+  h2 {
+    font-size: 2.25rem;
+    letter-spacing: -0.015em;
+  }
+
+  h3 {
+    font-size: 1.875rem;
+    letter-spacing: -0.01em;
+  }
+
+  h4 {
+    font-size: 1.5rem;
+  }
+
+  /* Mobile Typography Optimization */
+  @media (min-width: 768px) {
+    h1 {
+      font-size: 4.5rem;
+    }
+
+    h2 {
+      font-size: 3rem;
+    }
+
+    h3 {
+      font-size: 2.25rem;
+    }
+
+    h4 {
+      font-size: 1.875rem;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    h1 {
+      font-size: 6rem;
+    }
+
+    h2 {
+      font-size: 3.75rem;
+    }
+
+    h3 {
+      font-size: 3rem;
+    }
+  }
+
+  @media (max-width: 640px) {
+    h1 {
+      font-size: 2.25rem;
+    }
+
+    h2 {
+      font-size: 1.875rem;
+    }
+
+    h3 {
+      font-size: 1.5rem;
+    }
+
+    h4 {
+      font-size: 1.25rem;
+    }
+
+    body {
+      font-size: 0.875rem;
+    }
+  }
+}
+
+/* ============================================
+   PREMIUM UTILITIES
+   ============================================ */
+
+@layer utilities {
+
+  /* Gradient Text */
+  .gradient-text {
+    @apply bg-gradient-to-r from-primary-600 via-rose-500 to-pink-500 bg-clip-text text-transparent;
+  }
+
+  /* Glass Morphism */
+  .glass {
+    background: var(--glass-main);
+    backdrop-filter: blur(var(--blur-lg));
+    -webkit-backdrop-filter: blur(var(--blur-lg));
+    border: 1px solid var(--border-main);
+  }
+
+  .glass-strong {
+    background: var(--glass-main);
+    backdrop-filter: blur(var(--blur-xl)) saturate(180%);
+    -webkit-backdrop-filter: blur(var(--blur-xl)) saturate(180%);
+  }
+
+  /* 3D Depth System */
+  .depth-card {
+    transform-style: preserve-3d;
+    perspective: 1000px;
+  }
+
+  .depth-lifted {
+    transform: translateZ(20px);
+  }
+
+  .depth-float {
+    animation: float 6s ease-in-out infinite;
+  }
+
+  /* Premium Shadows */
+  .shadow-premium {
+    box-shadow:
+      0 0 0 1px var(--border-main),
+      0 10px 40px -10px rgba(0, 0, 0, 0.2),
+      0 0 60px -15px var(--primary-glow);
+  }
+
+  .shadow-glow {
+    box-shadow:
+      0 0 20px var(--primary-glow),
+      0 0 40px var(--primary-glow);
+  }
+
+  /* Smooth Transitions */
+  .transition-smooth {
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .transition-bounce {
+    transition: all 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  }
+
+  /* Container System */
+  .container-custom {
+    @apply max-w-7xl mx-auto px-6 sm:px-8 lg:px-12;
+  }
+
+  .section-padding {
+    @apply py-20 md:py-32 lg:py-40;
+  }
+
+  /* Mobile Optimization */
+  @media (max-width: 640px) {
+    .section-padding {
+      @apply py-12;
+    }
+
+    .container-custom {
+      @apply px-4;
+    }
+  }
+
+  /* Hide Scrollbar */
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+/* ============================================
+   ANIMATIONS
+   ============================================ */
+
+@keyframes float {
+
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+
+  50% {
+    transform: translateY(-20px);
+  }
+}
+
+@keyframes glow-pulse {
+
+  0%,
+  100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0.5;
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -1000px 0;
+  }
+
+  100% {
+    background-position: 1000px 0;
+  }
+}
+
+/* Reduced Motion Support */
+@media (prefers-reduced-motion: reduce) {
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  .depth-float {
+    animation: none;
+  }
+}
+
+/* ============================================
+   SCROLLBAR STYLING
+   ============================================ */
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-main);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--border-main);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--text-subtle);
+}
+
+/* Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--border-main) var(--bg-main);
+}
+
+/* ============================================
+   SELECTION
+   ============================================ */
+
+::selection {
+  background-color: var(--primary-main);
+  color: white;
+}
+
+::-moz-selection {
+  background-color: var(--primary-main);
+  color: white;
+}
+
+/* ============================================
+   FOCUS STATES
+   ============================================ */
+
+:focus-visible {
+  outline: 2px solid var(--primary-main);
+  outline-offset: 2px;
+}
+
+button:focus-visible,
+a:focus-visible {
+  outline: 2px solid var(--primary-main);
+  outline-offset: 4px;
+}
+
+/* Custom Scrollbar for Component Interiors */
+.custom-scrollbar::-webkit-scrollbar {
+  width: 4px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background-color: var(--primary-main);
+  border-radius: 99px;
+}
