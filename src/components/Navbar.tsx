@@ -48,17 +48,17 @@ const Navbar = () => {
         }
     };
 
-    // Width per item - Reduced for mobile to prevent overcrowding
     const itemWidth = isMobile ? 40 : 70;
 
     return (
         <nav className="fixed top-0 left-0 right-0 z-[100] flex justify-center pointer-events-none">
             <div
-                className="relative h-[65px] lg:h-[75px] rounded-b-[2rem] lg:rounded-full shadow-2xl flex items-center justify-between px-4 lg:px-8 pointer-events-auto border-b lg:border border-white/5 backdrop-blur-xl transition-all duration-300 overflow-visible"
+                className="relative h-[65px] lg:h-[75px] rounded-b-[2rem] lg:rounded-full shadow-2xl flex items-center justify-between px-4 lg:px-8 pointer-events-auto border-b lg:border border-white/10 backdrop-blur-3xl transition-all duration-300 overflow-visible"
                 style={{
-                    backgroundColor: 'var(--bg-surface)',
+                    backgroundColor: 'rgba(15, 15, 15, 0.4)',
                     width: isMobile ? '100%' : '90%',
-                    maxWidth: isMobile ? 'none' : '1000px'
+                    maxWidth: isMobile ? 'none' : '1000px',
+                    boxShadow: '0 8px 32px 0 rgba(0, 0, 0, 0.8)'
                 }}
             >
                 {/* Desktop Branding (Left) */}
@@ -86,7 +86,7 @@ const Navbar = () => {
                         >
                             {/* The Floating Circle Indicator (POPS DOWN) */}
                             <div
-                                className="absolute -bottom-[22px] lg:-bottom-[30px] left-1/2 -translate-x-1/2 w-[48px] h-[48px] lg:w-[65px] lg:h-[65px] rounded-full border-[4px] lg:border-[6px] shadow-fancy z-20 flex items-center justify-center"
+                                className="absolute -bottom-[22px] lg:-bottom-[30px] left-1/2 -translate-x-1/2 w-[48px] h-[48px] lg:w-[65px] lg:h-[65px] rounded-full border-[4px] lg:border-[6px] z-20 flex items-center justify-center shadow-[0_15px_35px_rgba(225,29,72,0.4)]"
                                 style={{
                                     backgroundColor: 'var(--primary-main)',
                                     borderColor: 'var(--bg-main)',
@@ -96,11 +96,11 @@ const Navbar = () => {
                                     key={activeIndex}
                                     initial={{ scale: 0, y: -10 }}
                                     animate={{ scale: 1, y: 0 }}
-                                    className="text-white"
+                                    className="text-white drop-shadow-lg"
                                 >
                                     {(() => {
                                         const Icon = navLinks[activeIndex].icon;
-                                        return <Icon size={isMobile ? 18 : 24} strokeWidth={2.5} />;
+                                        return <Icon size={isMobile ? 18 : 24} strokeWidth={3} />;
                                     })()}
                                 </motion.div>
                             </div>
@@ -119,30 +119,19 @@ const Navbar = () => {
                                     <Link
                                         to={link.href}
                                         onClick={() => handleNavClick(link.href, idx)}
-                                        className="flex flex-col items-center justify-center w-full h-full text-zinc-500 group relative"
+                                        className="flex flex-col items-center justify-center w-full h-full group relative"
                                     >
-                                        <motion.span
+                                        <motion.div
                                             animate={{
-                                                y: isActive ? -100 : 0,
-                                                opacity: isActive ? 0 : 1,
+                                                y: isActive ? -100 : 8, // Pressing deeper into the bar
+                                                opacity: isActive ? 0 : 0.6,
                                                 scale: isActive ? 0.3 : 1
                                             }}
-                                            transition={{ duration: 0.3 }}
+                                            transition={{ duration: 0.35, ease: "easeOut" }}
+                                            className="text-white group-hover:opacity-100 transition-opacity"
                                         >
-                                            <link.icon size={isMobile ? 14 : 22} strokeWidth={2} className="group-hover:text-primary-500 transition-colors" />
-                                        </motion.span>
-
-                                        {/* Name Label */}
-                                        <motion.span
-                                            className="absolute top-2 text-[6px] lg:text-[8px] font-black uppercase tracking-widest text-primary-500 font-mono"
-                                            initial={{ opacity: 0, y: -10 }}
-                                            animate={{
-                                                opacity: (isActive && !isMobile) ? 1 : 0,
-                                                y: isActive ? 0 : -10
-                                            }}
-                                        >
-                                            {link.name}
-                                        </motion.span>
+                                            <link.icon size={isMobile ? 14 : 20} strokeWidth={2.5} />
+                                        </motion.div>
                                     </Link>
                                 </li>
                             );
@@ -150,12 +139,12 @@ const Navbar = () => {
                     </ul>
                 </div>
 
-                {/* Right Area (Empty on mobile, Status on desktop) */}
+                {/* Right Area (Status on desktop) */}
                 {!isMobile && (
                     <div className="flex items-center gap-4">
-                        <div className="hidden xl:flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/5 border border-white/10">
-                            <div className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse" />
-                            <span className="text-[7px] font-black uppercase tracking-widest text-zinc-500">Live_Protocol</span>
+                        <div className="hidden xl:flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/5 border border-white/10 backdrop-blur-md">
+                            <div className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse shadow-[0_0_8px_rgba(34,197,94,0.6)]" />
+                            <span className="text-[7px] font-black uppercase tracking-widest text-zinc-400">System.Online</span>
                         </div>
                     </div>
                 )}
