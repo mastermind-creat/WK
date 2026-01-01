@@ -7,8 +7,8 @@ import { galleryItems } from '../data/portfolio';
 const Gallery = () => {
     const [currentIndex, setCurrentIndex] = useState(0);
     const [isAutoPlaying, setIsAutoPlaying] = useState(true);
-    // Use the 3 selected items: Birthday Card, Digital Skills, Success Card
-    const displayItems = galleryItems.slice(1, 4);
+    // Use all gallery items for the carousel loop
+    const displayItems = galleryItems;
 
     const handleNext = useCallback(() => {
         setCurrentIndex((prev) => (prev + 1) % displayItems.length);
