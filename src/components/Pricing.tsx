@@ -12,27 +12,31 @@ const Pricing = () => {
             <div className="absolute bottom-0 left-0 w-96 h-96 bg-primary-900/5 rounded-full blur-[120px]" />
 
             <div className="container-custom relative z-10">
+                {/* Header */}
                 <motion.div
-                    className="text-center mb-16"
-                    initial={{ opacity: 0, y: 20 }}
+                    className="text-center mb-10 md:mb-16"
+                    initial={{ opacity: 0, y: 30 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                 >
-                    <h2 className="text-3xl md:text-5xl font-black mb-4 gradient-text italic uppercase tracking-tighter">Investment Plans</h2>
-                    <p className="max-w-2xl mx-auto font-medium" style={{ color: 'var(--text-muted)' }}>
-                        Professional digital solutions at transparent price points. Choose your scale.
+                    <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full glass border mb-4 md:mb-6" style={{ borderColor: 'var(--border-main)' }}>
+                        <Zap className="w-3.5 h-3.5 text-primary-500" />
+                        <span className="text-[10px] md:text-xs font-bold uppercase tracking-wider" style={{ color: 'var(--text-muted)' }}>Transparent Investment</span>
+                    </div>
+                    <h2 className="text-3xl md:text-5xl lg:text-6xl font-black gradient-text mb-4">Strategic Tiering</h2>
+                    <p className="max-w-xl mx-auto text-sm md:text-lg" style={{ color: 'var(--text-muted)' }}>
+                        Elevate your digital presence with precision-crafted solutions
                     </p>
-                    <div className="w-20 h-1.5 bg-primary-600 mx-auto rounded-full mt-6 shadow-lg shadow-primary-600/20" />
                 </motion.div>
 
-                <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
                     {pricing.map((tier, idx) => {
                         const Icon = icons[idx] || Star;
                         return (
                             <motion.div
                                 key={tier.plan}
                                 className={`group relative p-5 md:p-10 rounded-2xl md:rounded-[3rem] border transition-all duration-500 hover:-translate-y-2 ${tier.popular
-                                    ? 'border-primary-600 shadow-2xl md:scale-105 z-10'
+                                    ? 'border-primary-600 shadow-[0_0_50px_rgba(37,99,235,0.2)] md:scale-105 z-10 active-focus-card'
                                     : 'shadow-xl'
                                     }`}
                                 style={{
@@ -43,16 +47,27 @@ const Pricing = () => {
                                 whileInView={{ opacity: 1, y: 0 }}
                                 viewport={{ once: true }}
                                 transition={{ duration: 0.5, delay: idx * 0.1 }}
+                                animate={tier.popular ? {
+                                    y: [0, -10, 0],
+                                    transition: {
+                                        duration: 4,
+                                        repeat: Infinity,
+                                        ease: "easeInOut"
+                                    }
+                                } : {}}
                             >
                                 {tier.popular && (
-                                    <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-primary-600 text-white px-4 md:px-8 py-1 md:py-2 text-[8px] md:text-[10px] font-black uppercase tracking-[0.2em] rounded-full shadow-lg shadow-primary-600/40">
-                                        Popular
-                                    </div>
+                                    <>
+                                        <div className="absolute inset-0 bg-primary-600/5 rounded-2xl md:rounded-[3rem] animate-pulse-slow" />
+                                        <div className="absolute top-0 right-8 -translate-y-1/2 bg-primary-600 text-white text-[8px] md:text-[10px] font-black uppercase tracking-widest px-3 md:px-4 py-1 md:py-1.5 rounded-full shadow-glow z-20">
+                                            Popular Choice
+                                        </div>
+                                    </>
                                 )}
 
                                 <div className="flex flex-col items-center mb-6 md:mb-10">
-                                    <div className={`w-12 h-12 md:w-16 md:h-16 rounded-xl md:rounded-[1.5rem] flex items-center justify-center mb-3 md:mb-6 transition-all duration-300 group-hover:rotate-12 ${tier.popular ? 'bg-primary-600 text-white shadow-lg' : 'border text-primary-500 shadow-inner'}`} style={{ backgroundColor: !tier.popular ? 'var(--bg-main)' : undefined, borderColor: !tier.popular ? 'var(--border-main)' : undefined }}>
-                                        <Icon size={tier.popular ? 24 : 20} className="md:w-8 md:h-8" />
+                                    <div className={`w-10 h-10 md:w-16 md:h-16 rounded-xl md:rounded-[1.5rem] flex items-center justify-center mb-3 md:mb-6 transition-all duration-300 group-hover:rotate-12 ${tier.popular ? 'bg-primary-600 text-white shadow-lg' : 'border text-primary-500 shadow-inner'}`} style={{ backgroundColor: !tier.popular ? 'var(--bg-main)' : undefined, borderColor: !tier.popular ? 'var(--border-main)' : undefined }}>
+                                        <Icon size={tier.popular ? 20 : 16} className="md:w-8 md:h-8" />
                                     </div>
                                     <h3 className="text-xs md:text-xl font-black uppercase tracking-wider md:tracking-widest text-center" style={{ color: 'var(--text-main)' }}>{tier.plan}</h3>
                                 </div>

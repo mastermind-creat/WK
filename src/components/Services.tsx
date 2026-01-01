@@ -74,43 +74,43 @@ const Services = () => {
             <div className="container-custom relative z-10">
                 {/* Section Header */}
                 <motion.div
-                    className="text-center mb-20"
+                    className="text-center mb-12 md:mb-20"
                     initial={{ opacity: 0, y: 30 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.6 }}
                 >
                     <motion.div
-                        className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass border mb-6"
+                        className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full glass border mb-4 md:mb-6"
                         style={{ borderColor: 'var(--border-main)' }}
                         initial={{ opacity: 0, scale: 0.8 }}
                         whileInView={{ opacity: 1, scale: 1 }}
                         viewport={{ once: true }}
                         transition={{ delay: 0.2 }}
                     >
-                        <Sparkles className="w-4 h-4 text-primary-500" />
-                        <span className="text-xs font-bold uppercase tracking-wider" style={{ color: 'var(--text-muted)' }}>
+                        <Sparkles className="w-3.5 h-3.5 text-primary-500" />
+                        <span className="text-[10px] md:text-xs font-bold uppercase tracking-wider" style={{ color: 'var(--text-muted)' }}>
                             Premium Services
                         </span>
                     </motion.div>
 
-                    <h2 className="text-4xl md:text-5xl lg:text-6xl font-black mb-6 gradient-text">
+                    <h2 className="text-3xl md:text-5xl lg:text-6xl font-black mb-4 md:mb-6 gradient-text">
                         Elite Solutions
                     </h2>
-                    <p className="max-w-2xl mx-auto text-lg" style={{ color: 'var(--text-muted)' }}>
+                    <p className="max-w-xl mx-auto text-sm md:text-lg" style={{ color: 'var(--text-muted)' }}>
                         Transforming ambitious ideas into high-performance digital products
                     </p>
                 </motion.div>
 
-                {/* Services Grid - 2 cols on mobile, 3 on tablet, 4 on desktop */}
-                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 md:gap-6">
+                {/* Services Grid */}
+                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 md:gap-6 group/services">
                     {services.map((service, idx) => (
                         <ServiceCard
                             key={service.title}
                             service={service}
                             icon={iconMap[service.icon] || Globe}
                             index={idx}
-                            onClick={() => setSelectedService(service)}
+                            onOpen={() => setSelectedService(service)}
                         />
                     ))}
                 </div>
@@ -130,14 +130,14 @@ const Services = () => {
     );
 };
 
-// 3D Tilt Card Component
-const ServiceCard = ({ service, icon: Icon, index, onClick }: any) => {
+// 3D Tilt Card Component with Active Focus
+const ServiceCard = ({ service, icon: Icon, index, onOpen }: any) => {
     const cardRef = useRef<HTMLDivElement>(null);
     const mouseX = useMotionValue(0);
     const mouseY = useMotionValue(0);
 
-    const rotateX = useSpring(useTransform(mouseY, [-0.5, 0.5], [7, -7]), { stiffness: 300, damping: 30 });
-    const rotateY = useSpring(useTransform(mouseX, [-0.5, 0.5], [-7, 7]), { stiffness: 300, damping: 30 });
+    const rotateX = useSpring(useTransform(mouseY, [-0.5, 0.5], [10, -10]), { stiffness: 300, damping: 30 });
+    const rotateY = useSpring(useTransform(mouseX, [-0.5, 0.5], [-10, 10]), { stiffness: 300, damping: 30 });
 
     const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
         if (!cardRef.current) return;
@@ -156,9 +156,8 @@ const ServiceCard = ({ service, icon: Icon, index, onClick }: any) => {
     return (
         <motion.div
             ref={cardRef}
-            className="group relative depth-card cursor-pointer"
+            className="group relative depth-card cursor-pointer transition-all duration-500 group-hover/services:opacity-50 hover:!opacity-100"
             style={{
-                transformStyle: 'preserve-3d',
                 perspective: '1000px',
             }}
             initial={{ opacity: 0, y: 30 }}
@@ -167,31 +166,28 @@ const ServiceCard = ({ service, icon: Icon, index, onClick }: any) => {
             transition={{ duration: 0.5, delay: index * 0.05 }}
             onMouseMove={handleMouseMove}
             onMouseLeave={handleMouseLeave}
-            onClick={onClick}
+            onClick={onOpen}
         >
             <motion.div
-                className="relative glass rounded-xl md:rounded-[2rem] p-4 md:p-8 overflow-hidden transition-all duration-300"
+                className="relative h-full p-4 md:p-8 rounded-2xl md:rounded-[2.5rem] border overflow-hidden transition-all duration-300 hover:shadow-[0_0_40px_rgba(37,99,235,0.15)] hover:border-primary-500/50"
                 style={{
                     rotateX,
                     rotateY,
                     transformStyle: 'preserve-3d',
+                    backgroundColor: 'var(--bg-surface)',
                     borderColor: 'var(--border-main)',
                 }}
-                whileHover={{ scale: 1.02 }}
+                whileHover={{ scale: 1.05 }}
             >
-                {/* Glow Effect */}
-                <div className="absolute inset-0 bg-gradient-to-br from-primary-500/0 via-primary-500/0 to-primary-500/0 opacity-0 group-hover:opacity-100 group-hover:from-primary-500/10 group-hover:via-transparent group-hover:to-rose-500/10 transition-all duration-500" />
-
-                {/* Animated Border Glow */}
-                <div className="absolute inset-0 rounded-[2rem] opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-                    <div className="absolute inset-0 rounded-[2rem] bg-gradient-to-r from-primary-500 via-rose-500 to-primary-500 opacity-20 blur-xl" />
-                </div>
+                {/* Active Focus Glow */}
+                <div className="absolute -inset-1 bg-gradient-to-r from-primary-600/20 to-rose-500/20 rounded-[2.5rem] blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                <div className="absolute inset-0 bg-gradient-to-br from-primary-600/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
 
                 {/* Content */}
-                <div className="relative z-10" style={{ transform: 'translateZ(20px)' }}>
+                <div className="relative z-10" style={{ transform: 'translateZ(30px)' }}>
                     {/* Icon */}
                     <motion.div
-                        className="w-10 h-10 md:w-14 md:h-14 rounded-xl md:rounded-2xl bg-primary-600 flex items-center justify-center mb-4 md:mb-6 shadow-glow"
+                        className="w-10 h-10 md:w-14 md:h-14 rounded-xl md:rounded-2xl bg-primary-600 flex items-center justify-center mb-3 md:mb-6 shadow-glow"
                         whileHover={{ rotate: 360, scale: 1.1 }}
                         transition={{ duration: 0.6 }}
                     >
@@ -199,18 +195,18 @@ const ServiceCard = ({ service, icon: Icon, index, onClick }: any) => {
                     </motion.div>
 
                     {/* Title */}
-                    <h3 className="text-sm md:text-xl font-black mb-2 md:mb-3 group-hover:text-primary-500 transition-colors line-clamp-2" style={{ color: 'var(--text-main)' }}>
+                    <h3 className="text-xs md:text-xl font-black mb-1.5 md:mb-3 group-hover:text-primary-500 transition-colors line-clamp-2" style={{ color: 'var(--text-main)' }}>
                         {service.title}
                     </h3>
 
                     {/* Description */}
-                    <p className="text-[10px] md:text-sm leading-relaxed mb-3 md:mb-6 line-clamp-3" style={{ color: 'var(--text-muted)' }}>
+                    <p className="text-[9px] md:text-sm leading-relaxed mb-2 md:mb-6 line-clamp-3" style={{ color: 'var(--text-muted)' }}>
                         {service.description}
                     </p>
 
                     {/* Price Badge */}
                     <div className="flex items-center justify-between">
-                        <span className="text-[9px] md:text-xs font-black uppercase tracking-wider text-primary-500">
+                        <span className="text-[8px] md:text-xs font-black uppercase tracking-wider text-primary-500">
                             {service.price}
                         </span>
                         <ArrowRight className="w-3 h-3 md:w-4 md:h-4 text-primary-500 group-hover:translate-x-1 transition-transform" />

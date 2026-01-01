@@ -35,16 +35,15 @@ const Contact = () => {
 
             <div className="container-custom relative z-10">
                 <motion.div
-                    className="text-center mb-16"
+                    className="text-center mb-10 md:mb-16"
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                 >
-                    <h2 className="text-3xl md:text-5xl font-black mb-4 gradient-text italic uppercase tracking-tighter">Available For Projects</h2>
-                    <p className="max-w-2xl mx-auto font-medium" style={{ color: 'var(--text-muted)' }}>
+                    <h2 className="text-2xl md:text-5xl font-black mb-3 md:mb-4 gradient-text italic uppercase tracking-tighter">Available For Projects</h2>
+                    <p className="max-w-xl mx-auto text-sm md:text-base font-medium" style={{ color: 'var(--text-muted)' }}>
                         Ready to design your digital future. Let's start the dialogue.
                     </p>
-                    <div className="w-20 h-1.5 bg-primary-600 mx-auto rounded-full mt-6 shadow-lg shadow-primary-600/20" />
                 </motion.div>
 
                 <div className="grid lg:grid-cols-2 gap-8 items-start">
@@ -56,7 +55,7 @@ const Contact = () => {
                         className="space-y-4 md:space-y-6"
                     >
                         <div className="p-5 md:p-10 rounded-2xl md:rounded-[3rem] shadow-2xl border" style={{ backgroundColor: 'var(--bg-surface)', borderColor: 'var(--border-main)' }}>
-                            <h3 className="text-lg md:text-2xl font-black mb-6 md:mb-12 tracking-tight border-l-4 border-primary-600 pl-4 md:pl-6 uppercase italic" style={{ color: 'var(--text-main)' }}>Contact Intel</h3>
+                            <h3 className="text-base md:text-2xl font-black mb-6 md:mb-12 tracking-tight border-l-4 border-primary-600 pl-4 md:pl-6 uppercase italic" style={{ color: 'var(--text-main)' }}>Contact Intel</h3>
 
                             <div className="space-y-6 md:space-y-10">
                                 {[
@@ -69,12 +68,12 @@ const Contact = () => {
                                         href={item.href}
                                         className="flex items-center gap-3 md:gap-6 group"
                                     >
-                                        <div className={`w-10 h-10 md:w-14 md:h-14 rounded-xl md:rounded-2xl flex items-center justify-center transition-all group-hover:bg-primary-600 group-hover:text-white border shadow-inner`} style={{ backgroundColor: 'var(--bg-main)', borderColor: 'var(--border-main)', color: 'var(--primary-main)' }}>
-                                            <item.icon size={18} className="md:w-6 md:h-6" />
+                                        <div className={`w-9 h-9 md:w-14 md:h-14 rounded-xl md:rounded-2xl flex items-center justify-center transition-all group-hover:bg-primary-600 group-hover:text-white border shadow-inner`} style={{ backgroundColor: 'var(--bg-main)', borderColor: 'var(--border-main)', color: 'var(--primary-main)' }}>
+                                            <item.icon size={16} className="md:w-6 md:h-6" />
                                         </div>
                                         <div className="flex-1 overflow-hidden">
-                                            <p className="text-[9px] md:text-[10px] font-black uppercase tracking-[0.2em] md:tracking-[0.3em] mb-1 md:mb-2 opacity-50" style={{ color: 'var(--text-main)' }}>{item.label}</p>
-                                            <p className="text-sm md:text-lg font-bold truncate transition-colors group-hover:text-primary-500" style={{ color: 'var(--text-main)' }}>{item.value}</p>
+                                            <p className="text-[8px] md:text-[10px] font-black uppercase tracking-[0.2em] md:tracking-[0.3em] mb-0.5 md:mb-2 opacity-50" style={{ color: 'var(--text-main)' }}>{item.label}</p>
+                                            <p className="text-xs md:text-lg font-bold truncate transition-colors group-hover:text-primary-500" style={{ color: 'var(--text-main)' }}>{item.value}</p>
                                         </div>
                                     </a>
                                 ))}
@@ -89,7 +88,7 @@ const Contact = () => {
                                             href={social.href}
                                             target="_blank"
                                             rel="noreferrer"
-                                            className="group relative w-full h-12 md:h-14 rounded-xl md:rounded-2xl flex items-center justify-center gap-2 md:gap-3 overflow-hidden border transition-all duration-300"
+                                            className="group relative w-full h-10 md:h-14 rounded-xl md:rounded-2xl flex items-center justify-center gap-2 md:gap-3 overflow-hidden border transition-all duration-300"
                                             style={{ backgroundColor: 'var(--bg-main)', borderColor: 'var(--border-main)' }}
                                             whileHover={{ scale: 1.05, y: -3 }}
                                             whileTap={{ scale: 0.95 }}
@@ -130,17 +129,17 @@ const Contact = () => {
 
                         {/* Status Card */}
                         <motion.div
-                            className="bg-primary-600 p-6 md:p-12 rounded-2xl md:rounded-[3.5rem] shadow-2xl text-white relative overflow-hidden group"
+                            className="bg-primary-600 p-5 md:p-12 rounded-2xl md:rounded-[3.5rem] shadow-2xl text-white relative overflow-hidden group"
                             whileHover={{ scale: 1.02 }}
                         >
                             <div className="absolute top-[-20px] right-[-20px] w-48 h-48 bg-white/10 rounded-full blur-3xl group-hover:scale-150 transition-transform duration-1000" />
-                            <MessageSquare className="mb-4 md:mb-8 opacity-30 group-hover:rotate-12 transition-transform w-10 h-10 md:w-14 md:h-14" />
-                            <h3 className="text-xl md:text-3xl font-black mb-2 md:mb-4 tracking-tighter uppercase italic">Phase 1: Discovery</h3>
-                            <p className="opacity-90 text-xs md:text-sm leading-relaxed max-w-xs font-bold uppercase tracking-wider mb-4 md:mb-8">
+                            <MessageSquare className="mb-3 md:mb-8 opacity-30 group-hover:rotate-12 transition-transform w-8 h-8 md:w-14 md:h-14" />
+                            <h3 className="text-lg md:text-3xl font-black mb-1.5 md:mb-4 tracking-tighter uppercase italic">Phase 1: Discovery</h3>
+                            <p className="opacity-90 text-[10px] md:text-sm leading-relaxed max-w-xs font-bold uppercase tracking-wider mb-3 md:mb-8">
                                 I'm actively integrating new projects into my roadmap.
                             </p>
-                            <div className="inline-flex items-center gap-2 md:gap-3 px-3 md:px-6 py-1.5 md:py-2.5 bg-black/20 rounded-full text-[9px] md:text-[10px] font-black uppercase tracking-wider md:tracking-widest border border-white/10">
-                                <span className="w-2 h-2 rounded-full bg-white animate-pulse shadow-[0_0_10px_white]" />
+                            <div className="inline-flex items-center gap-2 md:gap-3 px-3 md:px-6 py-1 md:py-2.5 bg-black/20 rounded-full text-[8px] md:text-[10px] font-black uppercase tracking-wider md:tracking-widest border border-white/10">
+                                <span className="w-1.5 h-1.5 md:w-2 md:h-2 rounded-full bg-white animate-pulse shadow-[0_0_10px_white]" />
                                 Server Status: Online
                             </div>
                         </motion.div>
@@ -210,12 +209,12 @@ const Contact = () => {
 
                             <motion.button
                                 type="submit"
-                                className="w-full py-4 md:py-6 bg-primary-600 text-white font-black text-[10px] md:text-xs uppercase tracking-[0.3em] md:tracking-[0.4em] rounded-2xl md:rounded-3xl flex items-center justify-center gap-3 md:gap-4 hover:bg-primary-700 shadow-2xl shadow-primary-600/20 transition-all active:scale-95 border border-primary-500/50"
+                                className="w-full py-3.5 md:py-6 bg-primary-600 text-white font-black text-[9px] md:text-xs uppercase tracking-[0.2em] md:tracking-[0.4em] rounded-xl md:rounded-3xl flex items-center justify-center gap-2 md:gap-4 hover:bg-primary-700 shadow-2xl shadow-primary-600/20 transition-all active:scale-95 border border-primary-500/50"
                                 whileHover={{ scale: 1.02 }}
                                 whileTap={{ scale: 0.98 }}
                             >
                                 Initiate Transmission
-                                <Send size={16} className="md:w-[18px] md:h-[18px] translate-y-[-1px]" />
+                                <Send size={14} className="md:w-[18px] md:h-[18px] translate-y-[-1px]" />
                             </motion.button>
 
                             <p className="text-center text-[9px] md:text-[10px] font-black uppercase tracking-[0.2em] md:tracking-[0.3em] pt-4 md:pt-6 flex items-center justify-center gap-3 md:gap-4 opacity-50" style={{ color: 'var(--text-main)' }}>

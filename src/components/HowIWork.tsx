@@ -63,29 +63,29 @@ const HowIWork = () => {
             <div className="container-custom relative z-10">
                 {/* Section Header */}
                 <motion.div
-                    className="text-center mb-20"
+                    className="text-center mb-12 md:mb-20"
                     initial={{ opacity: 0, y: 30 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                 >
                     <motion.div
-                        className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass border mb-6"
+                        className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full glass border mb-4 md:mb-6"
                         style={{ borderColor: 'var(--border-main)' }}
                         initial={{ opacity: 0, scale: 0.8 }}
                         whileInView={{ opacity: 1, scale: 1 }}
                         viewport={{ once: true }}
                         transition={{ delay: 0.2 }}
                     >
-                        <Sparkles className="w-4 h-4 text-primary-500" />
-                        <span className="text-xs font-bold uppercase tracking-wider" style={{ color: 'var(--text-muted)' }}>
+                        <Sparkles className="w-3.5 h-3.5 text-primary-500" />
+                        <span className="text-[10px] md:text-xs font-bold uppercase tracking-wider" style={{ color: 'var(--text-muted)' }}>
                             Process Excellence
                         </span>
                     </motion.div>
 
-                    <h2 className="text-4xl md:text-5xl lg:text-6xl font-black mb-6 gradient-text">
+                    <h2 className="text-3xl md:text-5xl lg:text-6xl font-black mb-4 md:mb-6 gradient-text">
                         How I Work
                     </h2>
-                    <p className="max-w-2xl mx-auto text-lg" style={{ color: 'var(--text-muted)' }}>
+                    <p className="max-w-xl mx-auto text-sm md:text-lg" style={{ color: 'var(--text-muted)' }}>
                         A systematic approach to delivering exceptional digital products
                     </p>
                 </motion.div>
@@ -129,25 +129,25 @@ const HowIWork = () => {
                 >
                     <div className="absolute inset-0 bg-gradient-to-br from-primary-500/10 via-transparent to-rose-500/10" />
 
-                    <div className="relative z-10 flex flex-col md:flex-row items-center gap-4 md:gap-8">
-                        <div className="w-12 h-12 md:w-16 md:h-16 rounded-xl md:rounded-2xl bg-primary-600 flex items-center justify-center shadow-glow shrink-0">
-                            <DollarSign className="w-6 h-6 md:w-8 md:h-8 text-white" />
+                    <div className="relative z-10 flex flex-col md:flex-row items-center gap-4 md:gap-8 text-center md:text-left">
+                        <div className="w-10 h-10 md:w-16 md:h-16 rounded-xl md:rounded-2xl bg-primary-600 flex items-center justify-center shadow-glow shrink-0">
+                            <DollarSign className="w-5 h-5 md:w-8 md:h-8 text-white" />
                         </div>
 
-                        <div className="flex-1 text-center md:text-left">
-                            <h3 className="text-lg md:text-2xl font-black mb-2" style={{ color: 'var(--text-main)' }}>
+                        <div className="flex-1">
+                            <h3 className="text-base md:text-2xl font-black mb-1 md:mb-2" style={{ color: 'var(--text-main)' }}>
                                 Payment Structure
                             </h3>
-                            <p className="text-sm md:text-lg" style={{ color: 'var(--text-muted)' }}>
+                            <p className="text-xs md:text-lg" style={{ color: 'var(--text-muted)' }}>
                                 <span className="font-black text-primary-500">40% upfront</span> to secure your slot,
                                 <span className="font-black text-primary-500"> 60% on delivery</span>.
-                                All projects include 30 days of priority support.
+                                <span className="hidden sm:inline"> All projects include 30 days of priority support.</span>
                             </p>
                         </div>
 
                         <motion.a
                             href="#contact"
-                            className="px-6 md:px-8 py-3 md:py-4 bg-primary-600 text-white font-bold text-xs md:text-sm uppercase tracking-wider rounded-xl md:rounded-2xl hover:bg-primary-700 transition-all shadow-premium shrink-0"
+                            className="w-full md:w-auto px-6 md:px-8 py-3 md:py-4 bg-primary-600 text-white font-bold text-[10px] md:text-sm uppercase tracking-wider rounded-xl md:rounded-2xl hover:bg-primary-700 transition-all shadow-premium shrink-0"
                             whileHover={{ scale: 1.05, y: -2 }}
                             whileTap={{ scale: 0.95 }}
                         >
@@ -236,16 +236,16 @@ const MobileProcessStep = ({ step, index }: any) => {
             {/* Timeline */}
             <div className="flex flex-col items-center">
                 <motion.div
-                    className="w-12 h-12 rounded-xl bg-primary-600 flex items-center justify-center shadow-glow shrink-0"
+                    className="w-10 h-10 rounded-xl bg-primary-600 flex items-center justify-center shadow-glow shrink-0"
                     initial={{ scale: 0 }}
                     animate={isInView ? { scale: 1 } : {}}
                     transition={{ duration: 0.4, delay: index * 0.1 + 0.2 }}
                 >
-                    <step.icon className="w-6 h-6 text-white" />
+                    <step.icon className="w-5 h-5 text-white" />
                 </motion.div>
                 {index < 4 && (
                     <motion.div
-                        className="w-0.5 flex-1 mt-4 bg-gradient-to-b from-primary-600 to-transparent"
+                        className="w-0.5 flex-1 mt-3 bg-gradient-to-b from-primary-600 to-transparent"
                         initial={{ height: 0 }}
                         animate={isInView ? { height: "100%" } : {}}
                         transition={{ duration: 0.6, delay: index * 0.1 + 0.4 }}
@@ -254,19 +254,19 @@ const MobileProcessStep = ({ step, index }: any) => {
             </div>
 
             {/* Content */}
-            <div className="flex-1 pb-6 md:pb-8">
-                <div className="flex items-center gap-2 md:gap-3 mb-2 md:mb-3">
-                    <span className="text-[10px] md:text-xs font-black text-primary-500">
+            <div className="flex-1 pb-4 md:pb-8">
+                <div className="flex items-center gap-2 md:gap-3 mb-1.5 md:mb-3">
+                    <span className="text-[9px] md:text-sm font-black text-primary-500">
                         {step.number}
                     </span>
-                    <h3 className="text-base md:text-xl font-black" style={{ color: 'var(--text-main)' }}>
+                    <h3 className="text-sm md:text-xl font-black" style={{ color: 'var(--text-main)' }}>
                         {step.title}
                     </h3>
                 </div>
-                <p className="text-xs md:text-sm leading-relaxed mb-2" style={{ color: 'var(--text-muted)' }}>
+                <p className="text-[11px] md:text-sm leading-relaxed mb-1.5" style={{ color: 'var(--text-muted)' }}>
                     {step.description}
                 </p>
-                <div className="text-[10px] md:text-xs font-bold text-primary-500">
+                <div className="text-[9px] md:text-xs font-bold text-primary-500">
                     {step.duration}
                 </div>
                 {step.highlight && (

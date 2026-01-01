@@ -91,22 +91,22 @@ const Hero = () => {
 
                         {/* Main Heading */}
                         <motion.h1
-                            className="mb-8"
+                            className="mb-6 md:mb-8"
                             initial={{ opacity: 0, y: 20 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ delay: 0.4, duration: 0.8 }}
                         >
-                            <span className="block text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-black leading-[0.95] tracking-tighter mb-4" style={{ color: 'var(--text-main)' }}>
+                            <span className="block text-3xl sm:text-4xl md:text-6xl lg:text-7xl xl:text-8xl font-black leading-[0.95] tracking-tighter mb-2 md:mb-4" style={{ color: 'var(--text-main)' }}>
                                 Engineering
                             </span>
-                            <span className="block text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl font-black leading-[0.95] tracking-tighter gradient-text">
+                            <span className="block text-4xl sm:text-5xl md:text-7xl lg:text-8xl xl:text-9xl font-black leading-[0.95] tracking-tighter gradient-text">
                                 Digital Excellence
                             </span>
                         </motion.h1>
 
                         {/* Description */}
                         <motion.p
-                            className="text-base sm:text-lg lg:text-xl mb-10 md:mb-12 max-w-2xl mx-auto lg:mx-0 leading-relaxed px-4 md:px-0"
+                            className="text-sm sm:text-base lg:text-xl mb-8 md:mb-12 max-w-xl mx-auto lg:mx-0 leading-relaxed px-2 md:px-0"
                             style={{ color: 'var(--text-muted)' }}
                             initial={{ opacity: 0, y: 20 }}
                             animate={{ opacity: 1, y: 0 }}
@@ -121,41 +121,41 @@ const Hero = () => {
 
                         {/* CTA Buttons */}
                         <motion.div
-                            className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4"
+                            className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-3 md:gap-4"
                             initial={{ opacity: 0, y: 20 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ delay: 0.8, duration: 0.8 }}
                         >
                             <motion.a
                                 href="#contact"
-                                className="group relative px-8 py-4 bg-primary-600 text-white font-bold text-sm uppercase tracking-wider rounded-2xl overflow-hidden shadow-premium transition-smooth hover:shadow-glow w-full sm:w-auto"
+                                className="group relative px-6 md:px-8 py-3.5 md:py-4 bg-primary-600 text-white font-bold text-xs md:text-sm uppercase tracking-wider rounded-xl md:rounded-2xl overflow-hidden shadow-premium transition-smooth hover:shadow-glow w-full sm:w-auto"
                                 whileHover={{ scale: 1.02, y: -2 }}
                                 whileTap={{ scale: 0.98 }}
                             >
                                 <span className="relative z-10 flex items-center justify-center gap-2">
                                     Start a Project
-                                    <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
+                                    <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
                                 </span>
                                 <div className="absolute inset-0 bg-gradient-to-r from-primary-700 to-rose-600 opacity-0 group-hover:opacity-100 transition-opacity" />
                             </motion.a>
 
                             <motion.a
                                 href="#projects"
-                                className="group px-8 py-4 glass font-bold text-sm uppercase tracking-wider rounded-2xl transition-smooth hover:border-primary-500/50 w-full sm:w-auto"
+                                className="group px-6 md:px-8 py-3.5 md:py-4 glass font-bold text-xs md:text-sm uppercase tracking-wider rounded-xl md:rounded-2xl transition-smooth hover:border-primary-500/50 w-full sm:w-auto"
                                 style={{ color: 'var(--text-main)' }}
                                 whileHover={{ scale: 1.02, y: -2 }}
                                 whileTap={{ scale: 0.98 }}
                             >
                                 <span className="flex items-center justify-center gap-2">
                                     View Portfolio
-                                    <Sparkles size={18} className="group-hover:rotate-12 transition-transform" />
+                                    <Sparkles size={16} className="group-hover:rotate-12 transition-transform" />
                                 </span>
                             </motion.a>
                         </motion.div>
 
                         {/* Stats Row */}
                         <motion.div
-                            className="grid grid-cols-3 gap-6 mt-16 pt-12 border-t"
+                            className="grid grid-cols-3 gap-3 md:gap-6 mt-12 md:mt-16 pt-8 md:pt-12 border-t"
                             style={{ borderColor: 'var(--border-main)' }}
                             initial={{ opacity: 0, y: 20 }}
                             animate={{ opacity: 1, y: 0 }}
@@ -173,11 +173,11 @@ const Hero = () => {
                                     animate={{ opacity: 1, y: 0 }}
                                     transition={{ delay: 1.2 + idx * 0.1 }}
                                 >
-                                    <stat.icon className="w-6 h-6 mx-auto mb-3 text-primary-500" />
-                                    <div className="text-2xl md:text-3xl font-black mb-1" style={{ color: 'var(--text-main)' }}>
+                                    <stat.icon className="w-4 h-4 md:w-6 md:h-6 mx-auto mb-2 md:mb-3 text-primary-500" />
+                                    <div className="text-lg md:text-3xl font-black mb-0.5 md:mb-1" style={{ color: 'var(--text-main)' }}>
                                         {stat.value}
                                     </div>
-                                    <div className="text-xs font-bold uppercase tracking-wider" style={{ color: 'var(--text-muted)' }}>
+                                    <div className="text-[8px] md:text-xs font-bold uppercase tracking-wider" style={{ color: 'var(--text-muted)' }}>
                                         {stat.label}
                                     </div>
                                 </motion.div>
