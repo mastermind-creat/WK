@@ -49,23 +49,24 @@ const Projects = () => {
                     </motion.a>
                 </div>
 
-                {/* Industrial Bento Grid */}
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-6 auto-rows-[280px] md:auto-rows-[320px]">
+                {/* Industrial Bento Collage */}
+                <div className="grid grid-cols-2 lg:grid-cols-12 gap-3 md:gap-6 auto-rows-[200px] md:auto-rows-[320px]">
                     {topProjects.map((project, idx) => {
-                        // Define different spans for a bento feel
+                        // Varied spans for a true collage feel across breakpoints
                         const spans = [
-                            "lg:col-span-8 lg:row-span-2", // 1st - Big Highlight
-                            "lg:col-span-4 lg:row-span-1", // 2nd
-                            "lg:col-span-4 lg:row-span-1", // 3rd
-                            "lg:col-span-4 lg:row-span-1", // 4th
-                            "lg:col-span-4 lg:row-span-1", // 5th
-                            "lg:col-span-4 lg:row-span-1", // 6th
+                            "col-span-2 row-span-2 lg:col-span-8 lg:row-span-2", // 1st: Primary Highlight
+                            "col-span-1 row-span-1 lg:col-span-4 lg:row-span-1", // 2nd: Square
+                            "col-span-1 row-span-1 lg:col-span-4 lg:row-span-1", // 3rd: Square
+                            "col-span-2 row-span-1 lg:col-span-4 lg:row-span-1", // 4th: Landscape
+                            "col-span-1 row-span-1 lg:col-span-4 lg:row-span-1", // 5th: Square
+                            "col-span-1 row-span-1 lg:col-span-4 lg:row-span-1", // 6th: Square
                         ];
 
                         return (
                             <motion.div
                                 key={project.title}
-                                className={`group relative rounded-[2.5rem] overflow-hidden border border-white/5 bg-zinc-900/50 backdrop-blur-sm ${spans[idx] || "lg:col-span-4"}`}
+                                className={`group relative rounded-[2rem] md:rounded-[2.5rem] overflow-hidden border border-white/5 dark:border-white/5 border-black/5 bg-zinc-900/50 backdrop-blur-sm ${spans[idx] || "lg:col-span-4"}`}
+                                style={{ backgroundColor: 'var(--bg-surface)' }}
                                 initial={{ opacity: 0, y: 30 }}
                                 whileInView={{ opacity: 1, y: 0 }}
                                 viewport={{ once: true }}

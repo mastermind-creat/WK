@@ -185,12 +185,13 @@ const Hero = () => {
                         </motion.div>
                     </motion.div>
 
-                    {/* Visual Column - Featured Systems Dashboard */}
+                    {/* Visual Column - Featured Systems Dashboard Collage */}
                     <motion.div
-                        className="flex-1 hidden lg:block relative"
-                        initial={{ opacity: 0, x: 50 }}
-                        animate={{ opacity: 1, x: 0 }}
-                        transition={{ duration: 1, delay: 0.5 }}
+                        className="flex-1 block relative mt-20 lg:mt-0 scale-75 md:scale-90 lg:scale-100 origin-center"
+                        initial={{ opacity: 0, y: 50 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 1 }}
                     >
                         <div className="relative group">
                             {/* Dashboard Background */}
