@@ -13,7 +13,7 @@ const Navbar = () => {
     const [isMobile, setIsMobile] = useState(false);
 
     const navLinks = [
-        { name: 'Home', href: '/', icon: Home },
+        { name: 'Home', href: '/#home', icon: Home },
         { name: 'About', href: '/#about', icon: User },
         { name: 'Services', href: '/#services', icon: Zap },
         { name: 'Projects', href: '/projects', icon: Layers },
@@ -96,6 +96,7 @@ const Navbar = () => {
                                     key={activeIndex}
                                     initial={{ scale: 0, y: -10 }}
                                     animate={{ scale: 1, y: 0 }}
+                                    whileTap={{ scale: 0.9, x: [-1, 2, -1, 0] }}
                                     className="text-white drop-shadow-lg"
                                 >
                                     {(() => {
@@ -126,6 +127,11 @@ const Navbar = () => {
                                                 y: isActive ? -100 : 8, // Pressing deeper into the bar
                                                 opacity: isActive ? 0 : 0.6,
                                                 scale: isActive ? 0.3 : 1
+                                            }}
+                                            whileTap={{
+                                                x: [-1, 2, -2, 1, 0],
+                                                y: isActive ? -100 : [8, 10, 6, 8],
+                                                transition: { duration: 0.15 }
                                             }}
                                             transition={{ duration: 0.35, ease: "easeOut" }}
                                             className="text-white group-hover:opacity-100 transition-opacity"
