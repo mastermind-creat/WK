@@ -602,29 +602,29 @@ export const pricing = [
     {
         plan: "Basic",
         price: "Ksh 15,000+",
-        description: "Perfect for personal use and small portfolios.",
-        features: ["Simple 5-page website", "Basic contact form", "Mobile responsive", "1 Round of revisions", "Basic SEO"],
+        description: "Essential foundation for your digital presence.",
+        features: ["Simple 5-page website", "Basic contact form", "Mobile responsive", "Standard Security Setup"],
         popular: false
     },
     {
         plan: "Standard",
         price: "Ksh 30,000+",
-        description: "Ideal for growing businesses and professional brands.",
-        features: ["Up to 10 pages", "CMS integration", "Basic SEO setup", "Google Analytics", "3 Rounds of revisions"],
+        description: "Dynamic solutions for growing professional brands.",
+        features: ["Up to 10 pages", "CMS integration (WP/Custom)", "Basic SEO setup", "Google Analytics Integration"],
         popular: true
     },
     {
         plan: "Premium",
         price: "Ksh 60,000+",
-        description: "Full-scale custom solutions for large organizations.",
-        features: ["Custom design & branding", "E-commerce functionality", "Advanced SEO", "Ongoing support", "Performance Optimization"],
+        description: "High-performance systems with advanced automation.",
+        features: ["Custom design & branding", "E-commerce functionality", "Advanced SEO optimization", "Maintenance & support"],
         popular: false
     },
     {
         plan: "Enterprise",
         price: "Ksh 100,000+",
-        description: "Enterprise-level custom software and virtual assistance packages.",
-        features: ["Custom software portal", "Virtual Assistance package", "Digital strategy consulting", "24/7 Priority support", "Deep analytics integration"],
+        description: "Full-scale ecological digital transformation.",
+        features: ["Enterprise custom software", "Advanced business portal", "Virtual Assistance package", "Digital strategy consulting"],
         popular: false
     }
 ];
