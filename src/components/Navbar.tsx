@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import {
     Menu, X, Sun, Moon, Monitor,
     Home, User, Zap, Layers, Image,
-    BookOpen, Tag, Mail
+    BookOpen, Tag, Mail, Fingerprint, Command
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Link, useLocation } from 'react-router-dom';
@@ -176,30 +176,34 @@ const Navbar = () => {
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
                         exit={{ opacity: 0 }}
-                        className="fixed inset-0 z-[60] bg-black/60 backdrop-blur-md lg:hidden"
+                        className="fixed inset-0 z-[60] bg-black/80 backdrop-blur-xl lg:hidden flex items-center justify-center p-6"
                         onClick={() => setIsOpen(false)}
                     >
                         <motion.div
-                            initial={{ x: '100%' }}
-                            animate={{ x: 0 }}
-                            exit={{ x: '100%' }}
-                            transition={{ type: 'spring', damping: 25, stiffness: 200 }}
-                            className="absolute top-0 right-0 h-full w-[85%] max-w-sm border-l overflow-y-auto"
-                            style={{ backgroundColor: 'var(--bg-main)', borderColor: 'var(--border-main)' }}
+                            initial={{ scale: 0.8, opacity: 0, rotateX: 20 }}
+                            animate={{ scale: 1, opacity: 1, rotateX: 0 }}
+                            exit={{ scale: 0.8, opacity: 0, rotateX: 20 }}
+                            className="w-full max-w-[320px] rounded-[3rem] p-8 border relative overflow-hidden shadow-fancy"
+                            style={{
+                                backgroundColor: 'var(--bg-elevated)',
+                                borderColor: 'var(--border-main)',
+                                perspective: '1000px'
+                            }}
                             onClick={(e) => e.stopPropagation()}
                         >
-                            <div className="p-8 flex flex-col h-full">
-                                <div className="flex items-center justify-between mb-10">
-                                    <span className="text-xs font-black uppercase tracking-[0.2em] text-primary-600">Navigation</span>
-                                    <button
-                                        onClick={() => setIsOpen(false)}
-                                        className="p-2 rounded-full hover:bg-white/5"
-                                    >
-                                        <X size={20} style={{ color: 'var(--text-muted)' }} />
-                                    </button>
+                            {/* Decorative Background Element */}
+                            <div className="absolute -top-20 -right-20 w-40 h-40 bg-primary-600/20 rounded-full blur-[60px] pointer-events-none" />
+                            <div className="absolute -bottom-20 -left-20 w-40 h-40 bg-rose-600/10 rounded-full blur-[60px] pointer-events-none" />
+
+                            <div className="relative z-10 flex flex-col items-center">
+                                {/* Tactical Header */}
+                                <div className="flex items-center gap-2 mb-8 px-4 py-1.5 rounded-full bg-white/5 border border-white/10">
+                                    <Command size={10} className="text-primary-500" />
+                                    <span className="text-[8px] font-black uppercase tracking-[0.3em] text-white/40">Portal Index</span>
                                 </div>
 
-                                <div className="space-y-4">
+                                {/* Circular Navigation Link Grid */}
+                                <div className="grid grid-cols-2 gap-4 w-full">
                                     {navLinks.map((link, idx) => {
                                         const isActive = link.href.startsWith('/#')
                                             ? location.hash === link.href.split('#')[1]
@@ -208,81 +212,63 @@ const Navbar = () => {
                                         return (
                                             <motion.div
                                                 key={link.name}
-                                                initial={{ opacity: 0, x: 50 }}
-                                                animate={{ opacity: 1, x: 0 }}
-                                                transition={{ delay: idx * 0.05 + 0.1 }}
+                                                initial={{ opacity: 0, y: 20 }}
+                                                animate={{ opacity: 1, y: 0 }}
+                                                transition={{ delay: idx * 0.05 }}
                                             >
-                                                {link.href.startsWith('/#') ? (
-                                                    <a
-                                                        href={link.href}
-                                                        onClick={(e) => {
+                                                <Link
+                                                    to={link.href}
+                                                    onClick={(e) => {
+                                                        if (link.href.startsWith('/#')) {
                                                             if (isHomePage) {
                                                                 e.preventDefault();
                                                                 handleNavClick(link.href);
                                                             } else {
                                                                 setIsOpen(false);
                                                             }
-                                                        }}
-                                                        className={`
-                                                            group flex items-center gap-4 p-4 rounded-2xl transition-all border
-                                                            ${isActive
-                                                                ? 'bg-primary-600 text-white border-primary-500 shadow-xl shadow-primary-600/20'
-                                                                : 'hover:bg-white/5 border-transparent hover:border-white/10'
-                                                            }
-                                                        `}
-                                                        style={{ color: isActive ? 'white' : 'var(--text-main)' }}
-                                                    >
-                                                        <div className={`
-                                                            w-10 h-10 rounded-xl flex items-center justify-center transition-colors
-                                                            ${isActive ? 'bg-white/20' : 'bg-primary-600/10 text-primary-600 group-hover:bg-primary-600 group-hover:text-white'}
-                                                        `}>
-                                                            <link.icon size={20} />
-                                                        </div>
-                                                        <span className="text-sm font-black uppercase tracking-widest">{link.name}</span>
-                                                    </a>
-                                                ) : (
-                                                    <Link
-                                                        to={link.href}
-                                                        onClick={() => setIsOpen(false)}
-                                                        className={`
-                                                            group flex items-center gap-4 p-4 rounded-2xl transition-all border
-                                                            ${isActive
-                                                                ? 'bg-primary-600 text-white border-primary-500 shadow-xl shadow-primary-600/20'
-                                                                : 'hover:bg-white/5 border-transparent hover:border-white/10'
-                                                            }
-                                                        `}
-                                                        style={{ color: isActive ? 'white' : 'var(--text-main)' }}
-                                                    >
-                                                        <div className={`
-                                                            w-10 h-10 rounded-xl flex items-center justify-center transition-colors
-                                                            ${isActive ? 'bg-white/20' : 'bg-primary-600/10 text-primary-600 group-hover:bg-primary-600 group-hover:text-white'}
-                                                        `}>
-                                                            <link.icon size={20} />
-                                                        </div>
-                                                        <span className="text-sm font-black uppercase tracking-widest">{link.name}</span>
-                                                    </Link>
-                                                )}
+                                                        } else {
+                                                            setIsOpen(false);
+                                                        }
+                                                    }}
+                                                    className={`
+                                                        flex flex-col items-center justify-center p-4 rounded-[2rem] transition-all border group
+                                                        ${isActive
+                                                            ? 'bg-primary-600 border-primary-500 shadow-glow'
+                                                            : 'bg-white/5 border-white/5 hover:border-primary-500/30'
+                                                        }
+                                                    `}
+                                                >
+                                                    <div className={`
+                                                        w-10 h-10 rounded-full flex items-center justify-center mb-2 transition-all
+                                                        ${isActive ? 'bg-white/20' : 'bg-primary-600/10 text-primary-500 group-hover:scale-110'}
+                                                    `}>
+                                                        <link.icon size={18} strokeWidth={isActive ? 2.5 : 2} />
+                                                    </div>
+                                                    <span className={`text-[9px] font-black uppercase tracking-widest ${isActive ? 'text-white' : 'text-white/40 group-hover:text-white'}`}>
+                                                        {link.name}
+                                                    </span>
+                                                </Link>
                                             </motion.div>
                                         );
                                     })}
                                 </div>
 
-                                <div className="mt-auto pt-10">
-                                    <div className="p-6 rounded-3xl border relative overflow-hidden" style={{ borderColor: 'var(--border-main)', backgroundColor: 'var(--bg-surface)' }}>
-                                        <div className="relative z-10">
-                                            <h4 className="text-lg font-black uppercase mb-2" style={{ color: 'var(--text-main)' }}>Mastermind</h4>
-                                            <p className="text-xs font-medium mb-4" style={{ color: 'var(--text-muted)' }}>Elite Engineering & Design</p>
-                                            <button
-                                                onClick={() => {
-                                                    setIsOpen(false);
-                                                    document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
-                                                }}
-                                                className="w-full py-3 bg-primary-600 text-white rounded-xl text-xs font-bold uppercase tracking-wider"
-                                            >
-                                                Get in Touch
-                                            </button>
+                                {/* Access Authorization Footer */}
+                                <div className="mt-8 pt-8 border-t border-white/5 w-full flex flex-col items-center">
+                                    <div className="flex items-center gap-3 mb-6">
+                                        <Fingerprint size={16} className="text-primary-500 animate-pulse" />
+                                        <div className="flex flex-col">
+                                            <span className="text-[7px] font-black uppercase tracking-[0.2em] text-white/30 leading-none">Access Verified</span>
+                                            <span className="text-[9px] font-bold text-white tracking-widest leading-tight">SYSTEMS ENGINEER</span>
                                         </div>
                                     </div>
+
+                                    <button
+                                        onClick={() => setIsOpen(false)}
+                                        className="w-full py-4 bg-white text-black rounded-2xl text-[10px] font-black uppercase tracking-[0.2em] shadow-xl active:scale-95 transition-all hover:bg-primary-600 hover:text-white"
+                                    >
+                                        Execute Close
+                                    </button>
                                 </div>
                             </div>
                         </motion.div>
