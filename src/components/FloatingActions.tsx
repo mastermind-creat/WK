@@ -1,23 +1,28 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Settings, MessageCircle, Briefcase, Mail, ArrowUp, MessageSquare, X, Smartphone, Globe, Palette } from 'lucide-react';
+import { Settings, MessageCircle, Briefcase, Mail, MessageSquare, X, Sun, Moon, Laptop } from 'lucide-react';
+import { useTheme } from '../context/ThemeContext';
 
 const FloatingActions = () => {
     const [isOpen, setIsOpen] = useState(false);
-    const [isVisible, setIsVisible] = useState(false);
+    const [hasAutoOpened, setHasAutoOpened] = useState(false);
+    const { theme, setTheme, resolvedTheme } = useTheme();
+
+    const handleScroll = useCallback(() => {
+        const scrollPosition = window.innerHeight + window.scrollY;
+        const totalHeight = document.documentElement.scrollHeight;
+
+        // Auto open when reaching bottom (within 20px) 
+        if (!hasAutoOpened && scrollPosition >= totalHeight - 20) {
+            setIsOpen(true);
+            setHasAutoOpened(true);
+        }
+    }, [hasAutoOpened]);
 
     useEffect(() => {
-        const toggleVisibility = () => {
-            if (window.scrollY > 300) {
-                setIsVisible(true);
-            } else {
-                setIsVisible(false);
-                setIsOpen(false);
-            }
-        };
-        window.addEventListener('scroll', toggleVisibility);
-        return () => window.removeEventListener('scroll', toggleVisibility);
-    }, []);
+        window.addEventListener('scroll', handleScroll);
+        return () => window.removeEventListener('scroll', handleScroll);
+    }, [handleScroll]);
 
     const actions = [
         {
@@ -87,6 +92,24 @@ const FloatingActions = () => {
                             </div>
 
                             <div className="grid grid-cols-1 gap-2">
+                                {/* Theme Toggles */}
+                                <div className="flex gap-2 mb-2 p-1 bg-white/5 rounded-xl">
+                                    {[
+                                        { id: 'light', icon: Sun },
+                                        { id: 'dark', icon: Moon },
+                                        { id: 'system', icon: Laptop }
+                                    ].map((t) => (
+                                        <button
+                                            key={t.id}
+                                            onClick={() => setTheme(t.id as any)}
+                                            className={`flex-1 flex items-center justify-center p-2 rounded-lg transition-all ${theme === t.id ? 'bg-primary-600 text-white shadow-lg' : 'text-white/40 hover:text-white/60'
+                                                }`}
+                                        >
+                                            <t.icon size={14} />
+                                        </button>
+                                    ))}
+                                </div>
+
                                 {actions.map((action, idx) => (
                                     <motion.div
                                         key={action.label}
@@ -132,25 +155,6 @@ const FloatingActions = () => {
                     )}
                 </AnimatePresence>
             </div>
-
-            {/* Back to Top - Kept separate at the bottom right */}
-            <AnimatePresence>
-                {isVisible && (
-                    <motion.button
-                        initial={{ opacity: 0, scale: 0.5, y: 20 }}
-                        animate={{ opacity: 1, scale: 1, y: 0 }}
-                        exit={{ opacity: 0, scale: 0.5, y: 20 }}
-                        onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-                        aria-label="Back to Top"
-                        className="pointer-events-auto fixed bottom-6 right-6 w-10 h-10 md:w-12 md:h-12 rounded-xl glass shadow-premium flex items-center justify-center hover:border-primary-500/50 transition-all border group"
-                        style={{ borderColor: 'var(--border-main)' }}
-                        whileHover={{ y: -4 }}
-                        whileTap={{ scale: 0.9 }}
-                    >
-                        <ArrowUp size={18} className="text-primary-500 group-hover:-translate-y-1 transition-transform" />
-                    </motion.button>
-                )}
-            </AnimatePresence>
         </div>
     );
 };
