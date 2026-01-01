@@ -278,46 +278,46 @@ const ServiceModal = ({ service, icon: Icon, onClose }: any) => {
                             <Icon className="w-8 h-8 text-white" />
                         </div>
                         <div className="flex-1">
-                            <h3 className="text-3xl font-black mb-2" style={{ color: 'var(--text-main)' }}>
+                            <h3 className="text-xl md:text-2xl font-black mb-1 md:mb-2" style={{ color: 'var(--text-main)' }}>
                                 {service.title}
                             </h3>
-                            <p className="text-lg" style={{ color: 'var(--text-muted)' }}>
+                            <p className="text-xs md:text-sm" style={{ color: 'var(--text-muted)' }}>
                                 {service.description}
                             </p>
                         </div>
                     </div>
 
                     {/* Pricing */}
-                    <div className="mb-8 p-6 rounded-2xl" style={{ backgroundColor: 'var(--bg-elevated)' }}>
-                        <div className="text-sm font-bold uppercase tracking-wider mb-2" style={{ color: 'var(--text-muted)' }}>
+                    <div className="mb-6 md:mb-8 p-4 md:p-6 rounded-2xl" style={{ backgroundColor: 'var(--bg-elevated)' }}>
+                        <div className="text-[10px] md:text-xs font-bold uppercase tracking-wider mb-1 md:mb-2" style={{ color: 'var(--text-muted)' }}>
                             Starting Price
                         </div>
-                        <div className="text-4xl font-black text-primary-500">
+                        <div className="text-2xl md:text-3xl font-black text-primary-500">
                             {service.price}
                         </div>
                     </div>
 
                     {/* Detailed Features */}
-                    <div className="mb-8">
-                        <h4 className="text-xl font-black mb-6" style={{ color: 'var(--text-main)' }}>
+                    <div className="mb-6 md:mb-8">
+                        <h4 className="text-base md:text-lg font-black mb-4 md:mb-6" style={{ color: 'var(--text-main)' }}>
                             What's Included
                         </h4>
-                        <div className="space-y-4">
+                        <div className="space-y-3 md:space-y-4">
                             {service.detailedFeatures.map((feature: any, idx: number) => (
                                 <motion.div
                                     key={idx}
-                                    className="flex items-start gap-4 p-4 rounded-xl"
+                                    className="flex items-start gap-3 md:gap-4 p-3 md:p-4 rounded-xl"
                                     style={{ backgroundColor: 'var(--bg-main)' }}
                                     initial={{ opacity: 0, x: -20 }}
                                     animate={{ opacity: 1, x: 0 }}
                                     transition={{ delay: idx * 0.05 }}
                                 >
-                                    <CheckCircle className="w-5 h-5 text-primary-500 shrink-0 mt-0.5" />
+                                    <CheckCircle className="w-4 h-4 md:w-5 md:h-5 text-primary-500 shrink-0 mt-0.5" />
                                     <div className="flex-1">
-                                        <div className="font-bold mb-1" style={{ color: 'var(--text-main)' }}>
+                                        <div className="text-xs md:text-sm font-bold mb-0.5 md:mb-1" style={{ color: 'var(--text-main)' }}>
                                             {feature.name}
                                         </div>
-                                        <div className="text-sm font-bold text-primary-500">
+                                        <div className="text-[10px] md:text-xs font-bold text-primary-500">
                                             {feature.price}
                                         </div>
                                     </div>
@@ -331,13 +331,13 @@ const ServiceModal = ({ service, icon: Icon, onClose }: any) => {
                         href={`https://wa.me/254743394373?text=${encodeURIComponent(service.whatsappMsg)}`}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="group flex items-center justify-center gap-3 w-full py-5 bg-primary-600 text-white font-bold text-sm uppercase tracking-wider rounded-2xl hover:bg-primary-700 transition-all shadow-premium"
+                        className="group flex items-center justify-center gap-2 md:gap-3 w-full py-4 md:py-5 bg-primary-600 text-white font-bold text-[10px] md:text-xs uppercase tracking-wider rounded-2xl hover:bg-primary-700 transition-all shadow-premium"
                         whileHover={{ scale: 1.02 }}
                         whileTap={{ scale: 0.98 }}
                     >
-                        <MessageCircle size={20} />
+                        <MessageCircle size={18} />
                         Get Started on WhatsApp
-                        <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
+                        <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
                     </motion.a>
                 </div>
             </motion.div>

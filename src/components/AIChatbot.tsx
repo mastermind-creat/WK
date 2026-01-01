@@ -358,60 +358,64 @@ If the user says they want to "hire", "contact", "start a project", or "needs he
                         initial={{ opacity: 0, y: 10, scale: 0.9 }}
                         animate={{ opacity: 1, y: 0, scale: 1 }}
                         exit={{ opacity: 0, y: 10, scale: 0.9 }}
-                        className="fixed bottom-24 left-6 z-40 max-w-[200px] bg-white text-zinc-900 p-4 rounded-xl shadow-2xl border-l-4 border-primary-500 cursor-pointer"
+                        className="fixed bottom-20 left-6 z-40 max-w-[180px] bg-zinc-900 text-white p-3 rounded-2xl shadow-2xl border border-white/10 cursor-pointer"
                         whileHover={{ scale: 1.05 }}
                         onClick={() => setIsOpen(true)}
                     >
-                        <div className="absolute bottom-[-6px] left-6 w-4 h-4 bg-white rotate-45" />
-                        <div className="flex items-start gap-3">
-                            <div className="w-8 h-8 rounded-full bg-primary-100 flex items-center justify-center shrink-0">
-                                <Sparkles size={16} className="text-primary-600" />
+                        <div className="absolute bottom-[-5px] left-5 w-3 h-3 bg-zinc-900 rotate-45 border-r border-b border-white/10" />
+                        <div className="flex items-start gap-2">
+                            <div className="w-6 h-6 rounded-full bg-primary-600 flex items-center justify-center shrink-0">
+                                <Sparkles size={12} className="text-white" strokeWidth={3} />
                             </div>
                             <div>
-                                <p className="text-xs font-bold leading-tight">Hi there! 👋</p>
-                                <p className="text-[10px] mt-1 opacity-80">I can answer any questions about Wambia's work!</p>
+                                <p className="text-[10px] font-black uppercase tracking-wider">Neural Link</p>
+                                <p className="text-[8px] mt-0.5 opacity-60 uppercase font-bold">Ask anything</p>
                             </div>
                         </div>
                         <button
                             onClick={(e) => { e.stopPropagation(); setShowReminder(false); }}
-                            className="absolute top-1 right-1 p-1 hover:bg-black/5 rounded-full"
+                            className="absolute -top-1 -right-1 p-1 bg-zinc-800 rounded-full border border-white/10"
                         >
-                            <X size={12} className="opacity-40" />
+                            <X size={8} className="text-white" />
                         </button>
                     </motion.div>
                 )}
             </AnimatePresence>
 
-            {/* Floating Chat Button - Moved to LEFT side */}
+            {/* Floating Chat Button - Reduced size and premium feel */}
             <motion.button
-                className="fixed bottom-6 left-6 z-50 w-14 h-14 md:w-16 md:h-16 bg-gradient-to-r from-primary-600 to-rose-500 text-white rounded-full shadow-2xl flex items-center justify-center group hover:shadow-primary-600/50 transition-all"
+                className="fixed bottom-6 left-6 z-50 w-12 h-12 md:w-14 md:h-14 bg-zinc-900 text-white rounded-2xl shadow-2xl flex items-center justify-center group border border-white/10 overflow-hidden"
                 whileHover={{ scale: 1.1, rotate: 5 }}
-                whileTap={{ scale: 0.9 }}
+                whileTap={{ scale: 0.95 }}
                 onClick={() => setIsOpen(!isOpen)}
                 initial={{ scale: 0 }}
                 animate={{ scale: 1 }}
                 transition={{ type: "spring", stiffness: 260, damping: 20 }}
             >
+                {/* Background Gradient Layer */}
+                <div className="absolute inset-0 bg-gradient-to-br from-primary-600 to-rose-600 opacity-60 group-hover:opacity-100 transition-opacity" />
+
                 <AnimatePresence mode="wait">
                     {isOpen ? (
                         <motion.div
                             key="close"
-                            initial={{ rotate: -90, opacity: 0 }}
-                            animate={{ rotate: 0, opacity: 1 }}
-                            exit={{ rotate: 90, opacity: 0 }}
+                            initial={{ scale: 0.5, opacity: 0 }}
+                            animate={{ scale: 1, opacity: 1 }}
+                            exit={{ scale: 0.5, opacity: 0 }}
+                            className="relative z-10"
                         >
-                            <X size={24} />
+                            <X size={20} strokeWidth={3} />
                         </motion.div>
                     ) : (
                         <motion.div
                             key="chat"
-                            initial={{ rotate: 90, opacity: 0 }}
-                            animate={{ rotate: 0, opacity: 1 }}
-                            exit={{ rotate: -90, opacity: 0 }}
-                            className="relative"
+                            initial={{ scale: 0.5, opacity: 0 }}
+                            animate={{ scale: 1, opacity: 1 }}
+                            exit={{ scale: 0.5, opacity: 0 }}
+                            className="relative z-10"
                         >
-                            <MessageCircle size={24} />
-                            <span className="absolute -top-1 -right-1 w-3 h-3 bg-green-500 rounded-full animate-pulse" />
+                            <MessageCircle size={20} className="text-white" strokeWidth={2.5} />
+                            <span className="absolute -top-1 -right-1 w-2.5 h-2.5 bg-green-500 rounded-full border-2 border-zinc-900 animate-pulse" />
                         </motion.div>
                     )}
                 </AnimatePresence>

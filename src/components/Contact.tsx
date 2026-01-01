@@ -79,52 +79,6 @@ const Contact = () => {
                                 ))}
                             </div>
 
-                            <div className="mt-8 md:mt-12 pt-6 md:pt-10 border-t" style={{ borderColor: 'var(--border-main)' }}>
-                                <h4 className="text-[9px] md:text-[10px] font-black uppercase tracking-[0.2em] md:tracking-[0.3em] mb-4 md:mb-8 opacity-50" style={{ color: 'var(--text-main)' }}>System Sync</h4>
-                                <div className="grid grid-cols-2 gap-3 md:gap-4">
-                                    {socialLinks.map((social, idx) => (
-                                        <motion.a
-                                            key={idx}
-                                            href={social.href}
-                                            target="_blank"
-                                            rel="noreferrer"
-                                            className="group relative w-full h-10 md:h-14 rounded-xl md:rounded-2xl flex items-center justify-center gap-2 md:gap-3 overflow-hidden border transition-all duration-300"
-                                            style={{ backgroundColor: 'var(--bg-main)', borderColor: 'var(--border-main)' }}
-                                            whileHover={{ scale: 1.05, y: -3 }}
-                                            whileTap={{ scale: 0.95 }}
-                                        >
-                                            {/* Animated background gradient */}
-                                            <div className="absolute inset-0 bg-gradient-to-r from-primary-600 to-rose-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-
-                                            {/* Icon with rotation effect */}
-                                            <motion.div
-                                                className="relative z-10 text-current group-hover:text-white transition-colors duration-300"
-                                                whileHover={{ rotate: 360 }}
-                                                transition={{ duration: 0.6 }}
-                                            >
-                                                <social.icon size={16} className="md:w-5 md:h-5" style={{ color: 'var(--text-muted)' }} />
-                                            </motion.div>
-
-                                            {/* Social name - hidden on mobile, shown on hover on desktop */}
-                                            <span className="hidden md:block relative z-10 text-[10px] font-black uppercase tracking-wider opacity-0 group-hover:opacity-100 transition-all duration-300 text-white">
-                                                {social.href.includes('github') ? 'GitHub' :
-                                                    social.href.includes('linkedin') ? 'LinkedIn' :
-                                                        social.href.includes('twitter') || social.href.includes('x.com') ? 'Twitter' :
-                                                            social.href.includes('instagram') ? 'Instagram' :
-                                                                social.href.includes('youtube') ? 'YouTube' :
-                                                                    social.href.includes('facebook') ? 'Facebook' :
-                                                                        social.href.includes('wa.me') ? 'WhatsApp' :
-                                                                            'Portfolio'}
-                                            </span>
-
-                                            {/* Shine effect */}
-                                            <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-                                                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000" />
-                                            </div>
-                                        </motion.a>
-                                    ))}
-                                </div>
-                            </div>
                         </div>
 
                         {/* Status Card */}

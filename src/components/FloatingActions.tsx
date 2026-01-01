@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Plus, MessageCircle, Briefcase, Mail, ArrowUp, MessageSquare, X } from 'lucide-react';
+import { Settings, MessageCircle, Briefcase, Mail, ArrowUp, MessageSquare, X, Smartphone, Globe, Palette } from 'lucide-react';
 
 const FloatingActions = () => {
     const [isOpen, setIsOpen] = useState(false);
@@ -23,36 +23,117 @@ const FloatingActions = () => {
         {
             icon: MessageCircle,
             href: `https://wa.me/254743394373`,
-            color: 'bg-green-500 hover:bg-green-600',
+            color: 'bg-green-500',
             label: 'WhatsApp',
             description: 'Quick chat'
         },
         {
             icon: MessageSquare,
             onClick: () => window.dispatchEvent(new CustomEvent('openChatbot')),
-            color: 'bg-zinc-800 hover:bg-zinc-900',
+            color: 'bg-zinc-800',
             label: 'AI Support',
-            description: 'Get help'
+            description: 'Virtual Help'
         },
         {
             icon: Mail,
             href: '#contact',
-            color: 'bg-primary-600 hover:bg-primary-700',
+            color: 'bg-primary-600',
             label: 'Contact',
             description: 'Send message'
         },
         {
             icon: Briefcase,
             href: '#projects',
-            color: 'bg-zinc-900 hover:bg-black',
+            color: 'bg-zinc-900',
             label: 'Portfolio',
             description: 'View work'
         },
     ];
 
     return (
-        <div className="fixed bottom-6 right-6 md:bottom-8 md:right-8 z-50 flex flex-col items-end gap-4">
-            {/* Back to Top */}
+        <div className="fixed top-1/2 right-0 -translate-y-1/2 z-[60] flex flex-col items-end pointer-events-none">
+            {/* Toolbox Drawer Container */}
+            <div className="flex items-center pointer-events-auto">
+                {/* Trigger Button - Spinning Settings Icon */}
+                <motion.button
+                    onClick={() => setIsOpen(!isOpen)}
+                    className={`group w-10 h-10 md:w-12 md:h-12 flex items-center justify-center rounded-l-2xl shadow-2xl transition-all duration-500 border-r-0 border ${isOpen ? 'bg-zinc-900 border-zinc-700' : 'bg-primary-600 border-primary-500'
+                        }`}
+                    whileHover={{ x: -2 }}
+                    animate={{ x: isOpen ? 0 : 0 }}
+                >
+                    <motion.div
+                        animate={{ rotate: isOpen ? 180 : 360 }}
+                        transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
+                        className="text-white"
+                    >
+                        {isOpen ? <X size={20} /> : <Settings size={22} />}
+                    </motion.div>
+                </motion.button>
+
+                {/* Drawer Menu */}
+                <AnimatePresence>
+                    {isOpen && (
+                        <motion.div
+                            initial={{ x: "100%" }}
+                            animate={{ x: 0 }}
+                            exit={{ x: "100%" }}
+                            transition={{ type: "spring", stiffness: 300, damping: 30 }}
+                            className="bg-zinc-900/95 backdrop-blur-xl border-l border-white/10 p-4 md:p-6 shadow-[-20px_0_50px_rgba(0,0,0,0.5)] flex flex-col gap-4 rounded-l-3xl overflow-hidden"
+                        >
+                            <div className="mb-2">
+                                <h4 className="text-[10px] font-black uppercase tracking-widest text-primary-500 mb-1">Toolbox</h4>
+                                <p className="text-[8px] font-bold text-white/40 uppercase">System Utilities</p>
+                            </div>
+
+                            <div className="grid grid-cols-1 gap-2">
+                                {actions.map((action, idx) => (
+                                    <motion.div
+                                        key={action.label}
+                                        initial={{ opacity: 0, x: 20 }}
+                                        animate={{ opacity: 1, x: 0 }}
+                                        transition={{ delay: idx * 0.05 }}
+                                    >
+                                        {action.onClick ? (
+                                            <button
+                                                onClick={() => {
+                                                    action.onClick();
+                                                    setIsOpen(false);
+                                                }}
+                                                className="w-full flex items-center gap-3 p-2 rounded-xl hover:bg-white/5 transition-colors group"
+                                            >
+                                                <div className={`w-8 h-8 md:w-10 md:h-10 ${action.color} rounded-lg flex items-center justify-center text-white`}>
+                                                    <action.icon size={18} />
+                                                </div>
+                                                <div className="text-left">
+                                                    <div className="text-[10px] font-black text-white uppercase tracking-wider">{action.label}</div>
+                                                    <div className="text-[8px] font-bold text-white/40 uppercase">{action.description}</div>
+                                                </div>
+                                            </button>
+                                        ) : (
+                                            <a
+                                                href={action.href}
+                                                onClick={() => setIsOpen(false)}
+                                                className="w-full flex items-center gap-3 p-2 rounded-xl hover:bg-white/5 transition-colors group"
+                                            >
+                                                <div className={`w-8 h-8 md:w-10 md:h-10 ${action.color} rounded-lg flex items-center justify-center text-white`}>
+                                                    <action.icon size={18} />
+                                                </div>
+                                                <div className="text-left">
+                                                    <div className="text-[10px] font-black text-white uppercase tracking-wider">{action.label}</div>
+                                                    <div className="text-[8px] font-bold text-white/40 uppercase">{action.description}</div>
+                                                </div>
+                                            </a>
+                                        )}
+                                    </motion.div>
+                                ))}
+                            </div>
+                        </motion.div>
+                    )}
+                </AnimatePresence>
+            </div>
+
+            {/* Back to Top - Kept separate at the bottom right */}
             <AnimatePresence>
                 {isVisible && (
                     <motion.button
@@ -61,137 +142,15 @@ const FloatingActions = () => {
                         exit={{ opacity: 0, scale: 0.5, y: 20 }}
                         onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
                         aria-label="Back to Top"
-                        className="group w-12 h-12 md:w-14 md:h-14 rounded-2xl glass shadow-premium flex items-center justify-center hover:border-primary-500/50 transition-all"
+                        className="pointer-events-auto fixed bottom-6 right-6 w-10 h-10 md:w-12 md:h-12 rounded-xl glass shadow-premium flex items-center justify-center hover:border-primary-500/50 transition-all border group"
                         style={{ borderColor: 'var(--border-main)' }}
                         whileHover={{ y: -4 }}
                         whileTap={{ scale: 0.9 }}
                     >
-                        <ArrowUp size={20} className="text-primary-500 group-hover:-translate-y-1 transition-transform" />
+                        <ArrowUp size={18} className="text-primary-500 group-hover:-translate-y-1 transition-transform" />
                     </motion.button>
                 )}
             </AnimatePresence>
-
-            {/* FAB Menu */}
-            <div className="relative">
-                {/* Action Items */}
-                <AnimatePresence>
-                    {isOpen && (
-                        <motion.div
-                            className="absolute bottom-20 right-0 flex flex-col gap-3"
-                            initial={{ opacity: 0 }}
-                            animate={{ opacity: 1 }}
-                            exit={{ opacity: 0 }}
-                        >
-                            {actions.map((action, idx) => (
-                                <motion.div
-                                    key={action.label}
-                                    className="flex items-center gap-3"
-                                    initial={{ opacity: 0, x: 50, scale: 0.5 }}
-                                    animate={{ opacity: 1, x: 0, scale: 1 }}
-                                    exit={{ opacity: 0, x: 50, scale: 0.5 }}
-                                    transition={{
-                                        type: "spring",
-                                        stiffness: 400,
-                                        damping: 25,
-                                        delay: idx * 0.05
-                                    }}
-                                >
-                                    {/* Label */}
-                                    <motion.div
-                                        className="hidden md:flex flex-col items-end"
-                                        initial={{ opacity: 0, x: 20 }}
-                                        animate={{ opacity: 1, x: 0 }}
-                                        transition={{ delay: idx * 0.05 + 0.1 }}
-                                    >
-                                        <span className="text-xs font-black uppercase tracking-wider px-4 py-2 rounded-xl glass shadow-premium whitespace-nowrap" style={{ color: 'var(--text-main)', borderColor: 'var(--border-main)' }}>
-                                            {action.label}
-                                        </span>
-                                        <span className="text-[10px] font-bold mt-1" style={{ color: 'var(--text-muted)' }}>
-                                            {action.description}
-                                        </span>
-                                    </motion.div>
-
-                                    {/* Button */}
-                                    {/* Button */}
-                                    {action.onClick ? (
-                                        <motion.button
-                                            onClick={() => {
-                                                action.onClick();
-                                                setIsOpen(false);
-                                            }}
-                                            aria-label={action.label}
-                                            className={`w-14 h-14 ${action.color} text-white rounded-2xl shadow-premium flex items-center justify-center transition-all group`}
-                                            whileHover={{ scale: 1.1, rotate: 5 }}
-                                            whileTap={{ scale: 0.9 }}
-                                        >
-                                            <action.icon size={22} className="group-hover:scale-110 transition-transform" />
-                                        </motion.button>
-                                    ) : (
-                                        <motion.a
-                                            href={action.href}
-                                            aria-label={action.label}
-                                            className={`w-14 h-14 ${action.color} text-white rounded-2xl shadow-premium flex items-center justify-center transition-all group`}
-                                            whileHover={{ scale: 1.1, rotate: 5 }}
-                                            whileTap={{ scale: 0.9 }}
-                                        >
-                                            <action.icon size={22} className="group-hover:scale-110 transition-transform" />
-                                        </motion.a>
-                                    )}
-                                </motion.div>
-                            ))}
-                        </motion.div>
-                    )}
-                </AnimatePresence>
-
-                {/* Main FAB */}
-                <motion.button
-                    onClick={() => setIsOpen(!isOpen)}
-                    aria-label="Toggle Quick Actions"
-                    className={`relative w-16 h-16 md:w-18 md:h-18 rounded-[1.5rem] shadow-[0_0_40px_rgba(225,29,72,0.3)] flex items-center justify-center transition-all duration-500 overflow-hidden ${isOpen ? 'bg-zinc-900' : 'bg-primary-600'
-                        }`}
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
-                    animate={{ rotate: isOpen ? 135 : 0 }}
-                >
-                    {/* Glow Effect */}
-                    <div className={`absolute inset-0 bg-gradient-to-br from-primary-500 to-rose-500 opacity-0 group-hover:opacity-20 transition-opacity ${isOpen ? 'opacity-0' : ''}`} />
-
-                    {/* Icon */}
-                    {isOpen ? (
-                        <X size={28} className="text-white" strokeWidth={2.5} />
-                    ) : (
-                        <Plus size={36} className="text-white" strokeWidth={2.5} />
-                    )}
-
-                    {/* Ripple Effect */}
-                    {!isOpen && (
-                        <motion.div
-                            className="absolute inset-0 rounded-[1.5rem] bg-white"
-                            initial={{ opacity: 0.1, scale: 0.8 }}
-                            animate={{ opacity: 0, scale: 1.5 }}
-                            transition={{ duration: 2, repeat: Infinity }}
-                        />
-                    )}
-                </motion.button>
-
-                {/* Tooltip */}
-                <AnimatePresence>
-                    {!isOpen && (
-                        <motion.div
-                            className="hidden md:block absolute bottom-full right-0 mb-4 px-4 py-2 rounded-xl glass shadow-premium whitespace-nowrap"
-                            style={{ borderColor: 'var(--border-main)' }}
-                            initial={{ opacity: 0, y: 10 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            exit={{ opacity: 0, y: 10 }}
-                            transition={{ delay: 0.5 }}
-                        >
-                            <span className="text-xs font-bold" style={{ color: 'var(--text-main)' }}>
-                                Quick Actions
-                            </span>
-                        </motion.div>
-                    )}
-                </AnimatePresence>
-            </div>
         </div>
     );
 };
