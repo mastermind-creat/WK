@@ -14,6 +14,9 @@ const GalleryPage = () => {
         { id: 'logo', label: 'IDENTITIES', icon: Briefcase },
         { id: 'card', label: 'STATIONERY', icon: Cake },
         { id: 'poster', label: 'CAMPAIGNS', icon: Trophy },
+        { id: 'ui', label: 'INTERFACE', icon: Laptop },
+        { id: 'art', label: 'ARTWORK', icon: Palette },
+        { id: 'design', label: 'CONCEPTS', icon: Briefcase },
     ];
 
     const iconMap: { [key: string]: any } = {
@@ -136,8 +139,8 @@ const GalleryPage = () => {
                                     exit={{ opacity: 0, scale: 0.9, y: 30 }}
                                     transition={{ duration: 0.5, delay: idx * 0.05 }}
                                     className={`group relative overflow-hidden border shadow-2xl ${isGrid
-                                            ? 'h-[250px] md:h-[500px] rounded-2xl md:rounded-[4rem]'
-                                            : 'h-auto min-h-[250px] md:h-[300px] rounded-[2rem] md:rounded-[3rem] flex flex-col md:flex-row'
+                                        ? 'h-[250px] md:h-[500px] rounded-2xl md:rounded-[4rem]'
+                                        : 'h-auto min-h-[250px] md:h-[300px] rounded-[2rem] md:rounded-[3rem] flex flex-col md:flex-row'
                                         }`}
                                     style={{ backgroundColor: 'var(--bg-surface)', borderColor: 'var(--border-main)' }}
                                 >
