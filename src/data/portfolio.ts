@@ -269,13 +269,13 @@ export const services = [
         title: "Web Development",
         description: "Modern, responsive websites that showcase your brand and engage your audience.",
         icon: "globe",
-        price: "Ksh 10,000+",
+        price: "Ksh 15,000+",
         features: ["UI/UX Design", "Personal Portfolio", "Landing Pages"],
         detailedFeatures: [
-            { name: "Personal Portfolio / CV Site", price: "Ksh 10,000" },
+            { name: "Personal Portfolio / CV Site", price: "Ksh 15,000" },
             { name: "Business Landing Page", price: "Ksh 15,000" },
-            { name: "E-commerce Website", price: "Ksh 30,000+" },
-            { name: "Blog / News Website", price: "Ksh 20,000+" }
+            { name: "E-commerce Website", price: "Ksh 60,000+" },
+            { name: "Blog / News Website", price: "Ksh 30,000+" }
         ],
         whatsappMsg: "Hi Wambia! I need a professional website built."
     },
