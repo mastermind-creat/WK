@@ -133,8 +133,9 @@ const AIChatbot = () => {
 
     // Replace basic markdown with styled elements and ACTION BUTTONS
     const formatMessage = (content: string) => {
-        // Split by bold (**...**) AND Custom Buttons ([[Label|Link]])
-        const parts = content.split(/(\*\*.*?\*\*|\[\[.*?\|.*?\]\])/g);
+        // More resilient regex that catches [[...]], [...], or raw Label|URL
+        // Looks for patterns like [[Name|Link]] or [Name|Link] or just Name|http...
+        const parts = content.split(/(\*\*.*?\*\*|\[\[.*?\|.*?\]\]|\[.*?\|.*?\])/g);
 
         return parts.map((part, index) => {
             if (part.startsWith('**') && part.endsWith('**')) {
@@ -144,8 +145,13 @@ const AIChatbot = () => {
                     </span>
                 );
             }
-            if (part.startsWith('[[') && part.endsWith(']]')) {
-                const [label, url] = part.slice(2, -2).split('|');
+
+            // Handle both [[Label|Link]] and [Label|Link]
+            if ((part.startsWith('[[') && part.endsWith(']]')) || (part.startsWith('[') && part.endsWith(']'))) {
+                const inner = part.startsWith('[[') ? part.slice(2, -2) : part.slice(1, -1);
+                const [label, url] = inner.split('|').map(s => s.trim());
+                if (!url) return <span key={index}>{part}</span>;
+
                 const isMailto = url.startsWith('mailto:');
 
                 return (
@@ -154,11 +160,11 @@ const AIChatbot = () => {
                         href={url}
                         target={isMailto ? undefined : "_blank"}
                         rel={isMailto ? undefined : "noopener noreferrer"}
-                        className="inline-flex items-center gap-2 mt-2 mr-2 px-4 py-2 bg-white text-primary-600 border border-primary-200 rounded-xl text-xs font-black uppercase tracking-wider hover:bg-primary-50 transition-all shadow-sm"
+                        className="inline-flex items-center gap-2 mt-2 mr-2 px-3 py-1.5 md:px-4 md:py-2 bg-gradient-to-br from-white to-zinc-100 dark:from-zinc-800 dark:to-zinc-900 text-primary-600 dark:text-primary-400 border border-primary-500/20 rounded-xl text-[9px] md:text-xs font-black uppercase tracking-wider hover:border-primary-500 hover:shadow-lg hover:shadow-primary-500/10 transition-all"
                         style={{ textDecoration: 'none' }}
                     >
                         {label}
-                        <Send size={12} />
+                        <Send size={10} className="md:w-3" />
                     </a>
                 );
             }
@@ -213,13 +219,14 @@ INSTRUCTIONS FOR HANDLING USER REQUESTS:
 
 CRITICAL - HANDLING CONTACT & HIRING REQUESTS:
 If the user says they want to "hire", "contact", "start a project", or "needs help":
-1.  **FIRST Response**: Enthusiastically ask them to briefly describe what they need. (e.g., "That's great! I'd love to help. Could you tell me a bit about the project or what you're looking to build?")
+1.  **FIRST Response**: Enthusiastically ask them to briefly describe what they house or need.
 2.  **SECOND Response (After they describe the need)**: 
     - Acknowledge their idea enthusiastically.
-    - Generate two **ACTION BUTTONS** using the special syntax: \`[[Label|URL]]\`.
-    - Button 1 (WhatsApp): \`[[Send via WhatsApp|https://wa.me/254743394373?text=Hi%20Wambia!%20I%20am%20interested%20in%20your%20services.%20Here%20is%20what%20I%20need:%20(INSERT_USER_NEED)]]\`
-    - Button 2 (Email): \`[[Send via Email|mailto:kennyleyy0@gmail.com?subject=New%20Project%20Inquiry&body=Hi%20Wambia,%0A%0AI%20am%20looking%20for:%20(INSERT_USER_NEED)]]\`
-    - Tell them: "I've drafted a direct message for Wambia with your details. Click above to send it instantly!"
+    - YOU MUST generate exactly two **ACTION BUTTONS** using the square bracket syntax: [[Label|URL]].
+    - Button 1 (WhatsApp): [[Send via WhatsApp|https://wa.me/254743394373?text=Hi%20Wambia!%20I%20am%20interested%20in%20your%20services.%20Here%20is%20what%20I%20need:%20(USER_NEED)]]
+    - Button 2 (Email): [[Send via Email|mailto:kennyleyy0@gmail.com?subject=New%20Project%20Inquiry&body=Hi%20Wambia,%0A%0AI%20am%20looking%20for:%20(USER_NEED)]]
+    - Replace (USER_NEED) with a brief summary of what they just told you.
+    - End with: "I've drafted a direct message for Wambia with your details. Click above to send it instantly!"
 `;
 
     const callOpenAI = async (userMessage: string): Promise<string> => {
@@ -475,10 +482,10 @@ If the user says they want to "hire", "contact", "start a project", or "needs he
                                     <Bot size={16} className="md:w-5 text-white" />
                                 </div>
                                 <div>
-                                    <h3 className="text-white font-black text-[10px] md:text-sm">AI Assistant</h3>
+                                    <h3 className="text-white font-black text-[10px] md:text-xs">AI ASSISTANT</h3>
                                     <div className="flex items-center gap-1.5 md:gap-2">
                                         <span className="w-1.5 h-1.5 md:w-2 md:h-2 bg-green-400 rounded-full animate-pulse" />
-                                        <span className="text-white/80 text-[8px] md:text-xs font-bold">Online</span>
+                                        <span className="text-white/80 text-[7px] md:text-[9px] font-black uppercase tracking-tighter">System Online</span>
                                     </div>
                                 </div>
                             </div>
@@ -564,20 +571,21 @@ If the user says they want to "hire", "contact", "start a project", or "needs he
                                     </div>
                                     <div className={`flex-1 ${message.role === 'user' ? 'text-right' : ''}`}>
                                         <div
-                                            className={`inline-block px-3 py-2 md:px-4 rounded-2xl text-[11px] md:text-sm ${message.role === 'user'
+                                            className={`inline-block px-3 py-1.5 md:px-4 md:py-2 rounded-2xl text-[10px] md:text-sm ${message.role === 'user'
                                                 ? 'bg-primary-600 text-white rounded-tr-none'
-                                                : 'border rounded-tl-none'
+                                                : 'border rounded-tl-none font-medium'
                                                 }`}
                                             style={{
                                                 backgroundColor: message.role === 'user' ? undefined : 'var(--bg-main)',
                                                 borderColor: message.role === 'user' ? undefined : 'var(--border-main)',
                                                 color: message.role === 'user' ? 'white' : 'var(--text-main)',
-                                                maxWidth: '92%'
+                                                maxWidth: '92%',
+                                                lineHeight: 1.4
                                             }}
                                         >
                                             {formatMessage(message.content)}
                                         </div>
-                                        <p className="text-[8px] md:text-[10px] mt-1 opacity-50" style={{ color: 'var(--text-muted)' }}>
+                                        <p className="text-[7px] md:text-[9px] mt-1 opacity-50 font-black uppercase tracking-widest" style={{ color: 'var(--text-muted)' }}>
                                             {message.timestamp.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
                                         </p>
                                     </div>
@@ -593,11 +601,11 @@ If the user says they want to "hire", "contact", "start a project", or "needs he
                                     <div className="w-6 h-6 md:w-8 md:h-8 rounded-full bg-gradient-to-r from-primary-600 to-rose-500 flex items-center justify-center shrink-0">
                                         <Bot size={12} className="md:w-4 text-white" />
                                     </div>
-                                    <div className="px-4 py-3 rounded-2xl rounded-tl-none border flex items-center gap-1.5 md:gap-2" style={{ backgroundColor: 'var(--bg-main)', borderColor: 'var(--border-main)' }}>
+                                    <div className="px-3 py-2 md:px-4 md:py-3 rounded-2xl rounded-tl-none border flex items-center gap-1 md:gap-1.5" style={{ backgroundColor: 'var(--bg-main)', borderColor: 'var(--border-main)' }}>
                                         {[0, 1, 2].map((dot) => (
                                             <motion.div
                                                 key={dot}
-                                                className="w-1 md:w-1.5 h-1 md:h-1.5 bg-primary-600 rounded-full"
+                                                className="w-0.5 md:w-1.5 h-0.5 md:h-1.5 bg-primary-600 rounded-full"
                                                 animate={{
                                                     scale: [1, 1.4, 1],
                                                     opacity: [0.3, 1, 0.3]
