@@ -382,6 +382,69 @@ export const projects = [
         liveUrl: "https://kodiero-investments.vercel.app/",
         githubUrl: "https://github.com/techsafi/Kodiero_Investments",
         category: "web"
+    },
+    {
+        title: "Personal Welding Website",
+        description: "A professional industrial portal for welding fabrication services, featuring dynamic service galleries and consultation booking integration.",
+        image: "images/projects/welding.png",
+        tags: ["React", "Tailwind CSS", "Framer Motion"],
+        liveUrl: "https://welding-flax.vercel.app/",
+        githubUrl: "https://github.com/mastermind-creat/Welding",
+        category: "web"
+    },
+    {
+        title: "AJIRA Job Portal",
+        description: "A comprehensive digital employment ecosystem designed to connect specialized talent with high-impact opportunities across Kenya.",
+        image: "images/projects/ajira.png",
+        tags: ["Next.js", "TypeScript", "PostgreSQL"],
+        liveUrl: "https://seme-tvc-ajira.vercel.app/",
+        githubUrl: "https://github.com/mastermind-creat/Seme_TVC_Ajira",
+        category: "web"
+    },
+    {
+        title: "Industrial SACCO System",
+        description: "A secure, scalable financial management platform for credit cooperatives, featuring real-time transaction monitoring and automated dividend distribution.",
+        image: "images/projects/sacco.png",
+        tags: ["Java", "Spring Boot", "MySQL"],
+        liveUrl: "#",
+        githubUrl: "#",
+        category: "software"
+    },
+    {
+        title: "Online Library Ecosystem",
+        description: "A sophisticated digital resource management system for academic institutions, supporting global cataloging and electronic lending protocols.",
+        image: "images/projects/online_library.png",
+        tags: ["Python", "Django", "PostgreSQL"],
+        liveUrl: "#",
+        githubUrl: "#",
+        category: "software"
+    },
+    {
+        title: "Workstation Reservation",
+        description: "An enterprise-grade resource allocation platform for optimized workspace management and real-time environment scheduling.",
+        image: "images/projects/wrs.png",
+        tags: ["C#", "ASP.NET Core", "SQL Server"],
+        liveUrl: "#",
+        githubUrl: "#",
+        category: "software"
+    },
+    {
+        title: "Portfolio Architecture v1",
+        description: "A high-fidelity creative demonstration platform featuring advanced glassmorphism and motion-synchronized UI components.",
+        image: "images/projects/portfolio1.png",
+        tags: ["React", "Framer Motion", "Tailwind"],
+        liveUrl: "https://lates-portfolio-v1.vercel.app/portfolio.html",
+        githubUrl: "https://github.com/mastermind-creat/mastermind-creat",
+        category: "web"
+    },
+    {
+        title: "Springs Environmental System",
+        description: "A specialized resource monitoring system for water quality tracking and environmental conservation management.",
+        image: "images/projects/springs.png",
+        tags: ["Python", "Flask", "Chart.js"],
+        liveUrl: "#",
+        githubUrl: "#",
+        category: "software"
     }
 ];
 
