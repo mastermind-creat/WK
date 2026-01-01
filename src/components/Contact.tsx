@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { Mail, Phone, MapPin, Send, MessageSquare, Github, Twitter, Linkedin, Instagram, Youtube, Facebook, Globe } from 'lucide-react';
+import { Mail, Phone, MapPin, Send, MessageSquare } from 'lucide-react';
 import { profile } from '../data/portfolio';
 import { useState } from 'react';
 
@@ -11,15 +11,7 @@ const Contact = () => {
         message: ''
     });
 
-    const socialLinks = [
-        { icon: Github, href: "https://github.com/mastermind-creat", color: "hover:text-primary-500" },
-        { icon: Linkedin, href: "https://www.linkedin.com/in/mastermind-5799bb398", color: "hover:text-primary-500" },
-        { icon: Twitter, href: "https://x.com/MastermindCreat", color: "hover:text-primary-500" },
-        { icon: Instagram, href: "https://www.instagram.com/mastermindcreat/", color: "hover:text-primary-500" },
-        { icon: Youtube, href: "https://www.youtube.com/@kennyleyy3918", color: "hover:text-primary-500" },
-        { icon: Facebook, href: "https://web.facebook.com/profile.php?id=100073953339674", color: "hover:text-primary-500" },
-        { icon: Globe, href: "https://lates-portfolio-v1.vercel.app/", color: "hover:text-primary-500" }
-    ];
+
 
     const handleWhatsAppSubmit = (e: React.FormEvent) => {
         e.preventDefault();

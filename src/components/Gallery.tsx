@@ -28,7 +28,7 @@ const Gallery = () => {
         return () => clearInterval(interval);
     }, [isAutoPlaying, handleNext]);
     // Only display first 3 items in the home section
-    const featuredGallery = galleryItems.slice(0, 3);
+
 
     const iconMap: { [key: string]: any } = {
         palette: Palette,

@@ -6,7 +6,7 @@ import { useTheme } from '../context/ThemeContext';
 const FloatingActions = () => {
     const [isOpen, setIsOpen] = useState(false);
     const [hasAutoOpened, setHasAutoOpened] = useState(false);
-    const { theme, setTheme, resolvedTheme } = useTheme();
+    const { theme, setTheme } = useTheme();
 
     const handleScroll = useCallback(() => {
         const scrollPosition = window.innerHeight + window.scrollY;
