@@ -586,16 +586,30 @@ If the user says they want to "hire", "contact", "start a project", or "needs he
 
                             {isLoading && (
                                 <motion.div
-                                    className="flex gap-3"
-                                    initial={{ opacity: 0 }}
-                                    animate={{ opacity: 1 }}
+                                    className="flex gap-2 md:gap-3"
+                                    initial={{ opacity: 0, y: 5 }}
+                                    animate={{ opacity: 1, y: 0 }}
                                 >
-                                    <div className="w-8 h-8 rounded-full bg-gradient-to-r from-primary-600 to-rose-500 flex items-center justify-center">
-                                        <Bot size={16} className="text-white" />
+                                    <div className="w-6 h-6 md:w-8 md:h-8 rounded-full bg-gradient-to-r from-primary-600 to-rose-500 flex items-center justify-center shrink-0">
+                                        <Bot size={12} className="md:w-4 text-white" />
                                     </div>
-                                    <div className="px-4 py-2 rounded-2xl rounded-tl-none border flex items-center gap-2" style={{ backgroundColor: 'var(--bg-main)', borderColor: 'var(--border-main)' }}>
-                                        <Loader2 size={16} className="animate-spin text-primary-600" />
-                                        <span className="text-sm" style={{ color: 'var(--text-muted)' }}>Thinking...</span>
+                                    <div className="px-4 py-3 rounded-2xl rounded-tl-none border flex items-center gap-1.5 md:gap-2" style={{ backgroundColor: 'var(--bg-main)', borderColor: 'var(--border-main)' }}>
+                                        {[0, 1, 2].map((dot) => (
+                                            <motion.div
+                                                key={dot}
+                                                className="w-1 md:w-1.5 h-1 md:h-1.5 bg-primary-600 rounded-full"
+                                                animate={{
+                                                    scale: [1, 1.4, 1],
+                                                    opacity: [0.3, 1, 0.3]
+                                                }}
+                                                transition={{
+                                                    duration: 0.8,
+                                                    repeat: Infinity,
+                                                    delay: dot * 0.15,
+                                                    ease: "easeInOut"
+                                                }}
+                                            />
+                                        ))}
                                     </div>
                                 </motion.div>
                             )}
