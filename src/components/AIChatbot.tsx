@@ -63,6 +63,29 @@ const AIChatbot = () => {
         return () => clearTimeout(timer);
     }, [isOpen]);
 
+    // Minimize on Scroll
+    useEffect(() => {
+        let lastScrollY = window.scrollY;
+
+        const handleScroll = () => {
+            const currentScrollY = window.scrollY;
+            const scrollDiff = Math.abs(currentScrollY - lastScrollY);
+
+            if (isOpen && !isMinimized && scrollDiff > 50) {
+                setIsMinimized(true);
+                lastScrollY = currentScrollY; // Reset base to avoid instant re-trigger
+            }
+
+            // If they stop scrolling or move a bit, update the base
+            if (scrollDiff > 100) {
+                lastScrollY = currentScrollY;
+            }
+        };
+
+        window.addEventListener('scroll', handleScroll, { passive: true });
+        return () => window.removeEventListener('scroll', handleScroll);
+    }, [isOpen, isMinimized]);
+
     // Text to Speech Function
     const speak = (text: string) => {
         if (!voiceEnabled || !synth) return;
@@ -352,33 +375,45 @@ If the user says they want to "hire", "contact", "start a project", or "needs he
 
     return (
         <>
-            {/* Reminder Tooltip positioned cleanly above left-aligned button */}
+            {/* Premium Remastered Neural Link Alert */}
             <AnimatePresence>
                 {showReminder && !isOpen && (
                     <motion.div
-                        initial={{ opacity: 0, y: 10, scale: 0.9 }}
-                        animate={{ opacity: 1, y: 0, scale: 1 }}
-                        exit={{ opacity: 0, y: 10, scale: 0.9 }}
-                        className="fixed bottom-20 left-6 z-40 max-w-[180px] bg-zinc-900 text-white p-3 rounded-2xl shadow-2xl border border-white/10 cursor-pointer"
-                        whileHover={{ scale: 1.05 }}
+                        initial={{ opacity: 0, x: -20, scale: 0.9 }}
+                        animate={{ opacity: 1, x: 0, scale: 1 }}
+                        exit={{ opacity: 0, x: -20, scale: 0.9 }}
+                        className="fixed bottom-20 left-4 md:left-6 z-40 cursor-pointer group"
                         onClick={() => setIsOpen(true)}
                     >
-                        <div className="absolute bottom-[-5px] left-5 w-3 h-3 bg-zinc-900 rotate-45 border-r border-b border-white/10" />
-                        <div className="flex items-start gap-2">
-                            <div className="w-6 h-6 rounded-full bg-primary-600 flex items-center justify-center shrink-0">
-                                <Sparkles size={12} className="text-white" strokeWidth={3} />
+                        {/* Glow Layer */}
+                        <div className="absolute -inset-0.5 bg-gradient-to-r from-primary-600 to-rose-600 rounded-2xl blur opacity-30 group-hover:opacity-60 transition-opacity" />
+
+                        <div className="relative glass-strong p-3 md:p-4 rounded-2xl border border-white/10 flex items-center gap-3 md:gap-4 shadow-2xl min-w-[160px] md:min-w-[200px]">
+                            <div className="relative">
+                                <div className="w-8 h-8 md:w-10 md:h-10 rounded-xl bg-gradient-to-br from-primary-600 to-rose-600 flex items-center justify-center text-white shadow-lg group-hover:rotate-12 transition-transform">
+                                    <Bot size={16} className="md:w-5" strokeWidth={2.5} />
+                                </div>
+                                <span className="absolute -top-1 -right-1 w-2.5 h-2.5 bg-green-500 rounded-full border-2 border-zinc-900 animate-pulse" />
                             </div>
-                            <div>
-                                <p className="text-[10px] font-black uppercase tracking-wider">Neural Link</p>
-                                <p className="text-[8px] mt-0.5 opacity-60 uppercase font-bold">Ask anything</p>
+
+                            <div className="flex-1">
+                                <div className="flex items-center gap-1.5 mb-0.5">
+                                    <Sparkles size={10} className="text-primary-500" />
+                                    <span className="text-[10px] md:text-xs font-black uppercase tracking-wider text-white">Neural Uplink</span>
+                                </div>
+                                <p className="text-[8px] md:text-[10px] font-bold text-white/50 uppercase leading-none">Wambia's AI is Online</p>
                             </div>
+
+                            <button
+                                onClick={(e) => { e.stopPropagation(); setShowReminder(false); }}
+                                className="p-1 hover:bg-white/10 rounded-lg transition-colors"
+                            >
+                                <X size={12} className="text-white/40" />
+                            </button>
                         </div>
-                        <button
-                            onClick={(e) => { e.stopPropagation(); setShowReminder(false); }}
-                            className="absolute -top-1 -right-1 p-1 bg-zinc-800 rounded-full border border-white/10"
-                        >
-                            <X size={8} className="text-white" />
-                        </button>
+
+                        {/* Speech Bubble Arrow */}
+                        <div className="absolute bottom-[-6px] left-6 w-3 h-3 bg-zinc-900/80 rotate-45 border-r border-b border-white/10" />
                     </motion.div>
                 )}
             </AnimatePresence>
