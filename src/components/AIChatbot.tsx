@@ -389,26 +389,26 @@ If the user says they want to "hire", "contact", "start a project", or "needs he
                         initial={{ opacity: 0, x: -20, scale: 0.9 }}
                         animate={{ opacity: 1, x: 0, scale: 1 }}
                         exit={{ opacity: 0, x: -20, scale: 0.9 }}
-                        className="fixed bottom-20 left-4 md:left-6 z-40 cursor-pointer group"
+                        className="fixed bottom-20 left-4 md:left-6 z-40 cursor-pointer group pointer-events-auto"
                         onClick={() => setIsOpen(true)}
                     >
                         {/* Glow Layer */}
                         <div className="absolute -inset-0.5 bg-gradient-to-r from-primary-600 to-rose-600 rounded-2xl blur opacity-30 group-hover:opacity-60 transition-opacity" />
 
-                        <div className="relative glass-strong p-3 md:p-4 rounded-2xl border border-white/10 flex items-center gap-3 md:gap-4 shadow-2xl min-w-[160px] md:min-w-[200px]">
+                        <div className="relative glass p-2 md:p-3 rounded-2xl border border-white/10 dark:border-white/10 border-black/5 flex items-center gap-2 md:gap-3 shadow-2xl min-w-[140px] md:min-w-[180px]" style={{ backgroundColor: 'var(--bg-surface)' }}>
                             <div className="relative">
-                                <div className="w-8 h-8 md:w-10 md:h-10 rounded-xl bg-gradient-to-br from-primary-600 to-rose-600 flex items-center justify-center text-white shadow-lg group-hover:rotate-12 transition-transform">
-                                    <Bot size={16} className="md:w-5" strokeWidth={2.5} />
+                                <div className="w-7 h-7 md:w-8 md:h-8 rounded-xl bg-gradient-to-br from-primary-600 to-rose-600 flex items-center justify-center text-white shadow-lg group-hover:rotate-12 transition-transform">
+                                    <Bot size={14} className="md:w-4" strokeWidth={2.5} />
                                 </div>
-                                <span className="absolute -top-1 -right-1 w-2.5 h-2.5 bg-green-500 rounded-full border-2 border-zinc-900 animate-pulse" />
+                                <span className="absolute -top-1 -right-1 w-2 h-2 bg-green-500 rounded-full border-2 border-white dark:border-zinc-900 animate-pulse" />
                             </div>
 
                             <div className="flex-1">
                                 <div className="flex items-center gap-1.5 mb-0.5">
-                                    <Sparkles size={10} className="text-primary-500" />
-                                    <span className="text-[10px] md:text-xs font-black uppercase tracking-wider text-white">Neural Uplink</span>
+                                    <Sparkles size={8} className="text-primary-500" />
+                                    <span className="text-[9px] md:text-[10px] font-black uppercase tracking-wider" style={{ color: 'var(--text-main)' }}>Neural Uplink</span>
                                 </div>
-                                <p className="text-[8px] md:text-[10px] font-bold text-white/50 uppercase leading-none">Wambia's AI is Online</p>
+                                <p className="text-[7px] md:text-[8px] font-bold uppercase leading-none" style={{ color: 'var(--text-muted)' }}>AI Agent Online</p>
                             </div>
 
                             <button

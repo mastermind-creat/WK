@@ -37,7 +37,27 @@ const Navbar = () => {
         return () => window.removeEventListener('resize', checkMobile);
     }, [location]);
 
+    const playClick = () => {
+        try {
+            const context = new (window.AudioContext || (window as any).webkitAudioContext)();
+            const oscillator = context.createOscillator();
+            const gainNode = context.createGain();
+            oscillator.type = 'sine';
+            oscillator.frequency.setValueAtTime(800, context.currentTime);
+            oscillator.frequency.exponentialRampToValueAtTime(0.01, context.currentTime + 0.1);
+            gainNode.gain.setValueAtTime(0.05, context.currentTime);
+            gainNode.gain.exponentialRampToValueAtTime(0.01, context.currentTime + 0.1);
+            oscillator.connect(gainNode);
+            gainNode.connect(context.destination);
+            oscillator.start();
+            oscillator.stop(context.currentTime + 0.1);
+        } catch (e) {
+            // Audio context might be blocked or not supported
+        }
+    };
+
     const handleNavClick = (href: string, index: number) => {
+        playClick();
         setActiveIndex(index);
         if (href.startsWith('/#')) {
             const id = href.split('#')[1];

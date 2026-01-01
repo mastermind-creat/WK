@@ -198,10 +198,11 @@ const Hero = () => {
 
                             {/* Primary Featured: ElimuTech LMS */}
                             <motion.div
-                                className="relative z-20 glass rounded-[2.5rem] p-8 md:p-10 shadow-premium border border-white/10 overflow-hidden"
+                                className="relative z-20 glass rounded-[2.3rem] p-7 md:p-9 shadow-premium border border-white/10 dark:border-white/10 border-black/5 overflow-hidden"
+                                style={{ backgroundColor: 'var(--bg-surface)' }}
                                 whileHover={{ y: -5, rotateY: 5 }}
                             >
-                                <div className="absolute top-0 right-0 w-32 h-32 bg-primary-600/10 rounded-full blur-3xl" />
+                                <div className="absolute top-0 right-0 w-32 h-32 bg-primary-600/10 rounded-full blur-3xl pointer-events-none" />
 
                                 <div className="relative z-10">
                                     <div className="flex items-center gap-4 mb-6">
@@ -209,10 +210,10 @@ const Hero = () => {
                                             <Code size={28} />
                                         </div>
                                         <div>
-                                            <h3 className="text-2xl font-black tracking-tight" style={{ color: 'var(--text-main)' }}>ElimuTech LMS</h3>
+                                            <h3 className="text-xl md:text-2xl font-black tracking-tight" style={{ color: 'var(--text-main)' }}>ElimuTech LMS</h3>
                                             <div className="flex items-center gap-2">
                                                 <span className="w-1.5 h-1.5 bg-green-500 rounded-full animate-pulse" />
-                                                <span className="text-[10px] font-black uppercase text-white/50">Core Infrastructure</span>
+                                                <span className="text-[8px] md:text-[10px] font-black uppercase" style={{ color: 'var(--text-muted)' }}>Core Infrastructure</span>
                                             </div>
                                         </div>
                                     </div>
@@ -223,31 +224,32 @@ const Hero = () => {
 
                                     <div className="flex flex-wrap gap-2 mb-8">
                                         {['React', 'Laravel', 'Tailwind'].map((tech) => (
-                                            <span key={tech} className="px-4 py-1.5 rounded-full text-[9px] font-black uppercase tracking-widest bg-white/5 text-primary-400 border border-white/5">
+                                            <span key={tech} className="px-3 py-1 rounded-full text-[8px] md:text-[9px] font-black uppercase tracking-widest bg-white/5 dark:bg-white/5 bg-black/5 text-primary-400 border border-white/5">
                                                 {tech}
                                             </span>
                                         ))}
                                     </div>
 
-                                    <div className="flex items-center justify-between pt-6 border-t border-white/5">
+                                    <div className="flex items-center justify-between pt-6 border-t border-white/10 dark:border-white/10 border-black/5">
                                         <div className="flex -space-x-3">
                                             {[1, 2, 3].map((i) => (
-                                                <div key={i} className="w-8 h-8 rounded-full border-2 border-zinc-900 bg-zinc-800 flex items-center justify-center overflow-hidden">
-                                                    <img src={`https://i.pravatar.cc/100?img=${i + 10}`} alt="user" className="w-full h-full object-cover opacity-60" />
+                                                <div key={i} className="w-7 h-7 md:w-8 md:h-8 rounded-full border-2 border-zinc-200 dark:border-zinc-900 bg-zinc-100 dark:bg-zinc-800 flex items-center justify-center overflow-hidden">
+                                                    <img src={`https://i.pravatar.cc/100?img=${i + 10}`} alt="user" className="w-full h-full object-cover opacity-60 dark:opacity-60" />
                                                 </div>
                                             ))}
-                                            <div className="w-8 h-8 rounded-full border-2 border-zinc-900 bg-zinc-800 flex items-center justify-center text-[10px] font-bold text-white/40">
+                                            <div className="w-7 h-7 md:w-8 md:h-8 rounded-full border-2 border-zinc-200 dark:border-zinc-900 bg-zinc-100 dark:bg-zinc-800 flex items-center justify-center text-[9px] md:text-[10px] font-bold" style={{ color: 'var(--text-muted)' }}>
                                                 +1k
                                             </div>
                                         </div>
-                                        <span className="text-[10px] font-black uppercase tracking-tighter text-white/30">Active Nodes</span>
+                                        <span className="text-[9px] font-black uppercase tracking-tighter" style={{ color: 'var(--text-muted)' }}>Active Nodes</span>
                                     </div>
                                 </div>
                             </motion.div>
 
                             {/* Secondary Featured: Kodiero Business Center */}
                             <motion.div
-                                className="absolute -bottom-10 -left-12 z-30 glass rounded-3xl p-6 shadow-2xl border border-white/10 w-64"
+                                className="absolute -bottom-8 -left-10 z-30 glass rounded-3xl p-5 md:p-6 shadow-2xl border border-white/10 dark:border-white/10 border-black/5 w-60 md:w-64"
+                                style={{ backgroundColor: 'var(--bg-surface)' }}
                                 animate={{ y: [0, -10, 0] }}
                                 transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
                                 whileHover={{ scale: 1.05 }}
@@ -257,11 +259,11 @@ const Hero = () => {
                                         <Briefcase size={20} />
                                     </div>
                                     <div>
-                                        <h4 className="text-sm font-black text-white">Kodiero Center</h4>
-                                        <p className="text-[9px] font-bold text-white/40">Corporate Architecture</p>
+                                        <h4 className="text-sm font-black" style={{ color: 'var(--text-main)' }}>Kodiero Center</h4>
+                                        <p className="text-[9px] font-bold" style={{ color: 'var(--text-muted)' }}>Corporate Architecture</p>
                                     </div>
                                 </div>
-                                <div className="h-1.5 w-full bg-white/5 rounded-full overflow-hidden">
+                                <div className="h-1.5 w-full bg-black/5 dark:bg-white/5 rounded-full overflow-hidden">
                                     <motion.div
                                         className="h-full bg-primary-500"
                                         initial={{ width: 0 }}
@@ -270,7 +272,7 @@ const Hero = () => {
                                     />
                                 </div>
                                 <div className="mt-2 flex justify-between">
-                                    <span className="text-[8px] font-black text-white/30">OPERATIONAL</span>
+                                    <span className="text-[8px] font-black" style={{ color: 'var(--text-muted)' }}>OPERATIONAL</span>
                                     <span className="text-[8px] font-black text-primary-500 tracking-widest">94%</span>
                                 </div>
                             </motion.div>
