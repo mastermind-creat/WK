@@ -102,17 +102,34 @@ const Services = () => {
                     </p>
                 </motion.div>
 
-                {/* Services Grid */}
-                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 md:gap-6 group/services">
-                    {services.map((service, idx) => (
-                        <ServiceCard
-                            key={service.title}
-                            service={service}
-                            icon={iconMap[service.icon] || Globe}
-                            index={idx}
-                            onOpen={() => setSelectedService(service)}
-                        />
-                    ))}
+                {/* Services Bento Collage */}
+                <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 md:gap-6 group/services">
+                    {services.map((service, idx) => {
+                        // Varied spans for a collage feel
+                        const spans = [
+                            "col-span-2 row-span-1 lg:col-span-2 lg:row-span-1", // 1st: Wide
+                            "col-span-1 row-span-1 lg:col-span-1 lg:row-span-1", // 2nd: Square
+                            "col-span-1 row-span-1 lg:col-span-1 lg:row-span-1", // 3rd: Square
+                            "col-span-2 row-span-1 lg:col-span-1 lg:row-span-2", // 4th: Tall
+                            "col-span-1 row-span-1 lg:col-span-1 lg:row-span-1", // 5th: Square
+                            "col-span-1 row-span-1 lg:col-span-2 lg:row-span-1", // 6th: Wide
+                            "col-span-2 row-span-1 lg:col-span-1 lg:row-span-1", // 7th: Square
+                            "col-span-1 row-span-1 lg:col-span-1 lg:row-span-1", // 8th: Square
+                            "col-span-1 row-span-1 lg:col-span-1 lg:row-span-1", // 9th: Square
+                            "col-span-2 row-span-1 lg:col-span-2 lg:row-span-1", // 10th: Wide
+                        ];
+
+                        return (
+                            <ServiceCard
+                                key={service.title}
+                                service={service}
+                                icon={iconMap[service.icon] || Globe}
+                                index={idx}
+                                spanClass={spans[idx] || "col-span-1"}
+                                onOpen={() => setSelectedService(service)}
+                            />
+                        );
+                    })}
                 </div>
             </div>
 
@@ -131,7 +148,7 @@ const Services = () => {
 };
 
 // 3D Tilt Card Component with Active Focus
-const ServiceCard = ({ service, icon: Icon, index, onOpen }: any) => {
+const ServiceCard = ({ service, icon: Icon, index, onOpen, spanClass }: any) => {
     const cardRef = useRef<HTMLDivElement>(null);
     const mouseX = useMotionValue(0);
     const mouseY = useMotionValue(0);
@@ -156,7 +173,7 @@ const ServiceCard = ({ service, icon: Icon, index, onOpen }: any) => {
     return (
         <motion.div
             ref={cardRef}
-            className="group relative depth-card cursor-pointer transition-all duration-500 group-hover/services:opacity-50 hover:!opacity-100"
+            className={`group relative depth-card cursor-pointer transition-all duration-500 group-hover/services:opacity-50 hover:!opacity-100 ${spanClass}`}
             style={{
                 perspective: '1000px',
             }}
