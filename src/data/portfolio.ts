@@ -320,6 +320,20 @@ export const services = [
             { name: "Code Debugging & Fixes", price: "Ksh 500/hr" }
         ],
         whatsappMsg: "Hi Wambia! I need help deploying or hosting my application."
+    },
+    {
+        title: "Training & Tutoring",
+        description: "Professional training in computer packages and coding bootcamps for beginners and advanced learners.",
+        icon: "graduation-cap",
+        price: "Ksh 1,500+",
+        features: ["Computer Packages", "Coding Bootcamps", "One-on-One Mentorship"],
+        detailedFeatures: [
+            { name: "Microsoft Office Suite", price: "Ksh 1,500" },
+            { name: "Web Dev Fundamentals", price: "Ksh 3,000" },
+            { name: "Project-based Coding", price: "Ksh 5,000" },
+            { name: "Advanced Frameworks", price: "Quote" }
+        ],
+        whatsappMsg: "Hi Wambia! I'm interested in the Computer Training or Coding sessions."
     }
 ];
 
