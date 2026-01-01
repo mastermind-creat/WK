@@ -1,5 +1,6 @@
 import { profile } from '../data/portfolio';
 import { Heart, Github, Twitter, Linkedin, Instagram, MessageCircle, Mail, Phone, MapPin, Send, Youtube, Facebook, Globe } from 'lucide-react';
+import { motion } from 'framer-motion';
 
 const Footer = () => {
     return (
@@ -19,25 +20,47 @@ const Footer = () => {
                         </p>
                         <div className="flex flex-wrap gap-2 md:gap-3">
                             {[
-                                { icon: Github, href: "https://github.com/mastermind-creat" },
-                                { icon: Linkedin, href: "https://www.linkedin.com/in/mastermind-5799bb398" },
-                                { icon: Twitter, href: "https://x.com/MastermindCreat" },
-                                { icon: Instagram, href: "https://www.instagram.com/mastermindcreat/" },
-                                { icon: Youtube, href: "https://www.youtube.com/@kennyleyy3918" },
-                                { icon: Facebook, href: "https://web.facebook.com/profile.php?id=100073953339674" },
-                                { icon: Globe, href: "https://lates-portfolio-v1.vercel.app/" },
-                                { icon: MessageCircle, href: `https://wa.me/254743394373` }
+                                { icon: Github, href: "https://github.com/mastermind-creat", color: "#333" },
+                                { icon: Linkedin, href: "https://www.linkedin.com/in/mastermind-5799bb398", color: "#0077b5" },
+                                { icon: Twitter, href: "https://x.com/MastermindCreat", color: "#1da1f2" },
+                                { icon: Instagram, href: "https://www.instagram.com/mastermindcreat/", color: "#e1306c" },
+                                { icon: Youtube, href: "https://www.youtube.com/@kennyleyy3918", color: "#ff0000" },
+                                { icon: Facebook, href: "https://web.facebook.com/profile.php?id=100073953339674", color: "#1877f2" },
+                                { icon: Globe, href: "https://lates-portfolio-v1.vercel.app/", color: "#e11d48" },
+                                { icon: MessageCircle, href: `https://wa.me/254743394373`, color: "#25d366" }
                             ].map((social, idx) => (
-                                <a
+                                <motion.a
                                     key={idx}
                                     href={social.href}
                                     target="_blank"
                                     rel="noreferrer"
-                                    className="w-9 h-9 md:w-10 md:h-10 border rounded-lg md:rounded-xl flex items-center justify-center transition-all hover:text-primary-500 hover:scale-110 shadow-lg"
-                                    style={{ backgroundColor: 'var(--bg-surface)', borderColor: 'var(--border-main)', color: 'var(--text-muted)' }}
+                                    className="w-10 h-10 md:w-12 md:h-12 border rounded-xl md:rounded-2xl flex items-center justify-center relative group overflow-hidden transition-colors"
+                                    style={{ backgroundColor: 'var(--bg-surface)', borderColor: 'var(--border-main)' }}
+                                    whileHover={{
+                                        scale: 1.1,
+                                        rotate: [0, -10, 10, 0],
+                                        transition: { type: "spring", stiffness: 400, damping: 10 }
+                                    }}
+                                    whileTap={{ scale: 0.9 }}
                                 >
-                                    <social.icon size={16} className="md:w-[18px] md:h-[18px]" />
-                                </a>
+                                    {/* Hover background fill */}
+                                    <motion.div
+                                        className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                                        style={{ backgroundColor: social.color }}
+                                    />
+                                    <social.icon
+                                        size={20}
+                                        className="relative z-10 transition-colors duration-300 md:w-[22px] md:h-[22px]"
+                                        style={{ color: 'var(--text-muted)' }}
+                                    />
+
+                                    {/* White icon on hover if color is present */}
+                                    <style>{`
+                                        .group:hover svg {
+                                            color: white !important;
+                                        }
+                                    `}</style>
+                                </motion.a>
                             ))}
                         </div>
                     </div>
