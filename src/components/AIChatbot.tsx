@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { MessageCircle, X, Send, Bot, User, Sparkles, Zap, Settings, Loader2, Volume2, VolumeX } from 'lucide-react';
+import { MessageCircle, X, Send, Bot, User, Sparkles, Zap, Settings, Loader2, Volume2, VolumeX, Minus, Maximize2 } from 'lucide-react';
 import { profile, services, projects, skills } from '../data/portfolio';
 
 interface Message {
@@ -13,6 +13,7 @@ type AIProvider = 'openai' | 'gemini';
 
 const AIChatbot = () => {
     const [isOpen, setIsOpen] = useState(false);
+    const [isMinimized, setIsMinimized] = useState(false);
     const [messages, setMessages] = useState<Message[]>([
         {
             role: 'assistant',
@@ -425,7 +426,7 @@ If the user says they want to "hire", "contact", "start a project", or "needs he
             <AnimatePresence>
                 {isOpen && (
                     <motion.div
-                        className="fixed bottom-24 left-6 z-50 w-[90vw] md:w-[400px] h-[600px] rounded-3xl shadow-2xl overflow-hidden border flex flex-col"
+                        className={`fixed bottom-20 md:bottom-24 left-4 md:left-6 z-50 w-[85vw] md:w-[400px] rounded-[2rem] md:rounded-3xl shadow-2xl overflow-hidden border flex flex-col transition-all duration-300 ${isMinimized ? 'h-[60px] md:h-[70px]' : 'h-[60vh] md:h-[600px]'}`}
                         style={{ backgroundColor: 'var(--bg-surface)', borderColor: 'var(--border-main)' }}
                         initial={{ opacity: 0, y: 20, scale: 0.95 }}
                         animate={{ opacity: 1, y: 0, scale: 1 }}
@@ -433,32 +434,40 @@ If the user says they want to "hire", "contact", "start a project", or "needs he
                         transition={{ type: "spring", stiffness: 300, damping: 30 }}
                     >
                         {/* Header */}
-                        <div className="bg-gradient-to-r from-primary-600 to-rose-500 p-4 flex items-center justify-between">
-                            <div className="flex items-center gap-3">
-                                <div className="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center">
-                                    <Bot size={20} className="text-white" />
+                        <div className="bg-gradient-to-r from-primary-600 to-rose-500 p-3 md:p-4 flex items-center justify-between">
+                            <div className="flex items-center gap-2 md:gap-3">
+                                <div className="w-8 h-8 md:w-10 md:h-10 rounded-full bg-white/20 flex items-center justify-center">
+                                    <Bot size={16} className="md:w-5 text-white" />
                                 </div>
                                 <div>
-                                    <h3 className="text-white font-black text-sm">AI Assistant</h3>
-                                    <div className="flex items-center gap-2">
-                                        <span className="w-2 h-2 bg-green-400 rounded-full animate-pulse" />
-                                        <span className="text-white/80 text-xs font-bold">Online</span>
+                                    <h3 className="text-white font-black text-[10px] md:text-sm">AI Assistant</h3>
+                                    <div className="flex items-center gap-1.5 md:gap-2">
+                                        <span className="w-1.5 h-1.5 md:w-2 md:h-2 bg-green-400 rounded-full animate-pulse" />
+                                        <span className="text-white/80 text-[8px] md:text-xs font-bold">Online</span>
                                     </div>
                                 </div>
                             </div>
-                            <div className="flex items-center gap-2">
+                            <div className="flex items-center gap-1 md:gap-2">
                                 <button
                                     onClick={() => setVoiceEnabled(!voiceEnabled)}
-                                    className={`p-2 rounded-full transition-colors ${voiceEnabled ? 'bg-white/20 text-white' : 'text-white/60 hover:text-white'}`}
+                                    className={`p-1.5 md:p-2 rounded-full transition-colors ${voiceEnabled ? 'bg-white/20 text-white' : 'text-white/60 hover:text-white'}`}
                                     title={voiceEnabled ? "Mute Voice" : "Enable Voice"}
                                 >
-                                    {voiceEnabled ? <Volume2 size={18} /> : <VolumeX size={18} />}
+                                    {voiceEnabled ? <Volume2 size={16} className="md:w-[18px]" /> : <VolumeX size={16} className="md:w-[18px]" />}
+                                </button>
+                                <button
+                                    onClick={() => setIsMinimized(!isMinimized)}
+                                    className="p-1.5 md:p-2 text-white/80 hover:text-white transition-colors"
+                                    title={isMinimized ? "Expand" : "Minimize"}
+                                >
+                                    {isMinimized ? <Maximize2 size={16} className="md:w-5" /> : <Minus size={16} className="md:w-5" />}
                                 </button>
                                 <button
                                     onClick={() => setShowSettings(!showSettings)}
-                                    className="p-2 text-white/80 hover:text-white transition-colors"
+                                    className="p-1.5 md:p-2 text-white/80 hover:text-white transition-colors"
+                                    title="Settings"
                                 >
-                                    <Settings size={20} />
+                                    <Settings size={16} className="md:w-5" />
                                 </button>
                             </div>
                         </div>
@@ -503,24 +512,24 @@ If the user says they want to "hire", "contact", "start a project", or "needs he
                         </AnimatePresence>
 
                         {/* Messages */}
-                        <div className="flex-1 overflow-y-auto p-4 space-y-4 custom-scrollbar">
+                        <div className="flex-1 overflow-y-auto p-3 md:p-4 space-y-3 md:space-y-4 custom-scrollbar">
                             {messages.map((message, idx) => (
                                 <motion.div
                                     key={idx}
-                                    className={`flex gap-3 ${message.role === 'user' ? 'flex-row-reverse' : ''}`}
+                                    className={`flex gap-2 md:gap-3 ${message.role === 'user' ? 'flex-row-reverse' : ''}`}
                                     initial={{ opacity: 0, y: 10 }}
                                     animate={{ opacity: 1, y: 0 }}
                                     transition={{ delay: idx * 0.05 }}
                                 >
-                                    <div className={`w-8 h-8 rounded-full flex items-center justify-center shrink-0 ${message.role === 'user'
+                                    <div className={`w-6 h-6 md:w-8 md:h-8 rounded-full flex items-center justify-center shrink-0 ${message.role === 'user'
                                         ? 'bg-primary-600 text-white'
                                         : 'bg-gradient-to-r from-primary-600 to-rose-500 text-white'
                                         }`}>
-                                        {message.role === 'user' ? <User size={16} /> : <Bot size={16} />}
+                                        {message.role === 'user' ? <User size={12} className="md:w-4" /> : <Bot size={12} className="md:w-4" />}
                                     </div>
                                     <div className={`flex-1 ${message.role === 'user' ? 'text-right' : ''}`}>
                                         <div
-                                            className={`inline-block px-4 py-2 rounded-2xl text-sm ${message.role === 'user'
+                                            className={`inline-block px-3 py-2 md:px-4 rounded-2xl text-[11px] md:text-sm ${message.role === 'user'
                                                 ? 'bg-primary-600 text-white rounded-tr-none'
                                                 : 'border rounded-tl-none'
                                                 }`}
@@ -528,12 +537,12 @@ If the user says they want to "hire", "contact", "start a project", or "needs he
                                                 backgroundColor: message.role === 'user' ? undefined : 'var(--bg-main)',
                                                 borderColor: message.role === 'user' ? undefined : 'var(--border-main)',
                                                 color: message.role === 'user' ? 'white' : 'var(--text-main)',
-                                                maxWidth: '90%'
+                                                maxWidth: '92%'
                                             }}
                                         >
                                             {formatMessage(message.content)}
                                         </div>
-                                        <p className="text-[10px] mt-1 opacity-50" style={{ color: 'var(--text-muted)' }}>
+                                        <p className="text-[8px] md:text-[10px] mt-1 opacity-50" style={{ color: 'var(--text-muted)' }}>
                                             {message.timestamp.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
                                         </p>
                                     </div>
@@ -579,7 +588,7 @@ If the user says they want to "hire", "contact", "start a project", or "needs he
                         )}
 
                         {/* Input */}
-                        <div className="p-4 border-t" style={{ borderColor: 'var(--border-main)' }}>
+                        <div className="p-3 md:p-4 border-t" style={{ borderColor: 'var(--border-main)' }}>
                             <div className="flex gap-2">
                                 <input
                                     ref={inputRef}
@@ -587,17 +596,17 @@ If the user says they want to "hire", "contact", "start a project", or "needs he
                                     value={input}
                                     onChange={(e) => setInput(e.target.value)}
                                     onKeyPress={handleKeyPress}
-                                    placeholder="Ask me anything..."
-                                    className="flex-1 px-4 py-3 rounded-2xl border focus:outline-none focus:ring-2 focus:ring-primary-600 text-sm"
+                                    placeholder="Ask anything..."
+                                    className="flex-1 px-3 py-2 md:px-4 md:py-3 rounded-xl md:rounded-2xl border focus:outline-none focus:ring-2 focus:ring-primary-600 text-[11px] md:text-sm"
                                     style={{ backgroundColor: 'var(--bg-main)', borderColor: 'var(--border-main)', color: 'var(--text-main)' }}
                                     disabled={isLoading}
                                 />
                                 <button
                                     onClick={handleSend}
                                     disabled={!input.trim() || isLoading}
-                                    className="w-12 h-12 bg-primary-600 text-white rounded-2xl flex items-center justify-center hover:bg-primary-700 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+                                    className="w-10 h-10 md:w-12 md:h-12 bg-primary-600 text-white rounded-xl md:rounded-2xl flex items-center justify-center hover:bg-primary-700 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
                                 >
-                                    {isLoading ? <Loader2 size={20} className="animate-spin" /> : <Send size={20} />}
+                                    {isLoading ? <Loader2 size={16} className="animate-spin md:w-5" /> : <Send size={16} className="md:w-5" />}
                                 </button>
                             </div>
                         </div>
