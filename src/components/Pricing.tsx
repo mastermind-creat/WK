@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { Check, X, Shield, Star, Zap, Cpu } from 'lucide-react';
+import { Check, Shield, Star, Zap, Cpu, ArrowRight } from 'lucide-react';
 import { pricing } from '../data/portfolio';
 
 const Pricing = () => {
@@ -8,117 +8,121 @@ const Pricing = () => {
     return (
         <section id="pricing" className="section-padding relative overflow-hidden" style={{ backgroundColor: 'var(--bg-main)' }}>
             {/* Background elements */}
-            <div className="absolute top-0 right-0 w-96 h-96 bg-primary-600/5 rounded-full blur-[120px]" />
-            <div className="absolute bottom-0 left-0 w-96 h-96 bg-primary-900/5 rounded-full blur-[120px]" />
+            <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-primary-600/5 rounded-full blur-[120px]" />
+            <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-primary-900/5 rounded-full blur-[120px]" />
+            <div className="absolute inset-0 opacity-[0.02]" style={{ backgroundImage: 'radial-gradient(var(--primary-main) 1px, transparent 1px)', backgroundSize: '40px 40px' }} />
 
             <div className="container-custom relative z-10">
                 {/* Header */}
                 <motion.div
-                    className="text-center mb-10 md:mb-16"
+                    className="text-center mb-16 md:mb-24"
                     initial={{ opacity: 0, y: 30 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                 >
-                    <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full glass border mb-4 md:mb-6" style={{ borderColor: 'var(--border-main)' }}>
-                        <Zap className="w-3.5 h-3.5 text-primary-500" />
-                        <span className="text-[10px] md:text-xs font-bold uppercase tracking-wider" style={{ color: 'var(--text-muted)' }}>Transparent Investment</span>
+                    <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-primary-600/10 border border-primary-500/20 mb-6 font-black text-[9px] md:text-[11px] uppercase tracking-[0.3em] text-primary-500">
+                        <Zap size={14} />
+                        <span>Investment Protocols</span>
                     </div>
-                    <h2 className="text-3xl md:text-5xl lg:text-6xl font-black gradient-text mb-4">Strategic Tiering</h2>
-                    <p className="max-w-xl mx-auto text-sm md:text-lg" style={{ color: 'var(--text-muted)' }}>
-                        Elevate your digital presence with precision-crafted solutions
+                    <h2 className="text-4xl md:text-6xl lg:text-7xl font-black gradient-text mb-6 uppercase italic tracking-tighter leading-[0.85]">
+                        Strategic <span className="text-white dark:text-white">Tiering</span>
+                    </h2>
+                    <p className="max-w-xl mx-auto text-xs md:text-lg font-medium opacity-60 leading-relaxed uppercase tracking-widest" style={{ color: 'var(--text-main)' }}>
+                        Precision-crafted pricing models for high-impact digital systems.
                     </p>
                 </motion.div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
+                {/* Pricing Grid */}
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
                     {pricing.map((tier, idx) => {
                         const Icon = icons[idx] || Star;
+                        const isPopular = tier.popular;
+
                         return (
                             <motion.div
                                 key={tier.plan}
-                                className={`group relative p-5 md:p-10 rounded-2xl md:rounded-[3rem] border transition-all duration-500 hover:-translate-y-2 ${tier.popular
-                                    ? 'border-primary-600 shadow-[0_0_50px_rgba(37,99,235,0.2)] md:scale-105 z-10 active-focus-card'
-                                    : 'shadow-xl'
+                                className={`group relative p-8 md:p-10 rounded-[2.5rem] md:rounded-[3rem] border flex flex-col h-full transition-all duration-500 ${isPopular
+                                        ? 'bg-zinc-900/50 border-primary-600 shadow-[0_30px_60px_-12px_rgba(225,29,72,0.25)] scale-100 lg:scale-[1.08] z-20'
+                                        : 'bg-zinc-900/30 border-white/5 hover:border-white/10'
                                     }`}
-                                style={{
-                                    backgroundColor: 'var(--bg-surface)',
-                                    borderColor: tier.popular ? 'var(--primary-main)' : 'var(--border-main)'
-                                }}
-                                initial={{ opacity: 0, y: 30 }}
+                                style={{ backgroundColor: 'var(--bg-surface)' }}
+                                initial={{ opacity: 0, y: 50 }}
                                 whileInView={{ opacity: 1, y: 0 }}
                                 viewport={{ once: true }}
-                                transition={{ duration: 0.5, delay: idx * 0.1 }}
-                                animate={tier.popular ? {
-                                    y: [0, -10, 0],
-                                    transition: {
-                                        duration: 4,
-                                        repeat: Infinity,
-                                        ease: "easeInOut"
-                                    }
-                                } : {}}
+                                transition={{ duration: 0.6, delay: idx * 0.1 }}
                             >
-                                {tier.popular && (
-                                    <>
-                                        <div className="absolute inset-0 bg-primary-600/5 rounded-2xl md:rounded-[3rem] animate-pulse-slow" />
-                                        <div className="absolute top-0 right-8 -translate-y-1/2 bg-primary-600 text-white text-[8px] md:text-[10px] font-black uppercase tracking-widest px-3 md:px-4 py-1 md:py-1.5 rounded-full shadow-glow z-20">
-                                            Popular Choice
-                                        </div>
-                                    </>
+                                {/* Industrial Badging */}
+                                {isPopular && (
+                                    <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-primary-600 text-white text-[8px] font-black uppercase tracking-[0.3em] px-6 py-2 rounded-full shadow-lg z-30">
+                                        Primary_Protocol
+                                    </div>
                                 )}
 
-                                <div className="flex flex-col items-center mb-6 md:mb-10">
-                                    <div className={`w-10 h-10 md:w-16 md:h-16 rounded-xl md:rounded-[1.5rem] flex items-center justify-center mb-3 md:mb-6 transition-all duration-300 group-hover:rotate-12 ${tier.popular ? 'bg-primary-600 text-white shadow-lg' : 'border text-primary-500 shadow-inner'}`} style={{ backgroundColor: !tier.popular ? 'var(--bg-main)' : undefined, borderColor: !tier.popular ? 'var(--border-main)' : undefined }}>
-                                        <Icon size={tier.popular ? 20 : 16} className="md:w-8 md:h-8" />
+                                <div className="absolute top-6 right-8 text-[10px] font-black text-white/10 uppercase tracking-widest select-none">
+                                    VER_{idx + 1}.0
+                                </div>
+
+                                {/* Icon & Header */}
+                                <div className="mb-10">
+                                    <div className={`w-14 h-14 rounded-2xl flex items-center justify-center mb-6 transition-transform duration-500 group-hover:scale-110 group-hover:rotate-6 ${isPopular ? 'bg-primary-600 text-white shadow-glow' : 'bg-white/5 text-primary-500 border border-white/5'
+                                        }`}>
+                                        <Icon size={28} />
                                     </div>
-                                    <h3 className="text-xs md:text-xl font-black uppercase tracking-wider md:tracking-widest text-center" style={{ color: 'var(--text-main)' }}>{tier.plan}</h3>
+                                    <h3 className="text-2xl font-black uppercase italic tracking-tighter" style={{ color: 'var(--text-main)' }}>
+                                        {tier.plan}
+                                    </h3>
+                                    <div className="flex items-baseline gap-1 mt-4">
+                                        <span className="text-3xl font-black" style={{ color: 'var(--text-main)' }}>{tier.price}</span>
+                                        {tier.price !== 'Quote' && <span className="text-[10px] font-bold text-zinc-500">/UNIT</span>}
+                                    </div>
                                 </div>
 
-                                <div className="text-center mb-6 md:mb-10">
-                                    <p className="text-[8px] md:text-[10px] uppercase tracking-[0.2em] md:tracking-[0.3em] font-black mb-1 md:mb-2 opacity-50">Investment</p>
-                                    <div className="text-xl md:text-3xl font-black" style={{ color: 'var(--text-main)' }}>{tier.price}</div>
-                                </div>
-
-                                <p className="text-[9px] md:text-xs text-center mb-6 md:mb-10 leading-relaxed font-bold italic h-8 md:h-12 flex items-center justify-center opacity-70 line-clamp-2 md:line-clamp-none" style={{ color: 'var(--text-main)' }}>
+                                <p className="text-[11px] md:text-xs leading-relaxed font-bold opacity-60 mb-10 h-12 italic" style={{ color: 'var(--text-main)' }}>
                                     "{tier.description}"
                                 </p>
 
-                                <div className="w-full h-px mb-6 md:mb-10" style={{ backgroundColor: 'var(--border-main)' }} />
-
-                                <ul className="space-y-3 md:space-y-5 mb-8 md:mb-12">
+                                {/* Features List */}
+                                <div className="space-y-4 mb-10 flex-grow">
+                                    <div className="text-[8px] font-black uppercase tracking-widest text-zinc-500 mb-2">Enabled_Capabilities:</div>
                                     {tier.features.map(feature => (
-                                        <li key={feature} className="flex items-start gap-2 md:gap-3">
-                                            <div className="mt-0.5 w-4 h-4 md:w-5 md:h-5 rounded-full bg-primary-600/10 border border-primary-600/20 flex items-center justify-center text-primary-500 shrink-0">
-                                                <Check size={10} className="md:w-3 md:h-3" />
+                                        <div key={feature} className="flex items-start gap-3 group/feature">
+                                            <div className="mt-1 w-4 h-4 rounded-full bg-primary-600/10 border border-primary-500/20 flex items-center justify-center text-primary-500 shrink-0 group-hover/feature:bg-primary-600 group-hover/feature:text-white transition-colors">
+                                                <Check size={10} />
                                             </div>
-                                            <span className="text-[10px] md:text-sm font-medium line-clamp-2" style={{ color: 'var(--text-muted)' }}>{feature}</span>
-                                        </li>
+                                            <span className="text-[11px] font-medium opacity-70 group-hover:opacity-100 transition-opacity" style={{ color: 'var(--text-main)' }}>
+                                                {feature}
+                                            </span>
+                                        </div>
                                     ))}
-                                    {idx === 0 && (
-                                        <li className="hidden md:flex items-start gap-3 opacity-20 grayscale">
-                                            <div className="mt-0.5 w-5 h-5 rounded-full bg-zinc-800 flex items-center justify-center text-white shrink-0">
-                                                <X size={12} />
-                                            </div>
-                                            <span className="text-sm">Enterprise support</span>
-                                        </li>
-                                    )}
-                                </ul>
+                                </div>
 
-                                <button
-                                    className={`w-full py-3 md:py-5 rounded-xl md:rounded-2xl font-black text-[9px] md:text-xs uppercase tracking-wider md:tracking-widest transition-all duration-300 active:scale-95 border ${tier.popular
-                                        ? 'bg-primary-600 text-white border-primary-600 shadow-xl shadow-primary-600/20 hover:bg-primary-700'
-                                        : 'hover:bg-primary-600 hover:text-white'
-                                        }`}
-                                    style={{
-                                        backgroundColor: !tier.popular ? 'var(--bg-main)' : undefined,
-                                        color: !tier.popular ? 'var(--text-main)' : undefined,
-                                        borderColor: !tier.popular ? 'var(--border-main)' : undefined
-                                    }}
-                                >
-                                    Get Started
+                                {/* CTA */}
+                                <button className={`w-full py-5 rounded-2xl font-black text-[10px] uppercase tracking-[0.2em] flex items-center justify-center gap-3 transition-all active:scale-95 ${isPopular
+                                        ? 'bg-primary-600 text-white hover:bg-primary-700 shadow-xl shadow-primary-600/20'
+                                        : 'bg-white/5 border border-white/10 text-white hover:bg-white/10'
+                                    }`}
+                                    style={{ color: !isPopular ? 'var(--text-main)' : undefined }}>
+                                    Initialize Protocol
+                                    <ArrowRight size={14} />
                                 </button>
+
+                                {/* Background Glitch Effect on Popular */}
+                                {isPopular && (
+                                    <div className="absolute inset-0 rounded-[3rem] border-2 border-primary-500/0 group-hover:border-primary-500/30 transition-colors pointer-events-none" />
+                                )}
                             </motion.div>
                         );
                     })}
                 </div>
+
+                {/* Professional Note */}
+                <motion.p
+                    className="mt-16 text-center text-[9px] font-bold uppercase tracking-[0.3em] opacity-30"
+                    initial={{ opacity: 0 }}
+                    whileInView={{ opacity: 0.3 }}
+                >
+                    Custom industrial frameworks available upon direct request. Standard SLA applies to all tiers.
+                </motion.p>
             </div>
         </section>
     );

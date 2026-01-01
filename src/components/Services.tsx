@@ -105,7 +105,6 @@ const Services = () => {
                 {/* Services Bento Collage */}
                 <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 md:gap-6 group/services">
                     {services.map((service, idx) => {
-                        // Varied spans for a collage feel
                         const spans = [
                             "col-span-2 row-span-1 lg:col-span-2 lg:row-span-1", // 1st: Wide
                             "col-span-1 row-span-1 lg:col-span-1 lg:row-span-1", // 2nd: Square
@@ -118,6 +117,7 @@ const Services = () => {
                             "col-span-1 row-span-1 lg:col-span-1 lg:row-span-1", // 9th: Square
                             "col-span-2 row-span-1 lg:col-span-2 lg:row-span-1", // 10th: Wide
                         ];
+                        const isFeatured = [0, 3, 5, 9].includes(idx);
 
                         return (
                             <ServiceCard
@@ -126,6 +126,7 @@ const Services = () => {
                                 icon={iconMap[service.icon] || Globe}
                                 index={idx}
                                 spanClass={spans[idx] || "col-span-1"}
+                                isFeatured={isFeatured}
                                 onOpen={() => setSelectedService(service)}
                             />
                         );
@@ -148,7 +149,7 @@ const Services = () => {
 };
 
 // 3D Tilt Card Component with Active Focus
-const ServiceCard = ({ service, icon: Icon, index, onOpen, spanClass }: any) => {
+const ServiceCard = ({ service, icon: Icon, index, onOpen, spanClass, isFeatured }: any) => {
     const cardRef = useRef<HTMLDivElement>(null);
     const mouseX = useMotionValue(0);
     const mouseY = useMotionValue(0);
@@ -199,6 +200,16 @@ const ServiceCard = ({ service, icon: Icon, index, onOpen, spanClass }: any) => 
                 {/* Active Focus Glow */}
                 <div className="absolute -inset-1 bg-gradient-to-r from-primary-600/20 to-rose-500/20 rounded-[2.5rem] blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                 <div className="absolute inset-0 bg-gradient-to-br from-primary-600/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+
+                {isFeatured && (
+                    <div className="absolute top-4 right-4 z-20">
+                        <div className="px-2 py-0.5 rounded-full bg-primary-600/20 border border-primary-500/30 backdrop-blur-md">
+                            <span className="text-[7px] md:text-[9px] font-black uppercase tracking-widest text-primary-400 flex items-center gap-1">
+                                <Sparkles size={10} /> Featured
+                            </span>
+                        </div>
+                    </div>
+                )}
 
                 {/* Content */}
                 <div className="relative z-10" style={{ transform: 'translateZ(30px)' }}>
