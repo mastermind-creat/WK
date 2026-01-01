@@ -1,11 +1,23 @@
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence, useScroll, useSpring } from 'framer-motion';
 import { ExternalLink, Github, Search, Filter, ArrowRight, Layers, Cpu, Globe } from 'lucide-react';
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useRef } from 'react';
 import { projects } from '../data/portfolio';
 
 const ProjectsPage = () => {
     const [filter, setFilter] = useState('all');
     const [searchQuery, setSearchQuery] = useState('');
+    const containerRef = useRef<HTMLDivElement>(null);
+
+    const { scrollYProgress } = useScroll({
+        target: containerRef,
+        offset: ["start center", "end center"]
+    });
+
+    const scaleY = useSpring(scrollYProgress, {
+        stiffness: 100,
+        damping: 30,
+        restDelta: 0.001
+    });
 
     const filteredProjects = useMemo(() => {
         return projects.filter(project => {
@@ -54,7 +66,6 @@ const ProjectsPage = () => {
 
                 {/* Filter & Search Bar */}
                 <div className="mb-16 md:mb-24 space-y-8">
-                    {/* Premium Segmented Control */}
                     <div className="flex flex-nowrap md:justify-center gap-2 overflow-x-auto pb-4 scrollbar-hide px-1">
                         <div className="flex bg-white/5 dark:bg-white/5 bg-black/5 p-1 rounded-2xl border border-white/5 backdrop-blur-md">
                             {categories.map((cat) => (
@@ -78,7 +89,6 @@ const ProjectsPage = () => {
                         </div>
                     </div>
 
-                    {/* Industrial Search */}
                     <div className="max-w-2xl mx-auto relative group">
                         <div className="absolute inset-0 bg-primary-600/10 blur-xl opacity-0 group-focus-within:opacity-100 transition-opacity" />
                         <Search className="absolute left-6 top-1/2 -translate-y-1/2 text-primary-600 group-focus-within:rotate-90 transition-transform" size={18} />
@@ -90,101 +100,107 @@ const ProjectsPage = () => {
                             value={searchQuery}
                             onChange={(e) => setSearchQuery(e.target.value)}
                         />
-                        <div className="absolute right-6 top-1/2 -translate-y-1/2 text-[10px] font-black text-primary-600 tracking-tighter hidden md:block">
-                            MATCH_FOUND: {filteredProjects.length}
-                        </div>
                     </div>
                 </div>
 
-                {/* Grid Layout */}
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 lg:gap-16">
-                    <AnimatePresence mode="popLayout">
-                        {filteredProjects.map((project, idx) => (
-                            <motion.div
-                                key={project.title}
-                                layout
-                                initial={{ opacity: 0, scale: 0.9 }}
-                                animate={{ opacity: 1, scale: 1 }}
-                                exit={{ opacity: 0, scale: 0.9 }}
-                                transition={{ duration: 0.4, delay: idx * 0.05 }}
-                                className="group relative"
-                            >
-                                {/* Project ID / Serial */}
-                                <div className="absolute -top-4 -left-2 z-30 px-3 py-1 bg-zinc-950 text-white text-[8px] font-black uppercase tracking-[0.3em] border border-white/10 rounded-md">
-                                    REF_{String(idx + 1).padStart(3, '0')}
-                                </div>
+                {/* Alternating Cinematic Timeline Grid */}
+                <div ref={containerRef} className="relative py-12">
+                    {/* Cinematic Middle Line */}
+                    <div className="absolute left-1/2 top-0 bottom-0 w-px -translate-x-1/2 hidden lg:block bg-white/5 overflow-hidden">
+                        <motion.div
+                            className="w-full bg-gradient-to-b from-transparent via-primary-500 to-transparent h-full origin-top"
+                            style={{ scaleY }}
+                        />
+                    </div>
 
-                                {/* Main Card Container */}
-                                <div className="relative overflow-hidden rounded-[2rem] md:rounded-[3rem] border border-white/10 dark:border-white/10 border-black/5 bg-zinc-900/40 backdrop-blur-sm group-hover:border-primary-500/50 transition-colors shadow-2xl">
-                                    {/* Image Section */}
-                                    <div className="relative aspect-[16/10] overflow-hidden">
-                                        <motion.img
-                                            src={project.image}
-                                            alt={project.title}
-                                            className="w-full h-full object-cover grayscale-[0.6] group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700"
-                                        />
-                                        <div className="absolute inset-0 bg-gradient-to-t from-zinc-950 via-zinc-950/20 to-transparent" />
-
-                                        {/* Status Tag */}
-                                        <div className="absolute top-6 right-6 flex items-center gap-2 px-3 py-1 rounded-full bg-black/60 backdrop-blur-md border border-white/10">
-                                            <div className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse shadow-[0_0_8px_#22c55e]" />
-                                            <span className="text-[8px] font-black text-white tracking-[0.2em] uppercase">Operational</span>
-                                        </div>
-                                    </div>
-
-                                    {/* Content Section */}
-                                    <div className="p-6 md:p-10 space-y-6">
-                                        <div className="flex flex-wrap gap-2">
-                                            {project.tags.map(tag => (
-                                                <span key={tag} className="text-[7px] md:text-[8px] font-black uppercase tracking-widest text-primary-400 bg-primary-600/5 px-2 py-1 rounded border border-primary-500/10">
-                                                    {tag}
-                                                </span>
-                                            ))}
-                                        </div>
-
-                                        <div>
-                                            <h2 className="text-2xl md:text-3xl font-black uppercase italic tracking-tighter mb-3 leading-none group-hover:text-primary-500 transition-colors" style={{ color: 'var(--text-main)' }}>
-                                                {project.title}
-                                            </h2>
-                                            <p className="text-[11px] md:text-sm leading-relaxed font-medium opacity-60 line-clamp-3" style={{ color: 'var(--text-main)' }}>
-                                                {project.description}
-                                            </p>
+                    <div className="space-y-12 lg:space-y-0 relative">
+                        <AnimatePresence mode="popLayout">
+                            {filteredProjects.map((project, idx) => {
+                                const isEven = idx % 2 === 0;
+                                return (
+                                    <motion.div
+                                        key={project.title}
+                                        layout
+                                        initial={{ opacity: 0, x: isEven ? -50 : 50 }}
+                                        whileInView={{ opacity: 1, x: 0 }}
+                                        viewport={{ once: true, margin: "-100px" }}
+                                        transition={{ duration: 0.6, ease: "easeOut" }}
+                                        className={`flex flex-col lg:flex-row items-center justify-between gap-8 lg:gap-0 lg:min-h-[450px] ${isEven ? 'lg:flex-row' : 'lg:flex-row-reverse'}`}
+                                    >
+                                        {/* Project Content Column */}
+                                        <div className={`w-full lg:w-[45%] ${isEven ? 'lg:pr-10 lg:text-right' : 'lg:pl-10 lg:text-left'}`}>
+                                            <div className="space-y-4">
+                                                <div className={`flex flex-wrap gap-2 ${isEven ? 'lg:justify-end' : 'lg:justify-start'}`}>
+                                                    {project.tags.slice(0, 3).map(tag => (
+                                                        <span key={tag} className="text-[7px] font-black uppercase tracking-widest text-primary-400 bg-primary-600/5 px-2 py-0.5 rounded border border-primary-500/10">
+                                                            {tag}
+                                                        </span>
+                                                    ))}
+                                                </div>
+                                                <h2 className="text-2xl md:text-3xl lg:text-4xl font-black uppercase italic tracking-tighter" style={{ color: 'var(--text-main)' }}>
+                                                    {project.title}
+                                                </h2>
+                                                <p className={`text-[11px] md:text-xs leading-relaxed font-medium opacity-60 line-clamp-3 ${isEven ? 'lg:ml-auto' : 'lg:mr-auto'} max-w-md`} style={{ color: 'var(--text-main)' }}>
+                                                    {project.description}
+                                                </p>
+                                                <div className={`flex items-center gap-3 pt-2 ${isEven ? 'lg:justify-end' : 'lg:justify-start'}`}>
+                                                    <a href={project.liveUrl} target="_blank" rel="noopener noreferrer" className="px-6 py-2.5 bg-primary-600 text-white rounded-lg font-black text-[9px] uppercase tracking-widest flex items-center gap-2 hover:bg-primary-700 transition-all shadow-lg shadow-primary-600/20 active:scale-95">
+                                                        Initialize <ExternalLink size={12} />
+                                                    </a>
+                                                    <a href={project.githubUrl} target="_blank" rel="noopener noreferrer" className="p-2.5 bg-white/5 border border-white/10 text-white rounded-lg hover:bg-white/10 transition-all active:scale-95" style={{ color: 'var(--text-main)' }}>
+                                                        <Github size={16} />
+                                                    </a>
+                                                </div>
+                                            </div>
                                         </div>
 
-                                        {/* Footer Actions */}
-                                        <div className="flex items-center gap-3 pt-4">
-                                            <a
-                                                href={project.liveUrl}
-                                                target="_blank"
-                                                rel="noopener noreferrer"
-                                                className="flex-1 px-4 py-3 bg-primary-600 text-white rounded-xl font-black text-[9px] uppercase tracking-widest flex items-center justify-center gap-2 hover:bg-primary-700 transition-all shadow-lg shadow-primary-600/20 active:scale-95"
+                                        {/* Middle Cinematic Node */}
+                                        <div className="hidden lg:flex items-center justify-center w-0 z-20 relative">
+                                            <div className="w-4 h-4 rounded-full border-2 border-primary-600 shadow-[0_0_15px_#E11D48] relative flex items-center justify-center overflow-hidden" style={{ backgroundColor: 'var(--bg-main)' }}>
+                                                <motion.div
+                                                    className="w-full h-full bg-primary-600"
+                                                    initial={{ scale: 0 }}
+                                                    whileInView={{ scale: [0, 1.2, 0.8] }}
+                                                    transition={{ duration: 0.5, delay: 0.3 }}
+                                                />
+                                            </div>
+                                            <div className="absolute w-[100px] h-px bg-gradient-to-r from-transparent via-primary-500/30 to-transparent" />
+                                        </div>
+
+                                        {/* Project Visual Column */}
+                                        <div className={`w-full lg:w-[45%] ${isEven ? 'lg:pl-10' : 'lg:pr-10'}`}>
+                                            <motion.div
+                                                className="relative group overflow-hidden rounded-[1.5rem] md:rounded-[2rem] border border-white/10 backdrop-blur-sm group-hover:border-primary-500/50 transition-colors shadow-xl"
+                                                whileHover={{ scale: 1.02 }}
+                                                transition={{ duration: 0.4 }}
                                             >
-                                                Initialize <ExternalLink size={12} />
-                                            </a>
-                                            <a
-                                                href={project.githubUrl}
-                                                target="_blank"
-                                                rel="noopener noreferrer"
-                                                className="px-4 py-3 bg-white/5 border border-white/10 text-white rounded-xl font-black text-[9px] uppercase tracking-widest flex items-center gap-2 hover:bg-white/10 transition-all active:scale-95"
-                                                style={{ color: 'var(--text-main)' }}
-                                            >
-                                                <Github size={14} />
-                                            </a>
-                                        </div>
-                                    </div>
+                                                {/* Project ID / Serial */}
+                                                <div className="absolute top-4 left-4 z-20 px-2 py-0.5 bg-zinc-950/80 backdrop-blur-md text-white text-[7px] font-black uppercase tracking-widest border border-white/10 rounded">
+                                                    REF_{String(idx + 1).padStart(3, '0')}
+                                                </div>
 
-                                    {/* Hover Interactive Scanline */}
-                                    <div className="absolute inset-0 pointer-events-none overflow-hidden opacity-0 group-hover:opacity-100 transition-opacity">
-                                        <motion.div
-                                            className="w-full h-[2px] bg-primary-500/30 blur-sm"
-                                            animate={{ y: [0, 400] }}
-                                            transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
-                                        />
-                                    </div>
-                                </div>
-                            </motion.div>
-                        ))}
-                    </AnimatePresence>
+                                                <img
+                                                    src={project.image}
+                                                    alt={project.title}
+                                                    className="w-full aspect-[16/9] object-cover grayscale-[0.8] group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700"
+                                                />
+                                                <div className="absolute inset-0 bg-gradient-to-t from-zinc-950 via-zinc-950/10 to-transparent" />
+
+                                                {/* Scanline Effect */}
+                                                <div className="absolute inset-0 pointer-events-none overflow-hidden opacity-0 group-hover:opacity-100 transition-opacity">
+                                                    <motion.div
+                                                        className="w-full h-[1px] bg-primary-500/30 blur-[2px]"
+                                                        animate={{ y: [0, 300] }}
+                                                        transition={{ duration: 1.5, repeat: Infinity, ease: "linear" }}
+                                                    />
+                                                </div>
+                                            </motion.div>
+                                        </div>
+                                    </motion.div>
+                                );
+                            })}
+                        </AnimatePresence>
+                    </div>
                 </div>
 
                 {/* Empty State */}
@@ -208,14 +224,9 @@ const ProjectsPage = () => {
                     viewport={{ once: true }}
                 >
                     <div className="absolute inset-0 bg-primary-600/5 opacity-0 group-hover:opacity-100 transition-opacity animate-pulse" />
-                    <div className="absolute top-0 left-0 w-32 h-32 bg-primary-600/10 blur-[80px] rounded-full" />
-
                     <h3 className="text-3xl md:text-5xl font-black uppercase italic tracking-tighter mb-8 relative z-10 leading-none" style={{ color: 'var(--text-main)' }}>
                         Execute <span className="text-primary-500">New Mission</span>?
                     </h3>
-                    <p className="mb-12 max-w-lg mx-auto relative z-10 font-bold uppercase text-[9px] md:text-[11px] tracking-[0.4em] opacity-60" style={{ color: 'var(--text-main)' }}>
-                        Current bandwidth allows for immediate system deployment. Initiate protocol.
-                    </p>
                     <a
                         href="/#contact"
                         className="px-10 py-5 bg-primary-600 text-white rounded-2xl font-black text-[12px] uppercase tracking-[0.3em] inline-flex items-center gap-4 hover:bg-primary-700 transition-all shadow-xl shadow-primary-600/30 active:scale-95 relative z-10"
