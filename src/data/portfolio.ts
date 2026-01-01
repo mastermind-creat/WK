@@ -457,18 +457,25 @@ export const galleryItems = [
         icon: "palette"
     },
     {
+        title: "Branding Logo",
+        category: "logo",
+        description: "Alternative branding concept",
+        image: "images/graphics/logo.jpg",
+        icon: "palette"
+    },
+    {
+        title: "Fullstack Foundry",
+        category: "logo",
+        description: "Identity design for a tech collective",
+        image: "images/graphics/Fullstack Foundry.png",
+        icon: "palette"
+    },
+    {
         title: "Birthday Card",
         category: "card",
         description: "Celebratory card for special occasions",
         image: "images/graphics/Birthday.jpg",
         icon: "cake"
-    },
-    {
-        title: "Digital Skills",
-        category: "poster",
-        description: "Training poster for digital skills development",
-        image: "images/graphics/digitalskills.png",
-        icon: "laptop-code"
     },
     {
         title: "Success Card",
@@ -478,6 +485,13 @@ export const galleryItems = [
         icon: "trophy"
     },
     {
+        title: "Digital Skills",
+        category: "poster",
+        description: "Training poster for digital skills development",
+        image: "images/graphics/digitalskills.png",
+        icon: "laptop-code"
+    },
+    {
         title: "African Cup",
         category: "poster",
         description: "Cultural cup design with African themes",
@@ -485,10 +499,101 @@ export const galleryItems = [
         icon: "trophy"
     },
     {
+        title: "African Heritage",
+        category: "poster",
+        description: "Traditional themed cultural poster",
+        image: "images/graphics/african.png",
+        icon: "palette"
+    },
+    {
         title: "Ajira Digital",
         category: "poster",
         description: "Professional poster for digital opportunities",
         image: "images/graphics/ajira.jpg",
+        icon: "briefcase"
+    },
+    {
+        title: "STVC Ajira",
+        category: "poster",
+        description: "Academic digital skills banner",
+        image: "images/graphics/stvcAjira.jpg",
+        icon: "briefcase"
+    },
+    {
+        title: "Training Banner",
+        category: "poster",
+        description: "Professional technical training announcement",
+        image: "images/graphics/training.png",
+        icon: "laptop-code"
+    },
+    {
+        title: "System Dev",
+        category: "infographic",
+        description: "Infrastructure development flow chart",
+        image: "images/graphics/systemdev.png",
+        icon: "laptop-code"
+    },
+    {
+        title: "Project Tracko",
+        category: "ui",
+        description: "Modern task management interface concept",
+        image: "images/graphics/projectTracko.jpg",
+        icon: "laptop-code"
+    },
+    {
+        title: "Worship Event",
+        category: "poster",
+        description: "Spiritual and community gathering flyer",
+        image: "images/graphics/worship.jpg",
+        icon: "palette"
+    },
+    {
+        title: "Portrait Design",
+        category: "art",
+        description: "High-fidelity digital portrait composition",
+        image: "images/graphics/Alicia.jpg",
+        icon: "palette"
+    },
+    {
+        title: "Modern Layout",
+        category: "design",
+        description: "Contemporary digital publication design",
+        image: "images/graphics/new.png",
+        icon: "palette"
+    },
+    {
+        title: "Plum Branding",
+        category: "logo",
+        description: "Experimental fruit-themed branding",
+        image: "images/graphics/plum.png",
+        icon: "palette"
+    },
+    {
+        title: "Vector Abstract",
+        category: "art",
+        description: "Clean mathematical vector illustration",
+        image: "images/graphics/graphic1.png",
+        icon: "palette"
+    },
+    {
+        title: "Floral Art",
+        category: "art",
+        description: "Nature-inspired pattern design",
+        image: "images/graphics/flower.jpg",
+        icon: "palette"
+    },
+    {
+        title: "Elite Composition",
+        category: "design",
+        description: "Mixed media digital artwork",
+        image: "images/graphics/Designer (1).jpeg",
+        icon: "palette"
+    },
+    {
+        title: "Social Branding",
+        category: "branding",
+        description: "LinkedIn-optimized professional identity",
+        image: "images/graphics/linkedin.png",
         icon: "briefcase"
     }
 ];
