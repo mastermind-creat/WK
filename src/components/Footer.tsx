@@ -26,7 +26,7 @@ const Footer = () => {
                                 { icon: Instagram, href: "https://www.instagram.com/mastermindcreat/", color: "#e1306c" },
                                 { icon: Youtube, href: "https://www.youtube.com/@kennyleyy3918", color: "#ff0000" },
                                 { icon: Facebook, href: "https://web.facebook.com/profile.php?id=100073953339674", color: "#1877f2" },
-                                { icon: Globe, href: "https://lates-portfolio-v1.vercel.app/", color: "#e11d48" },
+                                { icon: Globe, href: "https://wk-three.vercel.app/", color: "#e11d48" },
                                 { icon: MessageCircle, href: `https://wa.me/254743394373`, color: "#25d366" }
                             ].map((social, idx) => (
                                 <motion.a
