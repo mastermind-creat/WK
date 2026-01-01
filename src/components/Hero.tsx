@@ -1,5 +1,5 @@
 import { motion, useScroll, useTransform } from 'framer-motion';
-import { MousePointer2, Briefcase, Code, Award, ArrowRight, Sparkles } from 'lucide-react';
+import { Briefcase, Code, Award, ArrowRight, Sparkles } from 'lucide-react';
 import { profile } from '../data/portfolio';
 import { useRef } from 'react';
 
@@ -185,73 +185,108 @@ const Hero = () => {
                         </motion.div>
                     </motion.div>
 
-                    {/* Visual Column - 3D Card */}
+                    {/* Visual Column - Featured Systems Dashboard */}
                     <motion.div
-                        className="flex-1 hidden lg:block"
+                        className="flex-1 hidden lg:block relative"
                         initial={{ opacity: 0, x: 50 }}
                         animate={{ opacity: 1, x: 0 }}
                         transition={{ duration: 1, delay: 0.5 }}
                     >
-                        <motion.div
-                            className="relative depth-card"
-                            whileHover={{ rotateY: 5, rotateX: -5 }}
-                            transition={{ duration: 0.3 }}
-                        >
-                            {/* Main Card */}
-                            <div className="relative glass rounded-[3rem] p-12 shadow-premium overflow-hidden">
-                                {/* Glow Effect */}
-                                <div className="absolute inset-0 bg-gradient-to-br from-primary-500/10 via-transparent to-rose-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                        <div className="relative group">
+                            {/* Dashboard Background */}
+                            <div className="absolute inset-0 bg-primary-600/5 blur-[80px] rounded-full scale-110 pointer-events-none" />
 
-                                {/* Content */}
+                            {/* Primary Featured: ElimuTech LMS */}
+                            <motion.div
+                                className="relative z-20 glass rounded-[2.5rem] p-8 md:p-10 shadow-premium border border-white/10 overflow-hidden"
+                                whileHover={{ y: -5, rotateY: 5 }}
+                            >
+                                <div className="absolute top-0 right-0 w-32 h-32 bg-primary-600/10 rounded-full blur-3xl" />
+
                                 <div className="relative z-10">
-                                    <div className="w-24 h-24 rounded-3xl bg-primary-600 flex items-center justify-center text-white font-black text-5xl mb-8 shadow-glow">
-                                        W
+                                    <div className="flex items-center gap-4 mb-6">
+                                        <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-primary-600 to-rose-600 flex items-center justify-center text-white shadow-glow">
+                                            <Code size={28} />
+                                        </div>
+                                        <div>
+                                            <h3 className="text-2xl font-black tracking-tight" style={{ color: 'var(--text-main)' }}>ElimuTech LMS</h3>
+                                            <div className="flex items-center gap-2">
+                                                <span className="w-1.5 h-1.5 bg-green-500 rounded-full animate-pulse" />
+                                                <span className="text-[10px] font-black uppercase text-white/50">Core Infrastructure</span>
+                                            </div>
+                                        </div>
                                     </div>
 
-                                    <h3 className="text-3xl font-black mb-4" style={{ color: 'var(--text-main)' }}>
-                                        Elite Craftsman
-                                    </h3>
-
-                                    <p className="text-sm leading-relaxed mb-8" style={{ color: 'var(--text-muted)' }}>
-                                        Transforming ambitious ideas into high-performance digital products that command attention and drive results.
+                                    <p className="text-sm leading-relaxed mb-8 font-medium" style={{ color: 'var(--text-muted)' }}>
+                                        A high-fidelity Learning Management System engineered for scalable digital education delivery.
                                     </p>
 
-                                    {/* Tech Stack Pills */}
-                                    <div className="flex flex-wrap gap-2">
-                                        {['React', 'TypeScript', 'Node.js', 'Design'].map((tech) => (
-                                            <span
-                                                key={tech}
-                                                className="px-4 py-2 rounded-full text-xs font-bold uppercase tracking-wider"
-                                                style={{
-                                                    backgroundColor: 'var(--bg-elevated)',
-                                                    color: 'var(--text-main)'
-                                                }}
-                                            >
+                                    <div className="flex flex-wrap gap-2 mb-8">
+                                        {['React', 'Laravel', 'Tailwind'].map((tech) => (
+                                            <span key={tech} className="px-4 py-1.5 rounded-full text-[9px] font-black uppercase tracking-widest bg-white/5 text-primary-400 border border-white/5">
                                                 {tech}
                                             </span>
                                         ))}
                                     </div>
-                                </div>
 
-                                {/* Decorative Elements */}
-                                <div className="absolute -top-10 -right-10 w-40 h-40 bg-primary-500/10 rounded-full blur-3xl" />
-                                <div className="absolute -bottom-10 -left-10 w-40 h-40 bg-rose-500/10 rounded-full blur-3xl" />
-                            </div>
-
-                            {/* Floating Badge */}
-                            <motion.div
-                                className="absolute -top-6 -right-6 glass rounded-2xl px-6 py-3 shadow-premium"
-                                animate={{ y: [0, -10, 0] }}
-                                transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
-                            >
-                                <div className="flex items-center gap-2">
-                                    <MousePointer2 className="w-5 h-5 text-primary-500" />
-                                    <span className="text-xs font-black uppercase tracking-wider" style={{ color: 'var(--text-main)' }}>
-                                        Interactive
-                                    </span>
+                                    <div className="flex items-center justify-between pt-6 border-t border-white/5">
+                                        <div className="flex -space-x-3">
+                                            {[1, 2, 3].map((i) => (
+                                                <div key={i} className="w-8 h-8 rounded-full border-2 border-zinc-900 bg-zinc-800 flex items-center justify-center overflow-hidden">
+                                                    <img src={`https://i.pravatar.cc/100?img=${i + 10}`} alt="user" className="w-full h-full object-cover opacity-60" />
+                                                </div>
+                                            ))}
+                                            <div className="w-8 h-8 rounded-full border-2 border-zinc-900 bg-zinc-800 flex items-center justify-center text-[10px] font-bold text-white/40">
+                                                +1k
+                                            </div>
+                                        </div>
+                                        <span className="text-[10px] font-black uppercase tracking-tighter text-white/30">Active Nodes</span>
+                                    </div>
                                 </div>
                             </motion.div>
-                        </motion.div>
+
+                            {/* Secondary Featured: Kodiero Business Center */}
+                            <motion.div
+                                className="absolute -bottom-10 -left-12 z-30 glass rounded-3xl p-6 shadow-2xl border border-white/10 w-64"
+                                animate={{ y: [0, -10, 0] }}
+                                transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+                                whileHover={{ scale: 1.05 }}
+                            >
+                                <div className="flex items-center gap-3 mb-4">
+                                    <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-blue-600 to-primary-600 flex items-center justify-center text-white">
+                                        <Briefcase size={20} />
+                                    </div>
+                                    <div>
+                                        <h4 className="text-sm font-black text-white">Kodiero Center</h4>
+                                        <p className="text-[9px] font-bold text-white/40">Corporate Architecture</p>
+                                    </div>
+                                </div>
+                                <div className="h-1.5 w-full bg-white/5 rounded-full overflow-hidden">
+                                    <motion.div
+                                        className="h-full bg-primary-500"
+                                        initial={{ width: 0 }}
+                                        animate={{ width: "94%" }}
+                                        transition={{ duration: 2, delay: 1 }}
+                                    />
+                                </div>
+                                <div className="mt-2 flex justify-between">
+                                    <span className="text-[8px] font-black text-white/30">OPERATIONAL</span>
+                                    <span className="text-[8px] font-black text-primary-500 tracking-widest">94%</span>
+                                </div>
+                            </motion.div>
+
+                            {/* Status Badge */}
+                            <motion.div
+                                className="absolute -top-6 -right-6 z-30 glass rounded-2xl px-5 py-2.5 shadow-xl border border-primary-500/20"
+                                animate={{ scale: [1, 1.05, 1] }}
+                                transition={{ duration: 3, repeat: Infinity }}
+                            >
+                                <div className="flex items-center gap-2">
+                                    <Sparkles className="w-4 h-4 text-primary-500 animate-spin-slow" />
+                                    <span className="text-[9px] font-black uppercase tracking-[0.2em] text-white">System Verified</span>
+                                </div>
+                            </motion.div>
+                        </div>
                     </motion.div>
                 </div>
             </motion.div>
