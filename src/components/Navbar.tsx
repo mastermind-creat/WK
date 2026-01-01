@@ -1,15 +1,13 @@
 import { useState, useEffect } from 'react';
 import {
     Home, User, Zap, Layers, Image,
-    BookOpen, Tag, Mail, Sun, Moon, Monitor
+    BookOpen, Tag, Mail
 } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { Link, useLocation } from 'react-router-dom';
-import { useTheme } from '../context/ThemeContext';
 import { profile } from '../data/portfolio';
 
 const Navbar = () => {
-    const { theme, setTheme, resolvedTheme } = useTheme();
     const location = useLocation();
     const [activeIndex, setActiveIndex] = useState(0);
     const [isMobile, setIsMobile] = useState(false);
@@ -50,37 +48,20 @@ const Navbar = () => {
         }
     };
 
-    const cycleTheme = () => {
-        if (theme === 'light') setTheme('dark');
-        else if (theme === 'dark') setTheme('system');
-        else setTheme('light');
-    };
-
-    const getThemeIcon = () => {
-        if (theme === 'system') return <Monitor size={isMobile ? 12 : 16} className="text-primary-500" />;
-        return resolvedTheme === 'dark'
-            ? <Sun size={isMobile ? 12 : 16} className="text-primary-500" />
-            : <Moon size={isMobile ? 12 : 16} className="text-primary-500" />;
-    };
-
-    // Responsive Spacing Config
-    const itemWidth = isMobile ? 42 : 70;
+    // Width per item - Reduced for mobile to prevent overcrowding
+    const itemWidth = isMobile ? 40 : 70;
 
     return (
-        <motion.nav
-            initial={{ y: -100 }}
-            animate={{ y: 0 }}
-            className="fixed top-4 left-0 right-0 z-[100] flex justify-center px-4 pointer-events-none"
-        >
+        <nav className="fixed top-0 left-0 right-0 z-[100] flex justify-center pointer-events-none">
             <div
-                className="relative h-[60px] lg:h-[75px] rounded-full shadow-2xl flex items-center justify-between px-4 lg:px-8 pointer-events-auto border border-white/5 backdrop-blur-xl transition-all duration-500 overflow-visible"
+                className="relative h-[65px] lg:h-[75px] rounded-b-[2rem] lg:rounded-full shadow-2xl flex items-center justify-between px-4 lg:px-8 pointer-events-auto border-b lg:border border-white/5 backdrop-blur-xl transition-all duration-300 overflow-visible"
                 style={{
                     backgroundColor: 'var(--bg-surface)',
-                    width: isMobile ? 'fit-content' : '90%',
+                    width: isMobile ? '100%' : '90%',
                     maxWidth: isMobile ? 'none' : '1000px'
                 }}
             >
-                {/* 1. Desktop Profile Area */}
+                {/* Desktop Branding (Left) */}
                 {!isMobile && (
                     <Link to="/" className="flex items-center gap-3 group mr-4">
                         <div className="w-10 h-10 lg:w-12 lg:h-12 rounded-full border-2 border-primary-600 p-0.5 overflow-hidden group-hover:scale-110 transition-transform">
@@ -93,9 +74,9 @@ const Navbar = () => {
                     </Link>
                 )}
 
-                {/* 2. Magic Navigation Core */}
+                {/* Navigation Core */}
                 <div className="relative flex flex-1 justify-center h-full">
-                    {/* The Active Notch (Facing DOWN for Top Navbar) */}
+                    {/* The Active Notch (Pointing Down) */}
                     <div className="absolute inset-x-0 h-full flex justify-center">
                         <motion.div
                             className="relative h-full"
@@ -105,7 +86,7 @@ const Navbar = () => {
                         >
                             {/* The Floating Circle Indicator (POPS DOWN) */}
                             <div
-                                className="absolute -bottom-[20px] lg:-bottom-[30px] left-1/2 -translate-x-1/2 w-[50px] h-[50px] lg:w-[65px] lg:h-[65px] rounded-full border-[4px] lg:border-[6px] shadow-fancy z-20 flex items-center justify-center"
+                                className="absolute -bottom-[22px] lg:-bottom-[30px] left-1/2 -translate-x-1/2 w-[48px] h-[48px] lg:w-[65px] lg:h-[65px] rounded-full border-[4px] lg:border-[6px] shadow-fancy z-20 flex items-center justify-center"
                                 style={{
                                     backgroundColor: 'var(--primary-main)',
                                     borderColor: 'var(--bg-main)',
@@ -113,7 +94,7 @@ const Navbar = () => {
                             >
                                 <motion.div
                                     key={activeIndex}
-                                    initial={{ scale: 0, y: -20 }}
+                                    initial={{ scale: 0, y: -10 }}
                                     animate={{ scale: 1, y: 0 }}
                                     className="text-white"
                                 >
@@ -122,7 +103,6 @@ const Navbar = () => {
                                         return <Icon size={isMobile ? 18 : 24} strokeWidth={2.5} />;
                                     })()}
                                 </motion.div>
-                                <div className="absolute inset-0 rounded-full animate-pulse bg-primary-500/20 -z-10" />
                             </div>
 
                             {/* Downward Notch Curves */}
@@ -131,7 +111,7 @@ const Navbar = () => {
                         </motion.div>
                     </div>
 
-                    <ul className="flex items-center justify-center list-none p-0 m-0 z-10 w-full">
+                    <ul className="flex items-center justify-center list-none p-0 m-0 z-10 w-full overflow-hidden">
                         {navLinks.map((link, idx) => {
                             const isActive = activeIndex === idx;
                             return (
@@ -149,7 +129,7 @@ const Navbar = () => {
                                             }}
                                             transition={{ duration: 0.3 }}
                                         >
-                                            <link.icon size={isMobile ? 16 : 22} strokeWidth={2} className="group-hover:text-primary-500 transition-colors" />
+                                            <link.icon size={isMobile ? 14 : 22} strokeWidth={2} className="group-hover:text-primary-500 transition-colors" />
                                         </motion.span>
 
                                         {/* Name Label */}
@@ -170,29 +150,21 @@ const Navbar = () => {
                     </ul>
                 </div>
 
-                {/* 3. Theme Toggle & Desktop Status */}
-                <div className="flex items-center gap-2 lg:gap-4 ml-4">
-                    {!isMobile && (
+                {/* Right Area (Empty on mobile, Status on desktop) */}
+                {!isMobile && (
+                    <div className="flex items-center gap-4">
                         <div className="hidden xl:flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/5 border border-white/10">
                             <div className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse" />
                             <span className="text-[7px] font-black uppercase tracking-widest text-zinc-500">Live_Protocol</span>
                         </div>
-                    )}
-                    <button
-                        onClick={cycleTheme}
-                        className="w-10 h-10 lg:w-12 lg:h-12 rounded-full flex items-center justify-center glass border border-white/5 hover:bg-primary-600/10 hover:border-primary-500/30 transition-all group"
-                    >
-                        <motion.div whileHover={{ rotate: 15 }}>
-                            {getThemeIcon()}
-                        </motion.div>
-                    </button>
-                </div>
+                    </div>
+                )}
             </div>
 
             <style>{`
                 html { scroll-behavior: smooth; }
             `}</style>
-        </motion.nav>
+        </nav>
     );
 };
 
