@@ -28,13 +28,51 @@ const Navbar = () => {
         checkMobile();
         window.addEventListener('resize', checkMobile);
 
-        const currentPath = location.pathname + location.hash;
-        const index = navLinks.findIndex(link =>
-            link.href === '/' ? (location.pathname === '/' && !location.hash) : currentPath.includes(link.href)
-        );
-        if (index !== -1) setActiveIndex(index);
+        const handleScroll = () => {
+            // Only enable scroll spy on the home page
+            if (location.pathname === '/' || location.pathname === '') {
+                // Get all sections corresponding to nav links
+                // We'll iterate in reverse to find the last one that has been passed or is currently active
+                // or just standard check: top <= offset && bottom > offset
+                const headerOffset = 100;
+                const scrollPosition = window.scrollY + headerOffset;
 
-        return () => window.removeEventListener('resize', checkMobile);
+                // Iterate through links to find the active section
+                for (let i = 0; i < navLinks.length; i++) {
+                    const link = navLinks[i];
+                    const sectionId = link.name.toLowerCase();
+                    const section = document.getElementById(sectionId);
+
+                    if (section) {
+                        const { offsetTop, offsetHeight } = section;
+                        if (scrollPosition >= offsetTop && scrollPosition < offsetTop + offsetHeight) {
+                            setActiveIndex(i);
+                            return; // Stop checking once we find the active one
+                        }
+                    }
+                }
+            }
+        };
+
+        // Determine initial state
+        if (location.pathname !== '/' && location.pathname !== '') {
+            // Standard route matching for non-home pages
+            const currentPath = location.pathname + location.hash;
+            const index = navLinks.findIndex(link =>
+                link.href === '/' ? (location.pathname === '/' && !location.hash) : currentPath.includes(link.href)
+            );
+            if (index !== -1) setActiveIndex(index);
+        } else {
+            // On home page, use scrolling logic immediately
+            handleScroll();
+        }
+
+        window.addEventListener('scroll', handleScroll);
+
+        return () => {
+            window.removeEventListener('resize', checkMobile);
+            window.removeEventListener('scroll', handleScroll);
+        };
     }, [location]);
 
     const playClick = () => {

@@ -26,7 +26,7 @@ const About = () => {
                 {/* Dark Mode: Tech GIF */}
                 <div
                     className="absolute inset-0 bg-cover bg-center opacity-[0.10] hidden dark:block pointer-events-none mix-blend-luminosity"
-                    style={{ backgroundImage: "url('https://i.pinimg.com/originals/88/15/63/881563d6444b370fa4ceea0c3183bb4c.gif')" }}
+                    style={{ backgroundImage: "url('https://media.giphy.com/media/v1.Y2lkPWVjZjA1ZTQ3aWNyYTYyemxwNDc3aTVtNTRqbWdhd3N4bmI5YmEwZTlxcXN1aGI4ciZlcD12MV9naWZzX3JlbGF0ZWQmY3Q9Zw/lnfzT3k8g7wpG/giphy.gif')" }}
                 />
 
                 {/* Light Mode: Subtle Digital Grid */}
