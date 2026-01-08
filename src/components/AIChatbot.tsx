@@ -63,28 +63,7 @@ const AIChatbot = () => {
         return () => clearTimeout(timer);
     }, [isOpen]);
 
-    // Minimize on Scroll
-    useEffect(() => {
-        let lastScrollY = window.scrollY;
 
-        const handleScroll = () => {
-            const currentScrollY = window.scrollY;
-            const scrollDiff = Math.abs(currentScrollY - lastScrollY);
-
-            if (isOpen && !isMinimized && scrollDiff > 50) {
-                setIsMinimized(true);
-                lastScrollY = currentScrollY; // Reset base to avoid instant re-trigger
-            }
-
-            // If they stop scrolling or move a bit, update the base
-            if (scrollDiff > 100) {
-                lastScrollY = currentScrollY;
-            }
-        };
-
-        window.addEventListener('scroll', handleScroll, { passive: true });
-        return () => window.removeEventListener('scroll', handleScroll);
-    }, [isOpen, isMinimized]);
 
     // Text to Speech Function
     const speak = (text: string) => {

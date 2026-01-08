@@ -201,9 +201,9 @@ export const techStack = [
     { name: "React", icon: "react", color: "text-blue-400" },
     { name: "Vue.js", icon: "vuejs", color: "text-green-500" },
     { name: "Node.js", icon: "node-js", color: "text-green-600" },
-    { name: "Python", icon: "python", color: "text-blue-500" },
+    { name: "Laravel", icon: "laravel", color: "text-red-600" },
+    { name: "Tailwind", icon: "tailwindcss", color: "text-teal-400" },
     { name: "PHP", icon: "php", color: "text-blue-300" },
-    { name: "AWS", icon: "aws", color: "text-orange-500" },
     { name: "Docker", icon: "docker", color: "text-blue-600" },
     { name: "Git", icon: "git-alt", color: "text-red-500" }
 ];
