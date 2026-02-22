@@ -339,7 +339,7 @@ export const services = [
 
 export const projects = [
     {
-        title: "ElimuTech LMS",
+        title: "Masomo Bora LMS",
         description: "A modern Learning Management System designed to streamline online education. Features scalable content delivery, structured learning flows, and an intuitive user experience for both learners and instructors.",
         image: "images/projects/elimutech.png",
         tags: ["React", "Tailwind CSS", "Laravel"],
