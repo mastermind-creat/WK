@@ -74,7 +74,7 @@ const ProjectDetailModal = ({ project, isOpen, onClose }: { project: Project | n
 
                                 <div className="flex flex-col sm:flex-row gap-4 pt-4 md:pt-8">
                                     <a
-                                        href={project.liveUrl}
+                                        href={project.liveUrl.startsWith('http://') || project.liveUrl.startsWith('https://') || project.liveUrl === '#' ? project.liveUrl : `https://${project.liveUrl}`}
                                         target="_blank"
                                         rel="noopener noreferrer"
                                         className="flex-1 px-8 py-3.5 md:py-4 bg-primary-600 text-white rounded-xl md:rounded-2xl font-black text-[10px] md:text-xs uppercase tracking-[0.2em] flex items-center justify-center gap-3 hover:bg-primary-700 transition-all shadow-xl shadow-primary-600/20 active:scale-95"

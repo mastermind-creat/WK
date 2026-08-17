@@ -362,7 +362,7 @@ export const projects = [
         description: "Discover local traders, browse fresh produce, reserve items instantly, and pay securely via M-Pesa. Your entire neighbourhood market in your pocket. Engineered with a Laravel backend, Next.js frontend, and Tailwind CSS.",
         image: "images/projects/sokomtaa.png",
         tags: ["Next.js", "Laravel", "Tailwind CSS", "M-Pesa"],
-        liveUrl: "sokomtaa.co.ke",
+        liveUrl: "https://sokomtaa.co.ke",
         githubUrl: "https://github.com/mastermind-creat/sokomtaa",
         category: "web"
     },

@@ -123,7 +123,7 @@ const Projects = () => {
                                             )}
                                             {project.liveUrl !== '#' && (
                                                 <motion.a
-                                                    href={project.liveUrl}
+                                                    href={project.liveUrl.startsWith('http://') || project.liveUrl.startsWith('https://') ? project.liveUrl : `https://${project.liveUrl}`}
                                                     target="_blank"
                                                     rel="noopener noreferrer"
                                                     className="w-10 h-10 rounded-xl bg-primary-600 flex items-center justify-center text-white shadow-lg shadow-primary-500/20"
