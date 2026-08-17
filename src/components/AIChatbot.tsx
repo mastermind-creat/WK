@@ -208,11 +208,75 @@ If the user says they want to "hire", "contact", "start a project", or "needs he
     - End with: "I've drafted a direct message for Wambia with your details. Click above to send it instantly!"
 `;
 
+    const getSmartFallbackResponse = (query: string): string => {
+        const q = query.toLowerCase();
+
+        if (q.includes('contact') || q.includes('hire') || q.includes('email') || q.includes('phone') || q.includes('whatsapp') || q.includes('reach') || q.includes('project') || q.includes('message')) {
+            return `You can reach **Wambia Kennedy** directly through:\n\n` +
+                `- 📧 **Email**: [kennyleyy0@gmail.com](mailto:kennyleyy0@gmail.com)\n` +
+                `- 📱 **Phone / WhatsApp**: [+254 743 394 373](https://wa.me/254743394373)\n` +
+                `- 📍 **Location**: Kisumu, Kenya\n\n` +
+                `[[Send via WhatsApp|https://wa.me/254743394373?text=Hi%20Wambia!%20I'm%20interested%20in%20working%20with%20you.]] ` +
+                `[[Send via Email|mailto:kennyleyy0@gmail.com?subject=New%20Project%20Inquiry]]`;
+        }
+
+        if (q.includes('sokomtaa') || q.includes('marketplace') || q.includes('produce') || q.includes('m-pesa') || q.includes('mpesa')) {
+            return `**Sokomtaa** is Wambia's featured project! 🛒\n\n` +
+                `It is a **Digital Neighborhood Marketplace** connecting local traders with community consumers.\n\n` +
+                `- 💡 **Key Features**: Browse fresh produce, reserve items instantly, and pay securely via **M-Pesa**.\n` +
+                `- 🛠️ **Tech Stack**: Backend in **Laravel**, Frontend in **Next.js** & **Tailwind CSS**.\n` +
+                `- 🔗 **Live Site**: sokomtaa.co.ke | GitHub: github.com/mastermind-creat/sokomtaa`;
+        }
+
+        if (q.includes('project') || q.includes('portfolio') || q.includes('work') || q.includes('lms') || q.includes('techsafi')) {
+            return `Here are some of **Wambia Kennedy's key projects**:\n\n` +
+                `1. 🛒 **Sokomtaa**: Digital Neighborhood Marketplace (Next.js, Laravel, Tailwind, M-Pesa)\n` +
+                `2. 📚 **Masomo Bora LMS**: High-fidelity Learning Management System (React, Laravel, Tailwind)\n` +
+                `3. ⚡ **TechSafi**: Technology-driven service management platform (React, Laravel)\n` +
+                `4. 🚀 **LaunchVerse**: Startup onboarding and product launch platform\n` +
+                `5. 💼 **Kodiero Business Center**: Corporate web portal\n\n` +
+                `Would you like to learn more about a specific project or discuss building your own?`;
+        }
+
+        if (q.includes('skill') || q.includes('stack') || q.includes('technology') || q.includes('react') || q.includes('laravel') || q.includes('next')) {
+            return `**Wambia Kennedy's Core Skills & Stack**:\n\n` +
+                `- 💻 **Frontend**: React, Next.js, TypeScript, Tailwind CSS, Framer Motion\n` +
+                `- ⚙️ **Backend**: PHP / Laravel, Node.js, C# (.NET Core)\n` +
+                `- 🛢️ **Databases**: MySQL, PostgreSQL\n` +
+                `- 🎨 **Design**: UI/UX Design, Graphic Design (Logos, Branding, Marketing)\n` +
+                `- 🎓 **Training**: Tech Mentorship & ICT Instructor (Trainer of Trainees at Seme TVC)`;
+        }
+
+        if (q.includes('experience') || q.includes('job') || q.includes('seme') || q.includes('tot') || q.includes('intern')) {
+            return `**Wambia Kennedy's Experience Log**:\n\n` +
+                `- 👨‍🏫 **Trainer of Trainees (ToT)** at **Seme TVC** (Jan 2026 – Present)\n` +
+                `- 💻 **Intern Frontend Developer** at **Elimu Tech** (Dec 2025 – Feb 2026)\n` +
+                `- 🌐 **Freelance Web & Software Developer** (2023 – Present)\n` +
+                `- 🎨 **Graphic Designer** (2019 – Present)\n` +
+                `- 🏥 **ICT Attachment** at Mariakani Sub County Hospital (Jan – Apr 2024)`;
+        }
+
+        if (q.includes('service') || q.includes('price') || q.includes('cost') || q.includes('rate') || q.includes('build')) {
+            return `**Services Offered by Wambia Kennedy**:\n\n` +
+                `- 🌐 **Custom Web Development** (Landing Pages, Web Apps, Portals)\n` +
+                `- 🚀 **Full-Stack Development** (React/Next.js + Laravel/Node.js)\n` +
+                `- 📱 **UI/UX & Graphic Design** (Logos, Branding, UI Mockups)\n` +
+                `- ☁️ **Deployment & Cloud Setup** (Vercel, VPS, Hosting)\n` +
+                `- 📚 **ICT Training & Mentorship**\n\n` +
+                `[[Get a Quote|https://wa.me/254743394373?text=Hi%20Wambia!%20I'd%20like%20to%20get%20a%20quote%20for%20a%20project.]]`;
+        }
+
+        return `Hello! I'm **Wambia Kennedy's AI Assistant**. 👋\n\n` +
+            `I can help you explore Wambia's **skills**, **projects** (like Sokomtaa & LMS), **work experience**, or help you **get in touch** to start a project.\n\n` +
+            `What would you like to know today?\n\n` +
+            `[[Contact Wambia|https://wa.me/254743394373?text=Hi%20Wambia!]]`;
+    };
+
     const callOpenAI = async (userMessage: string): Promise<string> => {
         const apiKey = import.meta.env.VITE_OPENAI_API_KEY;
 
         if (!apiKey) {
-            return "OpenAI API key not configured. Please add VITE_OPENAI_API_KEY to your .env file.";
+            return getSmartFallbackResponse(userMessage);
         }
 
         try {
@@ -223,7 +287,7 @@ If the user says they want to "hire", "contact", "start a project", or "needs he
                     'Authorization': `Bearer ${apiKey}`
                 },
                 body: JSON.stringify({
-                    model: 'gpt-4-turbo-preview',
+                    model: 'gpt-4o-mini',
                     messages: [
                         { role: 'system', content: knowledgeBase },
                         ...messages.map(msg => ({ role: msg.role, content: msg.content })),
@@ -235,9 +299,8 @@ If the user says they want to "hire", "contact", "start a project", or "needs he
             });
 
             if (!response.ok) {
-                // OpenAI often blocks browser requests (CORS). Mention this if it happens.
                 if (response.status === 0 || response.type === 'opaque') {
-                    throw new Error("CORS blocked request. Please use Gemini or a backend proxy.");
+                    throw new Error("CORS blocked request.");
                 }
                 throw new Error(`OpenAI API error: ${response.statusText}`);
             }
@@ -246,7 +309,7 @@ If the user says they want to "hire", "contact", "start a project", or "needs he
             return data.choices[0].message.content;
         } catch (error) {
             console.error('OpenAI Error:', error);
-            return "Connection failed (likely CORS). Please switch to Gemini (Settings ⚙️) which works better in the browser, or check your API key.";
+            return getSmartFallbackResponse(userMessage);
         }
     };
 
@@ -254,7 +317,7 @@ If the user says they want to "hire", "contact", "start a project", or "needs he
         const apiKey = import.meta.env.GEMINI_API_KEY || import.meta.env.VITE_GEMINI_API_KEY;
 
         if (!apiKey) {
-            return "Gemini API key not configured. Please add VITE_GEMINI_API_KEY to your .env file.";
+            return getSmartFallbackResponse(userMessage);
         }
 
         try {
@@ -264,8 +327,8 @@ If the user says they want to "hire", "contact", "start a project", or "needs he
 
             const prompt = `${knowledgeBase}\n\nConversation History:\n${conversationHistory}\n\nUser: ${userMessage}\n\nAssistant:`;
 
-            // Updated model to gemini-flash-latest which is available on free tier and points to the newest flash model (e.g. 2.0/2.5)
-            const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-flash-latest:generateContent?key=${apiKey}`, {
+            // Updated model to gemini-1.5-flash which is the standard REST endpoint
+            const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -288,7 +351,6 @@ If the user says they want to "hire", "contact", "start a project", or "needs he
             }
 
             const data = await response.json();
-            // Gemini response structure can vary slightly
             if (data.candidates && data.candidates[0] && data.candidates[0].content) {
                 return data.candidates[0].content.parts[0].text;
             } else {
@@ -297,7 +359,7 @@ If the user says they want to "hire", "contact", "start a project", or "needs he
 
         } catch (error) {
             console.error('Gemini Error:', error);
-            return "Sorry, I'm having trouble connecting to Gemini. Please try again or switch to OpenAI.";
+            return getSmartFallbackResponse(userMessage);
         }
     };
 

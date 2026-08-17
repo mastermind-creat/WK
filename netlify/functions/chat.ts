@@ -29,8 +29,8 @@ const handler: Handler = async (event) => {
             const knowledgeBase = event.headers['x-knowledge-base'] || '';
             const prompt = `${knowledgeBase}\n\nConversation History:\n${conversationHistory}\n\nUser: ${userMessage}\n\nAssistant:`;
 
-            // Updated to use the correct model for v1beta API - gemini-flash-latest works best with free tier
-            const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-flash-latest:generateContent?key=${apiKey}`, {
+            // Updated to use official gemini-1.5-flash model endpoint for v1beta API
+            const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
