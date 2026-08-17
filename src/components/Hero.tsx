@@ -1,5 +1,5 @@
 import { motion, useScroll, useTransform } from 'framer-motion';
-import { Briefcase, Code, Award, ArrowRight, Sparkles } from 'lucide-react';
+import { Briefcase, Code, Award, ArrowRight, Sparkles, ShoppingBag } from 'lucide-react';
 import { profile } from '../data/portfolio';
 import { useRef } from 'react';
 
@@ -197,7 +197,7 @@ const Hero = () => {
                             {/* Dashboard Background */}
                             <div className="absolute inset-0 bg-primary-600/5 blur-[80px] rounded-full scale-110 pointer-events-none" />
 
-                            {/* Primary Featured: ElimuTech LMS */}
+                            {/* Primary Featured: Sokomtaa */}
                             <motion.div
                                 className="relative z-20 glass rounded-[2.3rem] p-7 md:p-9 shadow-premium border border-white/10 dark:border-white/10 border-black/5 overflow-hidden"
                                 style={{ backgroundColor: 'var(--bg-surface)' }}
@@ -208,23 +208,23 @@ const Hero = () => {
                                 <div className="relative z-10">
                                     <div className="flex items-center gap-4 mb-6">
                                         <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-primary-600 to-rose-600 flex items-center justify-center text-white shadow-glow">
-                                            <Code size={28} />
+                                            <ShoppingBag size={28} />
                                         </div>
                                         <div>
-                                            <h3 className="text-xl md:text-2xl font-black tracking-tight" style={{ color: 'var(--text-main)' }}>ElimuTech LMS</h3>
+                                            <h3 className="text-xl md:text-2xl font-black tracking-tight" style={{ color: 'var(--text-main)' }}>Sokomtaa</h3>
                                             <div className="flex items-center gap-2">
                                                 <span className="w-1.5 h-1.5 bg-green-500 rounded-full animate-pulse" />
-                                                <span className="text-[8px] md:text-[10px] font-black uppercase" style={{ color: 'var(--text-muted)' }}>Core Infrastructure</span>
+                                                <span className="text-[8px] md:text-[10px] font-black uppercase" style={{ color: 'var(--text-muted)' }}>Neighborhood Marketplace</span>
                                             </div>
                                         </div>
                                     </div>
 
                                     <p className="text-sm leading-relaxed mb-8 font-medium" style={{ color: 'var(--text-muted)' }}>
-                                        A high-fidelity Learning Management System engineered for scalable digital education delivery.
+                                        Discover local traders, browse fresh produce, reserve items instantly, and pay securely via M-Pesa. Your entire neighbourhood market in your pocket.
                                     </p>
 
                                     <div className="flex flex-wrap gap-2 mb-8">
-                                        {['React', 'Laravel', 'Tailwind'].map((tech) => (
+                                        {['Next.js', 'Laravel', 'Tailwind', 'M-Pesa'].map((tech) => (
                                             <span key={tech} className="px-3 py-1 rounded-full text-[8px] md:text-[9px] font-black uppercase tracking-widest bg-white/5 dark:bg-white/5 bg-black/5 text-primary-400 border border-white/5">
                                                 {tech}
                                             </span>
@@ -242,7 +242,7 @@ const Hero = () => {
                                                 +1k
                                             </div>
                                         </div>
-                                        <span className="text-[9px] font-black uppercase tracking-tighter" style={{ color: 'var(--text-muted)' }}>Active Nodes</span>
+                                        <span className="text-[9px] font-black uppercase tracking-tighter" style={{ color: 'var(--text-muted)' }}>Active Vendors</span>
                                     </div>
                                 </div>
                             </motion.div>

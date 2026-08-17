@@ -13,6 +13,12 @@ export const profile = {
     languages: ["English", "Swahili"],
     education: [
         {
+            degree: "eGP KENYA Training",
+            institution: "Government of Kenya (GoK)",
+            period: "2026",
+            icon: "certificate"
+        },
+        {
             degree: ".NET Core (C#) Training",
             institution: "Microsoft",
             period: "2025 – Present (Ongoing)",
@@ -45,9 +51,16 @@ export const profile = {
     ],
     experience: [
         {
+            title: "Trainer of Trainees (ToT)",
+            company: "Seme TVC",
+            period: "Jan 2026 – Present",
+            description: "Serving as Trainer of Trainees at Seme Technical and Vocational College, delivering hands-on technical instruction and practical mentorship in ICT, web development, and digital skills.",
+            icon: "chalkboard-teacher"
+        },
+        {
             title: "Intern Frontend Developer",
             company: "Elimu Tech",
-            period: "Dec 2025 – Present",
+            period: "Dec 2025 – Feb 2026",
             description: "Developing the frontend for an innovative Learning Management System (LMS) platform at a fast-paced startup. Utilizing React and modern UI/UX principles to enhance educational delivery systems.",
             icon: "laptop-code"
         },
@@ -107,6 +120,12 @@ export const profile = {
         }
     ],
     awards: [
+        {
+            title: "2nd Place – TVET Fair Regionals",
+            subtitle: "Sokomtaa Digital Marketplace system",
+            year: "2026",
+            icon: "trophy"
+        },
         {
             title: "1st Place – TVET Fair Regionals",
             subtitle: "Ajira Digital Club Management System, Qualified for Nationals",
@@ -338,6 +357,15 @@ export const services = [
 ];
 
 export const projects = [
+    {
+        title: "Sokomtaa",
+        description: "Discover local traders, browse fresh produce, reserve items instantly, and pay securely via M-Pesa. Your entire neighbourhood market in your pocket. Engineered with a Laravel backend, Next.js frontend, and Tailwind CSS.",
+        image: "images/projects/sokomtaa.png",
+        tags: ["Next.js", "Laravel", "Tailwind CSS", "M-Pesa"],
+        liveUrl: "sokomtaa.co.ke",
+        githubUrl: "https://github.com/mastermind-creat/sokomtaa",
+        category: "web"
+    },
     {
         title: "Masomo Bora LMS",
         description: "A modern Learning Management System designed to streamline online education. Features scalable content delivery, structured learning flows, and an intuitive user experience for both learners and instructors.",
